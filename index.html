@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-2017-5-22-tensorflow-cnn" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/28/2017-5-22-tensorflow-cnn/" class="article-date">
+  <time datetime="2017-10-28T03:11:56.873Z" itemprop="datePublished">2017-10-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/28/2017-5-22-tensorflow-cnn/">Tensorflow训练多层卷积神经网络</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>来自官方例子：<a href="https://www.tensorflow.org/get_started/mnist/pros" target="_blank" rel="external">Deep MNIST for Experts</a></p>
+<p>在阅读之前确保自己已经理解了<a href="https://www.tensorflow.org/get_started/mnist/beginners" target="_blank" rel="external">MNIST For ML Beginners</a></p>
+<h2 id="理解卷积-Convolution"><a href="#理解卷积-Convolution" class="headerlink" title="理解卷积 Convolution"></a>理解卷积 Convolution</h2><p><strong>原始定义：</strong>设f,g在R上可积,定义新函数h满足以下特性：</p>
+<p>$$h(x)=(f*g)(x) =\int_{-\infty}^{+\infty} f(t)g(x-t) {\rm d}t$$</p>
+<p>则称h是f和g的卷积。</p>
+<p>Wiki百科上有一个非常形象的图解来解释卷积：</p>
+<blockquote>
+<p>它（卷积）是其中一个函数翻转并平移后与另一个函数的乘积的积分,是一个对平移量的函数。</p>
+</blockquote>
+<p>这里有两个定义，翻转和平移，可以这么来理解这两个概念：</p>
+<ul>
+<li><strong>翻转</strong> g(t) 变成 g(-t)</li>
+<li><strong>平移</strong> g(-t) 向右平移x个单位，变成g(x-t)</li>
+</ul>
+<p>这里就不贴图了，直接上<a href="https://zh.wikipedia.org/wiki/%E5%8D%B7%E7%A7%AF" target="_blank" rel="external">Wiki百科地址</a>。看下面的图解，就能理解卷积函数所谓的翻转和平移了。另外有<a href="https://graphics.stanford.edu/courses/cs178/applets/convolution.html" target="_blank" rel="external">卷积Flash演示</a>。</p>
+<p>推荐一个知乎问题：<a href="https://www.zhihu.com/question/20500497" target="_blank" rel="external">在定义卷积时为什么要对其中一个函数进行翻转？</a>；这篇知乎阐述了卷积的起源。</p>
+<h3 id="卷积的离散定义"><a href="#卷积的离散定义" class="headerlink" title="卷积的离散定义"></a>卷积的离散定义</h3><p>根据卷积的连续定义，很容易就能理解卷积的离散定义：</p>
+<p>$$h(x)=(f*g)(x) =\sum_{k=-\infty}^{+\infty} f(k) g(x-k)  $$</p>
+<p>$$s.t.(x,k\in Z)$$</p>
+<p>参考总结的博文：<a href="http://mengqi92.github.io/2015/10/06/convolution/" target="_blank" rel="external">我对卷积的理解</a> 中输液的例子就能深刻理解卷积的离散定义。给出以下例子进行理解：</p>
+<h3 id="二维中的卷积"><a href="#二维中的卷积" class="headerlink" title="二维中的卷积"></a>二维中的卷积</h3><p>一维的卷积搞清楚了，二维的就好说了。</p>
+<p>参考总结的博文：<a href="http://mengqi92.github.io/2015/10/06/convolution/" target="_blank" rel="external">我对卷积的理解</a> 中对二维卷积的理解。</p>
+<h3 id="图像处理中的卷积"><a href="#图像处理中的卷积" class="headerlink" title="图像处理中的卷积"></a>图像处理中的卷积</h3><p>参考<a href="http://blog.sina.com.cn/s/blog_4bdb170b01019atv.html" target="_blank" rel="external">图像处理（卷积）作者太棒了</a></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>理解卷积，就要理解卷积的四个核心概念：</p>
+<ul>
+<li>（翻转）（图像处理中很多情况不用翻转？）</li>
+<li>移动</li>
+<li>乘积</li>
+<li>求和</li>
+</ul>
+<h2 id="理解卷积神经网络"><a href="#理解卷积神经网络" class="headerlink" title="理解卷积神经网络"></a>理解卷积神经网络</h2><p>参考博文：<a href="https://zhuanlan.zhihu.com/p/25868154" target="_blank" rel="external">看图判断口袋妖怪属性，学会用卷积神经网络分类（教程+代码）</a></p>
+<p>推荐视频教程：<a href="http://v.youku.com/v_show/id_XMjgzNzk5Njk3Ng==.html?spm=a2h0k.8191407.0.0&amp;from=s1.8-1-1.2" target="_blank" rel="external">卷积神经网络与图像识别</a></p>
+<h3 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a>卷积</h3><p>卷积的关键理解在前面一章已经阐述过。这里讲解卷积在卷积神经网络中的使用。</p>
+<p>tensorflow中卷积的写法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv2d</span><span class="params">(x, W)</span>:</span></div><div class="line">  <span class="keyword">return</span> tf.nn.conv2d(x, W, strides=[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], padding=<span class="string">'SAME'</span>)</div><div class="line"></div><div class="line">x_image = tf.reshape(x, [<span class="number">-1</span>, <span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>])</div><div class="line">h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)</div></pre></td></tr></table></figure>
+<p>查看conv2d的官方解释：</p>
+<blockquote>
+<p>Computes a 2-D convolution given 4-D input and filter tensors.</p>
+<p>Given an input tensor of shape [batch, in_height, in_width, in_channels] and a filter / kernel tensor of shape [filter_height, filter_width, in_channels, out_channels], this op performs the following:</p>
+<ol>
+<li>Flattens the filter to a 2-D matrix with shape <code>[filter_height * filter_width * in_channels, output_channels]</code>.</li>
+<li>Extracts image patches from the input tensor to form a <em>virtual</em> tensor of shape <code>[batch, out_height, out_width, filter_height * filter_width * in_channels]</code>.</li>
+<li>For each patch, right-multiplies the filter matrix and the image patch vector.</li>
+</ol>
+<h4 id="Args"><a href="#Args" class="headerlink" title="Args:"></a>Args:</h4><ul>
+<li><strong>input</strong>: A <code>Tensor</code>. Must be one of the following types: <code>half</code>, <code>float32</code>. A 4-D tensor. The dimension order is interpreted according to the value of <code>data_format</code>, see below for details.</li>
+<li><strong>filter</strong>: A <code>Tensor</code>. Must have the same type as <code>input</code>. A 4-D tensor of shape<code>[filter_height, filter_width, in_channels, out_channels]</code></li>
+<li><strong>strides</strong>: A list of <code>ints</code>. 1-D tensor of length 4. The stride of the sliding window for each dimension of <code>input</code>. The dimension order is determined by the value of <code>data_format</code>, see below for details.</li>
+<li><strong>padding</strong>: A <code>string</code> from: <code>&quot;SAME&quot;, &quot;VALID&quot;</code>. The type of padding algorithm to use.</li>
+</ul>
+</blockquote>
+<p><strong>strides</strong> 步长（每个维度上的移动步长）默认就是[1,1,1,1]了。</p>
+<p><strong>padding</strong> 填充算法，卷积核在边缘移动时，没有数据对应情况下的填充算法。</p>
+<h3 id="池化"><a href="#池化" class="headerlink" title="池化"></a>池化</h3><p>一张图就能直观解释池化：</p>
+<p><img src="http://img.blog.csdn.net/20130918153655515?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lsZW5jZTEyMTQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>为什么要池化？64*64的图片你算得算半天，池化可以有效提取特征并减少计算，而且池化可以防止过拟合。</p>
+<h3 id="Relu激活函数"><a href="#Relu激活函数" class="headerlink" title="Relu激活函数"></a>Relu激活函数</h3><p>Relu激活函数如图所示：</p>
+<p><img src="http://images.cnitblog.com/blog2015/678029/201504/241900156879853.png" alt="img"></p>
+<p>图中还有一个softplus公式，公式如下：</p>
+<p>$$Softplus(x) = log(1+e^x)$$</p>
+<p><a href="https://www.zhihu.com/question/29021768/answer/43517930" target="_blank" rel="external">为什么ReLu要好过于tanh和sigmoid function?</a></p>
+<h2 id="Tensorflow实战"><a href="#Tensorflow实战" class="headerlink" title="Tensorflow实战"></a>Tensorflow实战</h2><h3 id="tf-reshape"><a href="#tf-reshape" class="headerlink" title="tf.reshape"></a>tf.reshape</h3><p><strong>tf.reshape(tensor, shape, name=None)</strong><br>函数的作用是将tensor变换为参数shape的形式。<br>其中shape为一个列表形式，特殊的一点是列表中可以存在-1。<strong>-1代表的含义是不用我们自己指定这一维的大小</strong>，函数会自动计算，但列表中只能存在一个-1。（当然如果存在多个-1，就是一个存在多解的方程了）</p>
+<p>官方例子帮助理解：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># tensor 't' is [1, 2, 3, 4, 5, 6, 7, 8, 9]</span></div><div class="line"><span class="comment"># tensor 't' has shape [9]</span></div><div class="line">reshape(t, [3, 3]) ==&gt; [[1, 2, 3],</div><div class="line">                        [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>],</div><div class="line">                        [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]]</div><div class="line"></div><div class="line"><span class="comment"># tensor 't' is [[[1, 1], [2, 2]],</span></div><div class="line"><span class="comment">#                [[3, 3], [4, 4]]]</span></div><div class="line"><span class="comment"># tensor 't' has shape [2, 2, 2]</span></div><div class="line">reshape(t, [2, 4]) ==&gt; [[1, 1, 2, 2],</div><div class="line">                        [<span class="number">3</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">4</span>]]</div><div class="line"></div><div class="line"><span class="comment"># tensor 't' is [[[1, 1, 1],</span></div><div class="line"><span class="comment">#                 [2, 2, 2]],</span></div><div class="line"><span class="comment">#                [[3, 3, 3],</span></div><div class="line"><span class="comment">#                 [4, 4, 4]],</span></div><div class="line"><span class="comment">#                [[5, 5, 5],</span></div><div class="line"><span class="comment">#                 [6, 6, 6]]]</span></div><div class="line"><span class="comment"># tensor 't' has shape [3, 2, 3]</span></div><div class="line"><span class="comment"># pass '[-1]' to flatten 't'</span></div><div class="line">reshape(t, [-1]) ==&gt; [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6]</div><div class="line"></div><div class="line"><span class="comment"># -1 can also be used to infer the shape</span></div><div class="line"></div><div class="line"><span class="comment"># -1 is inferred to be 9:</span></div><div class="line">reshape(t, [2, -1]) ==&gt; [[1, 1, 1, 2, 2, 2, 3, 3, 3],</div><div class="line">                         [<span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>]]</div><div class="line"><span class="comment"># -1 is inferred to be 2:</span></div><div class="line">reshape(t, [-1, 9]) ==&gt; [[1, 1, 1, 2, 2, 2, 3, 3, 3],</div><div class="line">                         [<span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>]]</div><div class="line"><span class="comment"># -1 is inferred to be 3:</span></div><div class="line">reshape(t, [ 2, -1, 3]) ==&gt; [[[1, 1, 1],</div><div class="line">                              [<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>],</div><div class="line">                              [<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>]],</div><div class="line">                             [[<span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>],</div><div class="line">                              [<span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>],</div><div class="line">                              [<span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>]]]</div><div class="line"></div><div class="line"><span class="comment"># tensor 't' is [7]</span></div><div class="line"><span class="comment"># shape `[]` reshapes to a scalar</span></div><div class="line">reshape(t, []) ==&gt; 7</div></pre></td></tr></table></figure>
+<h3 id="正态分布取随机值"><a href="#正态分布取随机值" class="headerlink" title="正态分布取随机值"></a>正态分布取随机值</h3><h5 id="tf-truncated-normal-shape-mean-0-0-stddev-1-0"><a href="#tf-truncated-normal-shape-mean-0-0-stddev-1-0" class="headerlink" title="tf.truncated_normal(shape,mean=0.0,stddev=1.0)"></a>tf.truncated_normal(shape,mean=0.0,stddev=1.0)</h5><p>从<strong>截断</strong>的正态分布中输出随机值。<br>生成的值服从具有指定平均值和标准偏差的正态分布，如果生成的值大于平均值2个标准偏差的值则丢弃重新选择。</p>
+<p>在正态分布的曲线中，横轴区间（μ-σ，μ+σ）内的面积为68.268949%。<br>横轴区间（μ-2σ，μ+2σ）内的面积为95.449974%。<br>横轴区间（μ-3σ，μ+3σ）内的面积为99.730020%。<br>X落在（μ-3σ，μ+3σ）以外的概率小于千分之三，在实际问题中常认为相应的事件是不会发生的，基本上可以把区间（μ-3σ，μ+3σ）看作是随机变量X实际可能的取值区间，这称之为正态分布的“3σ”原则。<br>在tf.truncated_normal中如果x的取值在区间（μ-2σ，μ+2σ）之外则重新进行选择。这样保证了生成的值都在均值附近。</p>
+<p>参数:</p>
+<ul>
+<li>shape: 一维的张量，也是输出的张量。</li>
+<li>mean: 正态分布的均值。</li>
+<li>stddev: 正态分布的标准差。</li>
+<li>dtype: 输出的类型。</li>
+<li>seed: 一个整数，当设置之后，每次生成的随机数都一样。</li>
+<li>name: 操作的名字。</li>
+</ul>
+<h5 id="tf-random-normal-shape-mean-0-0-stddev-1-0"><a href="#tf-random-normal-shape-mean-0-0-stddev-1-0" class="headerlink" title="tf.random_normal(shape,mean=0.0,stddev=1.0)"></a>tf.random_normal(shape,mean=0.0,stddev=1.0)</h5><p>从正态分布中输出随机值。<br>参数:</p>
+<ul>
+<li>shape: 一维的张量，也是输出的张量。</li>
+<li>mean: 正态分布的均值。</li>
+<li>stddev: 正态分布的标准差。</li>
+<li>dtype: 输出的类型。</li>
+<li>seed: 一个整数，当设置之后，每次生成的随机数都一样。</li>
+<li>name: 操作的名字。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">a = tf.Variable(tf.random_normal([<span class="number">2</span>,<span class="number">2</span>],seed=<span class="number">1</span>))</div><div class="line">b = tf.Variable(tf.truncated_normal([<span class="number">2</span>,<span class="number">2</span>],seed=<span class="number">2</span>))</div><div class="line">init = tf.global_variables_initializer()</div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">    sess.run(init)</div><div class="line">    print(sess.run(a))</div><div class="line">    print(sess.run(b))</div><div class="line"></div><div class="line">输出：</div><div class="line">[[<span class="number">-0.81131822</span>  <span class="number">1.48459876</span>]</div><div class="line"> [ <span class="number">0.06532937</span> <span class="number">-2.44270396</span>]]</div><div class="line">[[<span class="number">-0.85811085</span> <span class="number">-0.19662298</span>]</div><div class="line"> [ <span class="number">0.13895047</span> <span class="number">-1.22127688</span>]]</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/28/2017-5-22-tensorflow-cnn/" data-id="cj9ar355v0001vfcxkb2hbwhh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-5-20-tensorflow-freshman" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/28/2017-5-20-tensorflow-freshman/" class="article-date">
+  <time datetime="2017-10-28T03:11:56.873Z" itemprop="datePublished">2017-10-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/28/2017-5-20-tensorflow-freshman/">Tensorflow入门笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Tensorflow原理"><a href="#Tensorflow原理" class="headerlink" title="Tensorflow原理"></a>Tensorflow原理</h2><p><strong>背景：</strong> Python和C++来回切换会造成巨大开销。</p>
+<blockquote>
+<p>To do efficient numerical computing in Python, we typically use libraries like <a href="http://www.numpy.org/" target="_blank" rel="external">NumPy</a>that do expensive operations such as matrix  multiplication outside Python, using highly efficient code implemented in another language. Unfortunately, there can still be a lot of overhead from switching back to Python every operation. This overhead is especially bad if you want to run computations on GPUs or in a distributed manner, where there can be a high cost to transferring data.</p>
+</blockquote>
+<p><strong>解决方案：</strong> 利用Python基于Graph定义所有运算，然后让这些一次性在Python外完成这些运算。</p>
+<blockquote>
+<p>TensorFlow also does its heavy lifting outside Python, but it ta<a href="https://www.tensorflow.org/get_started/mnist/proskes" target="_blank" rel="external">https://www.tensorflow.org/get_started/mnist/proskes</a> things a step further to avoid this overhead. Instead of running a single expensive operation independently from Python, TensorFlow lets us describe a graph of interacting operations that run entirely outside Python. This approach is similar to that used in Theano or Torch.</p>
+<p>The role of the Python code is therefore to build this external computation graph, and to dictate which parts of the computation graph should be run. See the <a href="https://www.tensorflow.org/get_started/get_started#the_computational_graph" target="_blank" rel="external">Computation Graph</a> section of <a href="https://www.tensorflow.org/get_started/get_started" target="_blank" rel="external">Getting Started With TensorFlow</a> for more detail.</p>
+</blockquote>
+<h2 id="Tensorflow常用API说明"><a href="#Tensorflow常用API说明" class="headerlink" title="Tensorflow常用API说明"></a>Tensorflow常用API说明</h2><h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><blockquote>
+<p>TensorFlow relies on a highly efficient C++ backend to do its computation. The connection to this backend is called a session.The common usage for TensorFlow programs is to first create a graph and then launch it in a session.</p>
+</blockquote>
+<p><strong>总结：</strong> 用于和C++高性能计算模块<strong>会话</strong>的类</p>
+<p>在入门教程中，我们使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line">sess = tf.InteractiveSession()</div></pre></td></tr></table></figure>
+<h3 id="Tensor"><a href="#Tensor" class="headerlink" title="Tensor"></a>Tensor</h3><p>中文名称张量，可以查看知乎上关于这个问题的解释：<a href="https://www.zhihu.com/question/20695804" target="_blank" rel="external">什么是张量</a>。实际上可以将其理解为一个矩阵，Tensorflow中的基本单位</p>
+<p>查看以下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line"><span class="comment"># What is Tensor?</span></div><div class="line">ta = [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>];</div><div class="line">ta[<span class="number">0</span>] = tf.placeholder(tf.float32,[<span class="keyword">None</span>,<span class="number">784</span>])</div><div class="line">ta[<span class="number">1</span>] = tf.zeros([<span class="number">5</span>,<span class="number">5</span>],tf.float32)</div><div class="line"><span class="keyword">print</span> (ta)</div></pre></td></tr></table></figure>
+<p>输出以下结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/usr/bin/python2.7 /home/maoyiwei/桌面/Tensorflow/playground/play.py</div><div class="line">[&lt;tf.Tensor 'Placeholder:0' shape=(?, 784) dtype=float32&gt;, &lt;tf.Tensor 'zeros:0' shape=(5, 5) dtype=float32&gt;, 0, 0]</div></pre></td></tr></table></figure>
+<h3 id="Placeholder"><a href="#Placeholder" class="headerlink" title="Placeholder"></a>Placeholder</h3><p>可以理解为用于存储输入数据（训练数据）的Tensor。格式如下：</p>
+<blockquote>
+<p>placeholder(    dtype,    shape=None,    name=None)</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">x = tf.placeholder(tf.float32, shape=(<span class="number">1024</span>, <span class="number">1024</span>))</div></pre></td></tr></table></figure>
+<h3 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h3><p>字面意思。在Tensorflow中意义如下：</p>
+<blockquote>
+<p>A <code>Variable</code> is a value that lives in TensorFlow’s computation graph. <strong>It can be used and even modified by the computation.</strong> In machine learning applications, one generally has the model parameters be<code>Variable</code>s.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">W = tf.Variable(tf.zeros([<span class="number">784</span>,<span class="number">10</span>]))</div><div class="line">b = tf.Variable(tf.zeros([<span class="number">10</span>]))</div></pre></td></tr></table></figure>
+<p>Variable要进行初始化，步骤如下：</p>
+<blockquote>
+<p>Before <code>Variable</code>s can be used within a session, they must be initialized using that session. This step takes the initial values (in this case tensors full of zeros) that have already been specified, and assigns them to each <code>Variable</code>. This can be done for all <code>Variables</code> at once:</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sess.run(tf.global_variables_initializer())</div></pre></td></tr></table></figure>
+<h3 id="tf-matmul-x-W"><a href="#tf-matmul-x-W" class="headerlink" title="tf.matmul(x,W)"></a>tf.matmul(x,W)</h3><p>矩阵相乘(x*W)：详细看文档：</p>
+<blockquote>
+<p>Matmul(a,b) Return:</p>
+<p>A Tensor of the same type as a and b where each inner-most matrix is the product of the corresponding matrices in a and b, e.g. if all transpose or adjoint attributes are False:</p>
+<p>output[…, i, j] = sum_k (a[…, i, k] * b[…, k, j]), for all indices i, j.</p>
+</blockquote>
+<h3 id="tf-reduce-XXX"><a href="#tf-reduce-XXX" class="headerlink" title="tf.reduce_XXX"></a>tf.reduce_XXX</h3><p>查看文档，解释如下：</p>
+<blockquote>
+<p>Computes the XXXX of elements across dimensions of a tensor.</p>
+</blockquote>
+<p>主要参数如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">reduce_mean(</div><div class="line">    input_tensor, <span class="comment"># 输入的tensor</span></div><div class="line">    axis=<span class="keyword">None</span>, <span class="comment"># 维度</span></div><div class="line">    <span class="comment"># keep_dims=False,</span></div><div class="line">    <span class="comment"># name=None,</span></div><div class="line">    <span class="comment"># reduction_indices=None</span></div><div class="line">)</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><strong>input_tensor</strong>: The tensor to reduce. Should have numeric type.</li>
+<li><strong>axis</strong>: The dimensions to reduce. If <code>None</code> (the default), reduces all dimensions.</li>
+</ul>
+</blockquote>
+<p>举例说明：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 'x' is [[1., 2.]</span></div><div class="line"><span class="comment">#         [3., 4.]]</span></div><div class="line"></div><div class="line">tf.reduce_mean(x) ==&gt; 2.5 #如果不指定第二个参数，那么就在所有的元素中取平均值</div><div class="line">tf.reduce_mean(x, 0) ==&gt; [2.,  3.] #指定第二个参数为0，则第一维的元素取平均值，即每一列求平均值</div><div class="line">tf.reduce_mean(x, 1) ==&gt; [1.5,  3.5] #指定第二个参数为1，则第二维的元素取平均值，即每一行求平均值</div></pre></td></tr></table></figure>
+<p>常用的API如下：</p>
+<ul>
+<li>reduce_mean 平均值</li>
+<li>reduce_max 最大值</li>
+<li>reduce_min 最小值</li>
+<li>reduce_sum 求和</li>
+</ul>
+<p><a href="https://stackoverflow.com/questions/43394402/why-does-tensorflow-uses-reduce-in-reduce-max-reduce-min-reduce-sum-etc" target="_blank" rel="external">为什么要命名Reduce呢？</a> Stackoverflow上对这个问题的解释为：</p>
+<blockquote>
+<p>Reduce is just a name for a family of operations which are used to create a single object from the sequence of objects, repeatedly applying the same binary operation.</p>
+</blockquote>
+<h3 id="tf-nn"><a href="#tf-nn" class="headerlink" title="tf.nn"></a>tf.nn</h3><p>一些激活函数、卷积函数等，源代码中注释如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""## Activation Functions</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">The activation ops provide different types of nonlinearities for use in neural</span></div><div class="line"><span class="string">networks.  These include smooth nonlinearities (`sigmoid`, `tanh`, `elu`,</span></div><div class="line"><span class="string">`softplus`, and `softsign`), continuous but not everywhere differentiable</span></div><div class="line"><span class="string">functions (`relu`, `relu6`, and `relu_x`), and random regularization</span></div><div class="line"><span class="string">(`dropout`).</span></div></pre></td></tr></table></figure>
+<h3 id="tf-train"><a href="#tf-train" class="headerlink" title="tf.train"></a>tf.train</h3><p>训练方法（训练损失函数）。直接上代码理解会更好一点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># define a math model</span></div><div class="line">print(<span class="string">'make model'</span>)</div><div class="line"><span class="comment"># 占位符（你的数据）</span></div><div class="line">x = tf.placeholder(tf.float32,[<span class="keyword">None</span>,<span class="number">784</span>])</div><div class="line">W = tf.Variable(tf.zeros([<span class="number">784</span>, <span class="number">10</span>]))</div><div class="line">b = tf.Variable(tf.zeros([<span class="number">10</span>]))</div><div class="line">y = tf.nn.softmax(tf.matmul(x,W) + b)</div><div class="line"></div><div class="line"><span class="comment"># train it</span></div><div class="line">print(<span class="string">'train it'</span>)</div><div class="line"><span class="comment"># 占位符（预测数据）</span></div><div class="line">y_ = tf.placeholder(tf.float32,[<span class="keyword">None</span>,<span class="number">10</span>])</div><div class="line"><span class="comment"># 计算交叉熵</span></div><div class="line">cross_entropy = tf.reduce_mean(-tf.reduce_sum( y_*tf.log(y),reduction_indices=[<span class="number">1</span>]))</div><div class="line"><span class="comment"># 使用梯度下降法</span></div><div class="line">train_step = tf.train.GradientDescentOptimizer(<span class="number">0.55</span>).minimize(cross_entropy)</div><div class="line">sess = tf.InteractiveSession()</div><div class="line">tf.global_variables_initializer().run()</div><div class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">1000</span>):</div><div class="line">	<span class="comment"># print('抓取100个随机数据训练')</span></div><div class="line">  	batch_xs, batch_ys = mnist.train.next_batch(<span class="number">100</span>)</div><div class="line">	<span class="comment"># print(x,y)</span></div><div class="line">  	sess.run(train_step, feed_dict=&#123;x: batch_xs, y_: batch_ys&#125;)</div></pre></td></tr></table></figure>
+<p>这个feed_dict和placeholder相互对应。</p>
+<p>记住这两句话：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">train_step = tf.train.GradientDescentOptimizer(<span class="number">0.55</span>).minimize(cross_entropy)</div><div class="line"></div><div class="line">sess.run(train_step, feed_dict=&#123;x: batch_xs, y_: batch_ys&#125;)</div></pre></td></tr></table></figure>
+<p>额外说明一下sess.run。可以传入tf.train或者tensor，如下面评价模型就是输入tensor的例子，此时sess.run返回tensor的计算结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Evaluating our Model</span></div><div class="line">print(<span class="string">'start to evaluate'</span>)</div><div class="line">correct_prediction = tf.equal(tf.argmax(y,<span class="number">1</span>), tf.argmax(y_,<span class="number">1</span>))</div><div class="line">accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</div><div class="line">print(sess.run(accuracy, feed_dict=&#123;x: mnist.test.images, y_: mnist.test.labels&#125;))</div></pre></td></tr></table></figure>
+<p>其中tf.cast用于数据转换。</p>
+<h2 id="Addition"><a href="#Addition" class="headerlink" title="Addition"></a>Addition</h2><p>另外找一个很好玩的网站<a href="http://playground.tensorflow.org/" target="_blank" rel="external">Tinker With a <strong>Neural Network</strong> in Your Browser.</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/28/2017-5-20-tensorflow-freshman/" data-id="cj9ar35630002vfcxs7nrneuk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/28/2017-5-22-tensorflow-cnn/">Tensorflow训练多层卷积神经网络</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/28/2017-5-20-tensorflow-freshman/">Tensorflow入门笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
