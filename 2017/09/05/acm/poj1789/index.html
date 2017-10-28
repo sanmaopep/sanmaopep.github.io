@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>POJ1789 最小生成树 | 玩毛线的毛线</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目内容链接： POJ1789题目 算法详解kruskal算法并查集感觉是个很智商碾压的算法。 题解题目要求我们生成一个原图的子图。而这个子图要把所有边连接起来（形成一套卡车发展体系），并且根据公式，边权值和越小越好（卡车变化越小越好）。 所以改题用最小生成树来解决。 本题我采用kruskal算法，但是网上采用prime算法的居多。貌似prime算法对于这种边权比较多的图处理效果更好。prime算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="POJ1789 最小生成树">
+<meta property="og:url" content="http://yoursite.com/2017/09/05/acm/poj1789/index.html">
+<meta property="og:site_name" content="玩毛线的毛线">
+<meta property="og:description" content="题目内容链接： POJ1789题目 算法详解kruskal算法并查集感觉是个很智商碾压的算法。 题解题目要求我们生成一个原图的子图。而这个子图要把所有边连接起来（形成一套卡车发展体系），并且根据公式，边权值和越小越好（卡车变化越小越好）。 所以改题用最小生成树来解决。 本题我采用kruskal算法，但是网上采用prime算法的居多。貌似prime算法对于这种边权比较多的图处理效果更好。prime算">
+<meta property="og:updated_time" content="2017-10-28T04:45:11.810Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="POJ1789 最小生成树">
+<meta name="twitter:description" content="题目内容链接： POJ1789题目 算法详解kruskal算法并查集感觉是个很智商碾压的算法。 题解题目要求我们生成一个原图的子图。而这个子图要把所有边连接起来（形成一套卡车发展体系），并且根据公式，边权值和越小越好（卡车变化越小越好）。 所以改题用最小生成树来解决。 本题我采用kruskal算法，但是网上采用prime算法的居多。貌似prime算法对于这种边权比较多的图处理效果更好。prime算">
+  
+    <link rel="alternate" href="/atom.xml" title="玩毛线的毛线" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">玩毛线的毛线</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-acm/poj1789" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/05/acm/poj1789/" class="article-date">
+  <time datetime="2017-09-04T16:00:00.000Z" itemprop="datePublished">2017-09-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      POJ1789 最小生成树
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h1><p>链接： <a href="https://vjudge.net/problem/POJ-1789" target="_blank" rel="external">POJ1789题目</a></p>
+<h1 id="算法详解"><a href="#算法详解" class="headerlink" title="算法详解"></a>算法详解</h1><h2 id="kruskal算法"><a href="#kruskal算法" class="headerlink" title="kruskal算法"></a>kruskal算法</h2><h2 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h2><p>感觉是个很智商碾压的算法。</p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>题目要求我们生成一个原图的子图。而这个子图要把所有边连接起来（形成一套卡车发展体系），并且根据公式，边权值和越小越好（卡车变化越小越好）。</p>
+<p>所以改题用最小生成树来解决。</p>
+<p>本题我采用kruskal算法，但是网上采用prime算法的居多。貌似prime算法对于这种边权比较多的图处理效果更好。prime算法就在下次最小生成树的题目里面来实践吧。</p>
+<h1 id="编码注意点"><a href="#编码注意点" class="headerlink" title="编码注意点"></a>编码注意点</h1><h2 id="sort比基数排序快？"><a href="#sort比基数排序快？" class="headerlink" title="sort比基数排序快？"></a>sort比基数排序快？</h2><p>TLE编码采用了基数排序的思想（因为边的大小最多八种可能），按道理时间复杂度为线性。</p>
+<p>AC编码采用了algorithm头文件里面的sort，时间复杂度N*log(N)~N^2。</p>
+<p>但是结果表明，sort比基数排序快。于是自己额外写了基数排序和快速排序的代码进行比较，让我吃惊的是，快速排序的速度大约是基数排序的10倍。</p>
+<p>难道是queue操作很耗时间？虽然很好奇，但是这个问题还是先放这里吧。记着！<strong>实际编码中，sort有时会比基数排序快。</strong></p>
+<h2 id="并查集编码总结"><a href="#并查集编码总结" class="headerlink" title="并查集编码总结"></a>并查集编码总结</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. 并查集数据结构</span></div><div class="line"><span class="keyword">int</span> p[maxn];</div><div class="line"></div><div class="line"><span class="comment">// 2. 查找函数编写</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">	<span class="comment">// 重要！</span></div><div class="line">	<span class="comment">// 如果一个节点的父节点是他自己，那么这个节点就是父节点。故返回x</span></div><div class="line">	<span class="comment">// 如果不是，就去找他的父节点的根节点</span></div><div class="line">	<span class="comment">// 然后一直递归....直到找到根节点位置 </span></div><div class="line">	<span class="keyword">return</span> p[x] == x ? x : p[x] = find(p[x]);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 3.合并a,b节点所在的两个集合</span></div><div class="line"><span class="comment">// 先找到连个根节点，然后把一个根节点的父节点设为另一个根节点就可以了。</span></div><div class="line"><span class="keyword">int</span> x = find(a);</div><div class="line"><span class="keyword">int</span> y = find(b);</div><div class="line">p[x] = y;</div></pre></td></tr></table></figure>
+<h1 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h1><h2 id="TLE版本"><a href="#TLE版本" class="headerlink" title="TLE版本"></a>TLE版本</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 2005</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> T_LEN 7</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// the definition of graph</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></div><div class="line">	<span class="keyword">int</span> from,to;</div><div class="line">	Edge(<span class="keyword">int</span> _from,<span class="keyword">int</span> _to):from(_from),to(_to)&#123;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"><span class="built_in">queue</span>&lt;Edge&gt; edges[<span class="number">8</span>];</div><div class="line"></div><div class="line"><span class="comment">// 并查集</span></div><div class="line"><span class="keyword">int</span> p[maxn];</div><div class="line"><span class="comment">// find parent node</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> p[x] == x ? x : p[x] = find(p[x]);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// length of truck is 7</span></div><div class="line"><span class="keyword">char</span> trucks[maxn][<span class="number">8</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">addTruck</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</div><div class="line">		<span class="keyword">int</span> d = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; T_LEN;j++)&#123;</div><div class="line">			d += (trucks[n][j] != trucks[i][j] ? <span class="number">1</span> : <span class="number">0</span>);</div><div class="line">		&#125;</div><div class="line">		edges[d].push(Edge(i,n));</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> N;</div><div class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;N)!=EOF)&#123;</div><div class="line">		<span class="keyword">if</span>(N == <span class="number">0</span>)	<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt;= T_LEN;i++)&#123;</div><div class="line">			<span class="keyword">while</span>(!edges[i].empty())&#123;</div><div class="line">				edges[i].pop();	</div><div class="line">			&#125; </div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; N;i++)&#123;</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%s"</span>,trucks[i]);</div><div class="line">			addTruck(i);</div><div class="line">			<span class="comment">// 每个节点一个集合 </span></div><div class="line">			p[i] = i;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">		<span class="keyword">int</span> flag = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> d = <span class="number">0</span>;d &lt;= T_LEN;d++)&#123;</div><div class="line">			<span class="comment">// read all edge</span></div><div class="line">			<span class="keyword">while</span>(!edges[d].empty())&#123;</div><div class="line">				Edge e = edges[d].front();</div><div class="line">				edges[d].pop();</div><div class="line">				<span class="comment">// get the set</span></div><div class="line">				<span class="keyword">int</span> x = find(e.from);</div><div class="line">				<span class="keyword">int</span> y = find(e.to);</div><div class="line">				<span class="comment">// 如果不连通 </span></div><div class="line">				<span class="keyword">if</span>(x != y)&#123;</div><div class="line">					sum += d;</div><div class="line">					flag++;</div><div class="line">					<span class="comment">// 连通两点 </span></div><div class="line">					p[e.to] = e.from;</div><div class="line">					<span class="keyword">if</span>(flag == N)	<span class="keyword">break</span>;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span>(flag == N)	<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"The highest possible quality is 1/%d.\n"</span>,sum);</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="AC版本"><a href="#AC版本" class="headerlink" title="AC版本"></a>AC版本</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt; </span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 2005</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> T_LEN 7</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// the definition of graph</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></div><div class="line">	<span class="keyword">int</span> from,to,len;</div><div class="line">	Edge(<span class="keyword">int</span> _from,<span class="keyword">int</span> _to,<span class="keyword">int</span> _len):from(_from),to(_to),len(_len)&#123;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> Edge&amp; a,<span class="keyword">const</span> Edge&amp; b)</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> a.len &lt; b.len;</div><div class="line">&#125; </div><div class="line"></div><div class="line"><span class="built_in">vector</span>&lt;Edge&gt; edges;</div><div class="line"></div><div class="line"><span class="comment">// 并查集</span></div><div class="line"><span class="keyword">int</span> p[maxn];</div><div class="line"><span class="comment">// find parent node</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> p[x] == x ? x : p[x] = find(p[x]);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// length of truck is 7</span></div><div class="line"><span class="keyword">char</span> trucks[maxn][<span class="number">8</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">addTruck</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</div><div class="line">		<span class="keyword">int</span> d = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; T_LEN;j++)&#123;</div><div class="line">			d += (trucks[n][j] != trucks[i][j] ? <span class="number">1</span> : <span class="number">0</span>);</div><div class="line">		&#125;</div><div class="line">		edges.push_back(Edge(i,n,d));</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> N;</div><div class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;N)!=EOF)&#123;</div><div class="line">		<span class="keyword">if</span>(N == <span class="number">0</span>)	<span class="keyword">break</span>;</div><div class="line">		edges.clear();</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; N;i++)&#123;</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%s"</span>,trucks[i]);</div><div class="line">			addTruck(i);</div><div class="line">			<span class="comment">// 每个节点一个集合 </span></div><div class="line">			p[i] = i;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="comment">// 实验证明，用queue[8]比sort更耗时间，毕竟你数据结构课后作业也试过了 </span></div><div class="line">		sort(edges.begin(),edges.end(),cmp);</div><div class="line">		</div><div class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">		<span class="keyword">int</span> flag = <span class="number">0</span>;</div><div class="line">		<span class="keyword">int</span> len = edges.size();</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; len;i++)&#123;</div><div class="line">			Edge e = edges[i];</div><div class="line">			<span class="comment">// get the set</span></div><div class="line">			<span class="keyword">int</span> x = find(e.from);</div><div class="line">			<span class="keyword">int</span> y = find(e.to);</div><div class="line">			<span class="comment">// 如果不连通 </span></div><div class="line">			<span class="keyword">if</span>(x != y)&#123;</div><div class="line">				<span class="comment">// printf("add edge from %d to %d with %d\n",e.from,e.to,e.len);</span></div><div class="line">				sum += e.len;</div><div class="line">				flag++;</div><div class="line">				<span class="comment">// 连通两点 ，并查集写错  p[e.from] = e.to </span></div><div class="line">				p[x] = y;</div><div class="line">				<span class="keyword">if</span>(flag == N<span class="number">-1</span>)	<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"The highest possible quality is 1/%d.\n"</span>,sum);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/05/acm/poj1789/" data-id="cj9aujwl400029icxfok66rrm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/05/acm/poj1459/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          POJ1459 EdmonsKarp最大流算法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/05/acm/poj3041/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">二分图与匈牙利算法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/26/web/my-understanding-of-closure/">我理解的闭包</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/22/web/react-two-way-binding/">React基于事件委托的双向绑定</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/05/acm/poj1094/">POJ1094 拓扑排序</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/05/acm/poj1459/">POJ1459 EdmonsKarp最大流算法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/05/acm/poj1789/">POJ1789 最小生成树</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Maoyiwei<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

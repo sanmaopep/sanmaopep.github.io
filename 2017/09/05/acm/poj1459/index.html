@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>POJ1459 EdmonsKarp最大流算法 | 玩毛线的毛线</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目内容链接： POJ1459.题目 算法详解题解本题就是EdmonsKarp算法的实现，唯一的难点在于多个发电站（有容量）和多个消费者（有用电需求）的处理。 我们的解决方法是：  设置一个超级发电站（记为SUPER_S），我们把每个发电站和SUPER_S连接起来，连接起来的边的容量就是发电站的最大发电量，这就解决了多个发电站的问题。 同样的，我们可以设置一个超级消费者（记为SUPER_C），我们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="POJ1459 EdmonsKarp最大流算法">
+<meta property="og:url" content="http://yoursite.com/2017/09/05/acm/poj1459/index.html">
+<meta property="og:site_name" content="玩毛线的毛线">
+<meta property="og:description" content="题目内容链接： POJ1459.题目 算法详解题解本题就是EdmonsKarp算法的实现，唯一的难点在于多个发电站（有容量）和多个消费者（有用电需求）的处理。 我们的解决方法是：  设置一个超级发电站（记为SUPER_S），我们把每个发电站和SUPER_S连接起来，连接起来的边的容量就是发电站的最大发电量，这就解决了多个发电站的问题。 同样的，我们可以设置一个超级消费者（记为SUPER_C），我们">
+<meta property="og:updated_time" content="2017-10-28T04:45:11.810Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="POJ1459 EdmonsKarp最大流算法">
+<meta name="twitter:description" content="题目内容链接： POJ1459.题目 算法详解题解本题就是EdmonsKarp算法的实现，唯一的难点在于多个发电站（有容量）和多个消费者（有用电需求）的处理。 我们的解决方法是：  设置一个超级发电站（记为SUPER_S），我们把每个发电站和SUPER_S连接起来，连接起来的边的容量就是发电站的最大发电量，这就解决了多个发电站的问题。 同样的，我们可以设置一个超级消费者（记为SUPER_C），我们">
+  
+    <link rel="alternate" href="/atom.xml" title="玩毛线的毛线" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">玩毛线的毛线</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-acm/poj1459" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/05/acm/poj1459/" class="article-date">
+  <time datetime="2017-09-04T16:00:00.000Z" itemprop="datePublished">2017-09-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      POJ1459 EdmonsKarp最大流算法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h1><p>链接： <a href="https://vjudge.net/problem/POJ-1459" target="_blank" rel="external">POJ1459.题目</a></p>
+<h1 id="算法详解"><a href="#算法详解" class="headerlink" title="算法详解"></a>算法详解</h1><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>本题就是EdmonsKarp算法的实现，唯一的难点在于多个发电站（有容量）和多个消费者（有用电需求）的处理。</p>
+<p>我们的解决方法是：</p>
+<ol>
+<li>设置一个超级发电站（记为SUPER_S），我们把每个发电站和SUPER_S连接起来，连接起来的边的容量就是发电站的最大发电量，这就解决了多个发电站的问题。</li>
+<li>同样的，我们可以设置一个超级消费者（记为SUPER_C），我们把每个消费者和SUPER_C连接起来，消费者的用电需求就是消费者和SUPER_C边的容量。</li>
+</ol>
+<h1 id="编码注意点"><a href="#编码注意点" class="headerlink" title="编码注意点"></a>编码注意点</h1><p>本题使用vector\<edge\> 实现的话会存在TLE的问题，用二维矩阵存取图结构能AC。所以建议在ACM比赛中除非空间复杂度太高，尽量使用二维矩阵存取图结构。</edge\></p>
+<h2 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h2><p>本题增广路算法核心代码如下，用了一些小技巧。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// EdmondsKarp算法 </span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxElectry</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</div><div class="line">		<span class="comment">// 从SUPER_S起点开始，标准操作 </span></div><div class="line">		<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; Q;</div><div class="line">		<span class="built_in">memset</span>(in,<span class="number">0</span>,<span class="keyword">sizeof</span>(<span class="keyword">int</span>)*maxn);</div><div class="line">		in[SUPER_S] = INF;</div><div class="line">		Q.push(SUPER_S);</div><div class="line">		<span class="comment">// BFS循环 </span></div><div class="line">		<span class="keyword">while</span>(!Q.empty())&#123;</div><div class="line">			<span class="comment">// 日常标准操作_(:з」∠)_ </span></div><div class="line">			<span class="keyword">int</span> now = Q.front();</div><div class="line">			Q.pop();</div><div class="line">			<span class="keyword">int</span> len = G[now].size();</div><div class="line">			<span class="comment">// 遍历该点所有出去的边 </span></div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; len;i++)&#123;</div><div class="line">				<span class="keyword">int</span> to = G[now][i];</div><div class="line">				<span class="comment">// 重要！ </span></div><div class="line">				<span class="comment">// 如果可以增加流量,并且没有访问过</span></div><div class="line">				<span class="comment">// 这里in数组一举两用，既可以表示该点的流入量，也可以表示是否访问过。 </span></div><div class="line">				<span class="keyword">if</span>(capMap[now][to] &gt; <span class="number">0</span> &amp;&amp; !in[to])&#123;</div><div class="line">					<span class="comment">// 重要！ </span></div><div class="line">					<span class="comment">// to的流入量为当前剩余容量和上一个流入量的最小值 </span></div><div class="line">					in[to] = min(in[now],capMap[now][to]);</div><div class="line">					<span class="comment">// 重要！</span></div><div class="line">					<span class="comment">// to的上一个点是now，用于记录路线 </span></div><div class="line">					p[to] = now;</div><div class="line">					Q.push(to);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			<span class="comment">// BFS到达终点，结束循环 </span></div><div class="line">			<span class="keyword">if</span>(in[SUPER_C])	<span class="keyword">break</span>;</div><div class="line">		&#125; </div><div class="line">		</div><div class="line">		<span class="comment">// 如果终点没有流量流入，说明没有增广路，结束 </span></div><div class="line">		<span class="keyword">if</span>(!in[SUPER_C]) <span class="keyword">break</span>;</div><div class="line">		<span class="comment">// 根据p数组记录的数据，返回起点 </span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> u = SUPER_C;u != SUPER_S;u = p[u])&#123;</div><div class="line">			<span class="comment">// 重要！</span></div><div class="line">			<span class="comment">// 根据最大流的定理，flow(u,v) = -flow(v,u)</span></div><div class="line">			<span class="comment">// 所以一个+ 一个- </span></div><div class="line">			capMap[p[u]][u] -= in[SUPER_C];</div><div class="line">			capMap[u][p[u]] += in[SUPER_C];</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// 总电量增加该增广路的流量 </span></div><div class="line">		sum += in[SUPER_C];</div><div class="line">		<span class="comment">// 寻找下一条增广路 </span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> sum;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>总结一些常见的编码方法：</p>
+<h3 id="p数组存储BFS路径的方法"><a href="#p数组存储BFS路径的方法" class="headerlink" title="p数组存储BFS路径的方法"></a>p数组存储BFS路径的方法</h3><p>两个重点，一个记录路径的方法，一个回溯路径的方法。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1.记录方法</span></div><div class="line">p[to] = now;</div><div class="line"></div><div class="line"><span class="comment">// 2.回溯方法</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> u = SUPER_C;u != SUPER_S;u = p[u])&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h1><h2 id="TLE版本"><a href="#TLE版本" class="headerlink" title="TLE版本"></a>TLE版本</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"></div><div class="line"><span class="comment">// How to do? make all source nodes the one source node</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="comment">//macros</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 120</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SUPER_STATION 105</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SUPER_CONSUMER 110</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SUPER_S SUPER_STATION</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SUPER_C SUPER_CONSUMER</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 99999999</span></div><div class="line"></div><div class="line"><span class="comment">// n -&gt; nodes</span></div><div class="line"><span class="comment">// np -&gt; power stations</span></div><div class="line"><span class="comment">// nc -&gt; consumers</span></div><div class="line"><span class="comment">// m -&gt; edge num</span></div><div class="line"><span class="keyword">int</span> n,np,nc,m;</div><div class="line"></div><div class="line"><span class="comment">// the definition of graph</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></div><div class="line">	<span class="keyword">int</span> from,to,cap,flow;</div><div class="line">	Edge(<span class="keyword">int</span> _from,<span class="keyword">int</span> _to,<span class="keyword">int</span> _cap):from(_from),to(_to),cap(_cap)&#123;</div><div class="line">		flow = <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"><span class="built_in">vector</span>&lt;Edge&gt; edges;		<span class="comment">// store the edge</span></div><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[maxn];	<span class="comment">// edges NO out in a node</span></div><div class="line"><span class="keyword">int</span> in[maxn];	<span class="comment">// supply of a node</span></div><div class="line"><span class="keyword">int</span> p[maxn];	<span class="comment">// record the last edge we move</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(<span class="keyword">int</span> from,<span class="keyword">int</span> to,<span class="keyword">int</span> value)</span></span>&#123;</div><div class="line">	edges.push_back(Edge(from,to,value));</div><div class="line">	edges.push_back(Edge(to,from,<span class="number">0</span>));</div><div class="line">	<span class="keyword">int</span> s = edges.size(); </div><div class="line">	G[from].push_back(s<span class="number">-2</span>);</div><div class="line">	G[to].push_back(s<span class="number">-1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// EdmondsKarp</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxElectry</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</div><div class="line">		<span class="comment">// start from SUPER_S</span></div><div class="line">		<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; Q;</div><div class="line">		<span class="built_in">memset</span>(in,<span class="number">0</span>,<span class="keyword">sizeof</span>(<span class="keyword">int</span>)*maxn);</div><div class="line">		in[SUPER_S] = INF;</div><div class="line">		Q.push(SUPER_S);</div><div class="line">		<span class="keyword">while</span>(!Q.empty())&#123;</div><div class="line">			<span class="keyword">int</span> now = Q.front();</div><div class="line">			Q.pop();</div><div class="line">			<span class="keyword">int</span> len = G[now].size();</div><div class="line">			<span class="comment">// get a way out</span></div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; len;i++)&#123;</div><div class="line">				Edge edge = edges[G[now][i]];</div><div class="line">				<span class="comment">// have not visited yet</span></div><div class="line">				<span class="keyword">if</span>(edge.cap &gt; edge.flow &amp;&amp; !in[edge.to])&#123;</div><div class="line">					in[edge.to] = min(in[now],edge.cap - edge.flow);</div><div class="line">					p[edge.to] = G[now][i];</div><div class="line">					Q.push(edge.to);</div><div class="line">				&#125;</div><div class="line">				</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span>(in[SUPER_C])	<span class="keyword">break</span>;</div><div class="line">		&#125; </div><div class="line">		</div><div class="line">		<span class="comment">// nothing more to send</span></div><div class="line">		<span class="keyword">if</span>(!in[SUPER_C]) <span class="keyword">break</span>;</div><div class="line">		<span class="comment">// the path</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> u = SUPER_C;u != SUPER_S;u = edges[p[u]].from)&#123;</div><div class="line">			edges[p[u]].flow += in[SUPER_C];</div><div class="line">			edges[p[u]^<span class="number">1</span>].flow -= in[SUPER_C];</div><div class="line">		&#125;</div><div class="line">		sum += in[SUPER_C];</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> sum;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">// input of scanf</span></div><div class="line">	<span class="keyword">int</span> first,next,value;</div><div class="line">	<span class="comment">// the use of scanf</span></div><div class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d%d%d"</span>,&amp;n,&amp;np,&amp;nc,&amp;m)!=EOF)&#123;</div><div class="line">		<span class="comment">// empty graph</span></div><div class="line">		edges.clear();</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</div><div class="line">			G[i].clear();</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// m edges</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; m;i++)&#123;</div><div class="line">			<span class="keyword">while</span>(getchar()!=<span class="string">'('</span>);</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%d,%d)%d"</span>, &amp;first, &amp;next, &amp;value);</div><div class="line">			addEdge(first,next,value);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// np nodes</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; np;i++)&#123;</div><div class="line">			<span class="keyword">while</span>(getchar()!=<span class="string">'('</span>);</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%d)%d"</span>, &amp;first, &amp;value);</div><div class="line">			addEdge(SUPER_S,first,value);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// nc nodes</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; nc;i++)&#123;</div><div class="line">			<span class="keyword">while</span>(getchar()!=<span class="string">'('</span>);</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%d)%d"</span>, &amp;first, &amp;value);</div><div class="line">			addEdge(first,SUPER_C,value);</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,maxElectry());</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="AC版本"><a href="#AC版本" class="headerlink" title="AC版本"></a>AC版本</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"></div><div class="line"><span class="comment">// How to do? make all source nodes the one source node</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="comment">//macros</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 120</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SUPER_STATION 105</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SUPER_CONSUMER 110</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SUPER_S SUPER_STATION</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SUPER_C SUPER_CONSUMER</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 99999999</span></div><div class="line"></div><div class="line"><span class="comment">// n -&gt; nodes</span></div><div class="line"><span class="comment">// np -&gt; power stations</span></div><div class="line"><span class="comment">// nc -&gt; consumers</span></div><div class="line"><span class="comment">// m -&gt; edge num</span></div><div class="line"><span class="keyword">int</span> n,np,nc,m;</div><div class="line"></div><div class="line"><span class="comment">// the definition of graph</span></div><div class="line"><span class="keyword">int</span> capMap[maxn][maxn];</div><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[maxn];</div><div class="line"><span class="keyword">int</span> in[maxn];	<span class="comment">// supply of a node</span></div><div class="line"><span class="keyword">int</span> p[maxn];	<span class="comment">// record the last node we move</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(<span class="keyword">int</span> from,<span class="keyword">int</span> to,<span class="keyword">int</span> value)</span></span>&#123;</div><div class="line">	capMap[from][to] = value;</div><div class="line">	G[from].push_back(to);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// EdmondsKarp</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxElectry</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</div><div class="line">		<span class="comment">// start from SUPER_S</span></div><div class="line">		<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; Q;</div><div class="line">		<span class="built_in">memset</span>(in,<span class="number">0</span>,<span class="keyword">sizeof</span>(<span class="keyword">int</span>)*maxn);</div><div class="line">		in[SUPER_S] = INF;</div><div class="line">		Q.push(SUPER_S);</div><div class="line">		<span class="keyword">while</span>(!Q.empty())&#123;</div><div class="line">			<span class="keyword">int</span> now = Q.front();</div><div class="line">			Q.pop();</div><div class="line">			<span class="keyword">int</span> len = G[now].size();</div><div class="line">			<span class="comment">// get a way out</span></div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; len;i++)&#123;</div><div class="line">				<span class="keyword">int</span> to = G[now][i];</div><div class="line">				<span class="comment">// have not visited yet</span></div><div class="line">				<span class="keyword">if</span>(capMap[now][to] &gt; <span class="number">0</span> &amp;&amp; !in[to])&#123;</div><div class="line">					in[to] = min(in[now],capMap[now][to]);</div><div class="line">					p[to] = now;</div><div class="line">					Q.push(to);</div><div class="line">				&#125;</div><div class="line">				</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span>(in[SUPER_C])	<span class="keyword">break</span>;</div><div class="line">		&#125; </div><div class="line">		</div><div class="line">		<span class="comment">// nothing more to send</span></div><div class="line">		<span class="keyword">if</span>(!in[SUPER_C]) <span class="keyword">break</span>;</div><div class="line">		<span class="comment">// the path</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> u = SUPER_C;u != SUPER_S;u = p[u])&#123;</div><div class="line">			capMap[p[u]][u] -= in[SUPER_C];</div><div class="line">			capMap[u][p[u]] += in[SUPER_C];</div><div class="line">		&#125;</div><div class="line">		sum += in[SUPER_C];</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> sum;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">// input of scanf</span></div><div class="line">	<span class="keyword">int</span> first,next,value;</div><div class="line">	<span class="comment">// the use of scanf</span></div><div class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d%d%d"</span>,&amp;n,&amp;np,&amp;nc,&amp;m)!=EOF)&#123;</div><div class="line">		<span class="comment">// empty graph</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; maxn;i++)&#123;</div><div class="line">			G[i].clear();</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; maxn;j++)&#123;</div><div class="line">				capMap[i][j] = <span class="number">0</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// m edges</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; m;i++)&#123;</div><div class="line">			<span class="keyword">while</span>(getchar()!=<span class="string">'('</span>);</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%d,%d)%d"</span>, &amp;first, &amp;next, &amp;value);</div><div class="line">			addEdge(first,next,value);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// np nodes</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; np;i++)&#123;</div><div class="line">			<span class="keyword">while</span>(getchar()!=<span class="string">'('</span>);</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%d)%d"</span>, &amp;first, &amp;value);</div><div class="line">			addEdge(SUPER_S,first,value);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// nc nodes</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; nc;i++)&#123;</div><div class="line">			<span class="keyword">while</span>(getchar()!=<span class="string">'('</span>);</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%d)%d"</span>, &amp;first, &amp;value);</div><div class="line">			addEdge(first,SUPER_C,value);</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,maxElectry());</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/05/acm/poj1459/" data-id="cj9aujwkx00019icxrh7437j1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/05/acm/poj1094/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          POJ1094 拓扑排序
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/05/acm/poj1789/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">POJ1789 最小生成树</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/26/web/my-understanding-of-closure/">我理解的闭包</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/22/web/react-two-way-binding/">React基于事件委托的双向绑定</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/05/acm/poj1094/">POJ1094 拓扑排序</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/05/acm/poj1459/">POJ1459 EdmonsKarp最大流算法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/05/acm/poj1789/">POJ1789 最小生成树</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Maoyiwei<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

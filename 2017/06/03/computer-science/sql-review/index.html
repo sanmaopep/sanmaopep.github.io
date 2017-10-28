@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SQL复习 | 玩毛线的毛线</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="BasisBasic Usage123456789101112131415161718192021/* Select */SELECT column_name,column_nameFROM table_name;SELECT * FROM table_name;/* Insert */INSERT INTO table_nameVALUES (value1,value2,value3,...);">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL复习">
+<meta property="og:url" content="http://yoursite.com/2017/06/03/computer-science/sql-review/index.html">
+<meta property="og:site_name" content="玩毛线的毛线">
+<meta property="og:description" content="BasisBasic Usage123456789101112131415161718192021/* Select */SELECT column_name,column_nameFROM table_name;SELECT * FROM table_name;/* Insert */INSERT INTO table_nameVALUES (value1,value2,value3,...);">
+<meta property="og:image" content="http://www.runoob.com/wp-content/uploads/2013/09/img_innerjoin.gif">
+<meta property="og:image" content="http://www.runoob.com/wp-content/uploads/2013/09/inner-join1.jpg">
+<meta property="og:image" content="http://www.runoob.com/wp-content/uploads/2013/09/img_leftjoin.gif">
+<meta property="og:image" content="http://www.runoob.com/wp-content/uploads/2013/09/left-join1.jpg">
+<meta property="og:image" content="http://www.runoob.com/wp-content/uploads/2013/09/img_fulljoin.gif">
+<meta property="og:image" content="http://www.runoob.com/wp-content/uploads/2013/09/union1.jpg">
+<meta property="og:image" content="http://www.runoob.com/wp-content/uploads/2013/09/union2.jpg">
+<meta property="og:image" content="http://www.runoob.com/wp-content/uploads/2013/09/AAA99C7B-36A5-43FB-B489-F8CE63B62C71.jpg">
+<meta property="og:image" content="http://www.runoob.com/wp-content/uploads/2013/09/groupby1.jpg">
+<meta property="og:updated_time" content="2017-10-28T04:45:11.810Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL复习">
+<meta name="twitter:description" content="BasisBasic Usage123456789101112131415161718192021/* Select */SELECT column_name,column_nameFROM table_name;SELECT * FROM table_name;/* Insert */INSERT INTO table_nameVALUES (value1,value2,value3,...);">
+<meta name="twitter:image" content="http://www.runoob.com/wp-content/uploads/2013/09/img_innerjoin.gif">
+  
+    <link rel="alternate" href="/atom.xml" title="玩毛线的毛线" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">玩毛线的毛线</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-computer-science/sql-review" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/03/computer-science/sql-review/" class="article-date">
+  <time datetime="2017-06-02T16:00:00.000Z" itemprop="datePublished">2017-06-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SQL复习
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Basis"><a href="#Basis" class="headerlink" title="Basis"></a>Basis</h2><h3 id="Basic-Usage"><a href="#Basic-Usage" class="headerlink" title="Basic Usage"></a>Basic Usage</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* Select */</span></div><div class="line"><span class="keyword">SELECT</span> column_name,column_name</div><div class="line"><span class="keyword">FROM</span> table_name;</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> table_name;</div><div class="line"></div><div class="line"><span class="comment">/* Insert */</span></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name</div><div class="line"><span class="keyword">VALUES</span> (value1,value2,value3,...);</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name (column1,column2,column3,...)</div><div class="line"><span class="keyword">VALUES</span> (value1,value2,value3,...);</div><div class="line"></div><div class="line"><span class="comment">/* Update */</span></div><div class="line"><span class="keyword">UPDATE</span> table_name</div><div class="line"><span class="keyword">SET</span> column1=value1,column2=value2,...</div><div class="line"><span class="keyword">WHERE</span> some_column=some_value;</div><div class="line"></div><div class="line"><span class="comment">/* Delete */</span></div><div class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> table_name</div><div class="line"><span class="keyword">WHERE</span> some_column=some_value;</div></pre></td></tr></table></figure>
+<h3 id="Where"><a href="#Where" class="headerlink" title="Where"></a>Where</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name,column_name</div><div class="line"><span class="keyword">FROM</span> table_name</div><div class="line"><span class="keyword">WHERE</span> column_name <span class="keyword">operator</span> <span class="keyword">value</span>;</div></pre></td></tr></table></figure>
+<h3 id="Distinct"><a href="#Distinct" class="headerlink" title="Distinct"></a>Distinct</h3><p>Choose the only one</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> column_name,column_name</div><div class="line"><span class="keyword">FROM</span> table_name;</div></pre></td></tr></table></figure>
+<h3 id="Order-by"><a href="#Order-by" class="headerlink" title="Order by"></a>Order by</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name,column_name</div><div class="line"><span class="keyword">FROM</span> table_name</div><div class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> column_name,column_name <span class="keyword">ASC</span>|<span class="keyword">DESC</span>;</div></pre></td></tr></table></figure>
+<p>Note that <strong>ASC</strong> is the default way.</p>
+<hr>
+<h2 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h2><h3 id="演示数据库说明"><a href="#演示数据库说明" class="headerlink" title="演示数据库说明"></a>演示数据库说明</h3><h4 id="Websites表"><a href="#Websites表" class="headerlink" title="Websites表"></a>Websites表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">+----+--------------+---------------------------+-------+---------+</div><div class="line">| id | name         | url                       | alexa | country |</div><div class="line">+----+--------------+---------------------------+-------+---------+</div><div class="line">| 1  | Google       | https://www.google.cm/    | 1     | USA     |</div><div class="line">| 2  | 淘宝          | https://www.taobao.com/   | 13    | CN      |</div><div class="line">| 3  | 菜鸟教程      | http://www.runoob.com/    | 4689  | CN      |</div><div class="line">| 4  | 微博          | http://weibo.com/         | 20    | CN      |</div><div class="line">| 5  | Facebook     | https://www.facebook.com/ | 3     | USA     |</div><div class="line">| 7  | stackoverflow | http://stackoverflow.com/ |   0 | IND     |</div><div class="line">+----+---------------+---------------------------+-------+---------+</div></pre></td></tr></table></figure>
+<h4 id="Access-log-表"><a href="#Access-log-表" class="headerlink" title="Access_log 表"></a>Access_log 表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">+-----+---------+-------+------------+</div><div class="line">| aid | site_id | count | date       |</div><div class="line">+-----+---------+-------+------------+</div><div class="line">|   1 |       1 |    45 | 2016-05-10 |</div><div class="line">|   2 |       3 |   100 | 2016-05-13 |</div><div class="line">|   3 |       1 |   230 | 2016-05-14 |</div><div class="line">|   4 |       2 |    10 | 2016-05-14 |</div><div class="line">|   5 |       5 |   205 | 2016-05-14 |</div><div class="line">|   6 |       4 |    13 | 2016-05-15 |</div><div class="line">|   7 |       3 |   220 | 2016-05-15 |</div><div class="line">|   8 |       5 |   545 | 2016-05-16 |</div><div class="line">|   9 |       3 |   201 | 2016-05-17 |</div><div class="line">+-----+---------+-------+------------+</div></pre></td></tr></table></figure>
+<h4 id="apps表"><a href="#apps表" class="headerlink" title="apps表"></a>apps表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">+----+------------+-------------------------+---------+</div><div class="line">| id | app_name   | url                     | country |</div><div class="line">+----+------------+-------------------------+---------+</div><div class="line">|  1 | QQ APP     | http://im.qq.com/       | CN      |</div><div class="line">|  2 | 微博 APP | http://weibo.com/       | CN      |</div><div class="line">|  3 | 淘宝 APP | https://www.taobao.com/ | CN      |</div><div class="line">+----+------------+-------------------------+---------+</div></pre></td></tr></table></figure>
+<h3 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h3><p>在 SQL 中，通配符与 SQL LIKE 操作符一起使用，SQL 通配符用于搜索表中的数据。</p>
+<table>
+<thead>
+<tr>
+<th>通配符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_</td>
+<td>代替一个字符</td>
+</tr>
+<tr>
+<td>%</td>
+<td>代替0或多个字符</td>
+</tr>
+<tr>
+<td>[字符串]</td>
+<td>字符串中的任意一个字符</td>
+</tr>
+<tr>
+<td>[^字符串] 或 [!字符串]</td>
+<td>不在字符串中的任意一个字符</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Websites</div><div class="line"><span class="keyword">WHERE</span> <span class="keyword">url</span> <span class="keyword">LIKE</span> <span class="string">'https%'</span>;</div></pre></td></tr></table></figure>
+<h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 正则表达式匹配 */</span></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Websites</div><div class="line"><span class="keyword">WHERE</span> <span class="keyword">name</span> REGEXP <span class="string">'^[GFs]'</span>;</div><div class="line"></div><div class="line"><span class="comment">/* 正则表达式匹配 否定形式 */</span></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Websites</div><div class="line"><span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">NOT</span> REGEXP <span class="string">'^[GFs]'</span>;</div></pre></td></tr></table></figure>
+<h3 id="IN"><a href="#IN" class="headerlink" title="IN"></a>IN</h3><p>IN 操作符允许您在 <strong>WHERE</strong> 子句中<strong>规定多个值</strong>。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Websites</div><div class="line"><span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">IN</span> (<span class="string">'Google'</span>,<span class="string">'菜鸟教程'</span>);</div></pre></td></tr></table></figure>
+<h3 id="BETWEEN"><a href="#BETWEEN" class="headerlink" title="BETWEEN"></a>BETWEEN</h3><p>BETWEEN 操作符用于选取介于两个值之间的数据范围内的值。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name(s)</div><div class="line"><span class="keyword">FROM</span> table_name</div><div class="line"><span class="keyword">WHERE</span> column_name <span class="keyword">BETWEEN</span> value1 <span class="keyword">AND</span> value2;</div></pre></td></tr></table></figure>
+<h3 id="AS"><a href="#AS" class="headerlink" title="AS"></a>AS</h3><p>通过使用 SQL，可以为表名称或列名称指定别名。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name <span class="keyword">AS</span> alias_name</div><div class="line"><span class="keyword">FROM</span> table_name;</div></pre></td></tr></table></figure>
+<h3 id="JOIN"><a href="#JOIN" class="headerlink" title="JOIN"></a>JOIN</h3><h4 id="INNER-JOIN"><a href="#INNER-JOIN" class="headerlink" title="INNER JOIN"></a>INNER JOIN</h4><p><img src="http://www.runoob.com/wp-content/uploads/2013/09/img_innerjoin.gif" alt="SQL INNER JOIN"></p>
+<p>语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name(s)</div><div class="line"><span class="keyword">FROM</span> table1</div><div class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> table2</div><div class="line"><span class="keyword">ON</span> table1.column_name=table2.column_name;</div><div class="line"></div><div class="line"><span class="comment">/*或者*/</span></div><div class="line"><span class="keyword">SELECT</span> column_name(s)</div><div class="line"><span class="keyword">FROM</span> table1</div><div class="line"><span class="keyword">JOIN</span> table2</div><div class="line"><span class="keyword">ON</span> table1.column_name=table2.column_name;</div><div class="line"></div><div class="line"><span class="comment">/* 实例 */</span></div><div class="line"><span class="keyword">SELECT</span> Websites.name, access_log.count, access_log.date</div><div class="line"><span class="keyword">FROM</span> Websites</div><div class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> access_log</div><div class="line"><span class="keyword">ON</span> Websites.id=access_log.site_id</div><div class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> access_log.count;</div></pre></td></tr></table></figure>
+<p>举例如下：</p>
+<p><img src="http://www.runoob.com/wp-content/uploads/2013/09/inner-join1.jpg" alt="img"></p>
+<h4 id="LEFT-JOIN"><a href="#LEFT-JOIN" class="headerlink" title="LEFT JOIN"></a>LEFT JOIN</h4><p>LEFT JOIN 关键字从<strong>左表（table1）返回所有的行</strong>，即使右表（table2）中没有匹配。如果右表中<strong>没有匹配</strong>，则结果<strong>为</strong> <strong>NULL</strong>。<strong>(RIGHT JOIN 则相反)</strong></p>
+<p><img src="http://www.runoob.com/wp-content/uploads/2013/09/img_leftjoin.gif" alt="SQL LEFT JOIN"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name(s)</div><div class="line"><span class="keyword">FROM</span> table1</div><div class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> table2</div><div class="line"><span class="keyword">ON</span> table1.column_name=table2.column_name;</div></pre></td></tr></table></figure>
+<p><img src="http://www.runoob.com/wp-content/uploads/2013/09/left-join1.jpg" alt="img"></p>
+<h4 id="FULL-OUTER-JOIN"><a href="#FULL-OUTER-JOIN" class="headerlink" title="FULL OUTER JOIN"></a>FULL OUTER JOIN</h4><p>FULL OUTER JOIN 关键字只要左表（table1）和右表（table2）其中一个表中存在匹配，则返回行。</p>
+<p><img src="http://www.runoob.com/wp-content/uploads/2013/09/img_fulljoin.gif" alt="SQL FULL OUTER JOIN"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name(s)</div><div class="line"><span class="keyword">FROM</span> table1</div><div class="line"><span class="keyword">FULL</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> table2</div><div class="line"><span class="keyword">ON</span> table1.column_name=table2.column_name;</div></pre></td></tr></table></figure>
+<h3 id="UNION"><a href="#UNION" class="headerlink" title="UNION"></a>UNION</h3><p>UNION 操作符用于合并两个或多个 SELECT 语句的结果集。</p>
+<p><strong>Attention：</strong> UNION 内部的每个 SELECT 语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每个 SELECT 语句中的列的顺序必须相同。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table1</div><div class="line"><span class="keyword">UNION</span></div><div class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table2;</div><div class="line"></div><div class="line"><span class="comment">/*默认地，UNION 操作符选取不同的值。如果允许重复的值，请使用 UNION ALL。*/</span></div><div class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table1</div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table2;</div></pre></td></tr></table></figure>
+<p><img src="http://www.runoob.com/wp-content/uploads/2013/09/union1.jpg" alt="img"><img src="http://www.runoob.com/wp-content/uploads/2013/09/union2.jpg" alt="img"></p>
+<p>另外，带where的union all会这样：</p>
+<p><img src="http://www.runoob.com/wp-content/uploads/2013/09/AAA99C7B-36A5-43FB-B489-F8CE63B62C71.jpg" alt="img"></p>
+<h3 id="INSERT-INTO-SELECT"><a href="#INSERT-INTO-SELECT" class="headerlink" title="INSERT INTO SELECT"></a>INSERT INTO SELECT</h3><p>INSERT INTO SELECT 语句从一个表复制数据，然后把数据插入到一个已存在的表中。目标表中任何已存在的行都不会受影响。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table2</div><div class="line">(column_name(s))</div><div class="line"><span class="keyword">SELECT</span> column_name(s)</div><div class="line"><span class="keyword">FROM</span> table1;</div></pre></td></tr></table></figure>
+<h3 id="EXISTS"><a href="#EXISTS" class="headerlink" title="EXISTS"></a>EXISTS</h3><p>结果集是否为空。比如说，选出有人访问的网站：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Websites</div><div class="line"><span class="keyword">WHERE</span> <span class="keyword">EXISTS</span> (<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> access_log</div><div class="line">             <span class="keyword">WHERE</span> access_log.site_id = Websites.id)</div></pre></td></tr></table></figure>
+<p>还有NOT EXISTS搭配使用。</p>
+<hr>
+<h2 id="SQL-Function"><a href="#SQL-Function" class="headerlink" title="SQL Function"></a>SQL Function</h2><h3 id="GROUP-BY"><a href="#GROUP-BY" class="headerlink" title="GROUP BY"></a>GROUP BY</h3><p>GROUP BY 语句用于<strong>结合聚合函数</strong>，根据一个或多个列对结果集进行分组。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name, aggregate_function(column_name)</div><div class="line"><span class="keyword">FROM</span> table_name</div><div class="line"><span class="keyword">WHERE</span> column_name <span class="keyword">operator</span> <span class="keyword">value</span></div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> column_name;</div></pre></td></tr></table></figure>
+<p><img src="http://www.runoob.com/wp-content/uploads/2013/09/groupby1.jpg" alt="img"></p>
+<h3 id="HAVING"><a href="#HAVING" class="headerlink" title="HAVING"></a>HAVING</h3><p>在 SQL 中增加 HAVING 子句原因是，<strong>WHERE 关键字无法与聚合函数一起使用</strong>。</p>
+<p>HAVING 子句可以让我们<strong>筛选分组后的各组数据</strong>。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name, aggregate_function(column_name)</div><div class="line"><span class="keyword">FROM</span> table_name</div><div class="line"><span class="keyword">WHERE</span> column_name <span class="keyword">operator</span> <span class="keyword">value</span></div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> column_name</div><div class="line"><span class="keyword">HAVING</span> aggregate_function(column_name) <span class="keyword">operator</span> <span class="keyword">value</span>;</div></pre></td></tr></table></figure>
+<p>查找访问量大于200的网站</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> Websites.name, Websites.url, <span class="keyword">SUM</span>(access_log.count) <span class="keyword">AS</span> nums <span class="keyword">FROM</span> (access_log</div><div class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> Websites</div><div class="line"><span class="keyword">ON</span> access_log.site_id=Websites.id)</div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> Websites.name</div><div class="line"><span class="keyword">HAVING</span> <span class="keyword">SUM</span>(access_log.count) &gt; <span class="number">200</span>;</div></pre></td></tr></table></figure>
+<h3 id="聚合-Aggregate-函数"><a href="#聚合-Aggregate-函数" class="headerlink" title="聚合(Aggregate)函数"></a>聚合(Aggregate)函数</h3><p>SQL Aggregate 函数计算从列中取得的值，返回一个单一的值。</p>
+<p>有用的 Aggregate 函数：</p>
+<ul>
+<li>AVG() - 返回平均值</li>
+<li>COUNT() - 返回行数</li>
+<li>FIRST() - 返回第一个记录的值</li>
+<li>LAST() - 返回最后一个记录的值</li>
+<li>MAX() - 返回最大值</li>
+<li>MIN() - 返回最小值</li>
+<li>SUM() - 返回总和</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/06/03/computer-science/sql-review/" data-id="cj9aujwlq00099icxij0jz36m" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/05/acm/poj3041/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          二分图与匈牙利算法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/01/computer-science/c++ overload-and-virtual-function/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">C++重载与虚函数</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/26/web/my-understanding-of-closure/">我理解的闭包</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/22/web/react-two-way-binding/">React基于事件委托的双向绑定</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/05/acm/poj1094/">POJ1094 拓扑排序</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/05/acm/poj1459/">POJ1459 EdmonsKarp最大流算法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/05/acm/poj1789/">POJ1789 最小生成树</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Maoyiwei<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

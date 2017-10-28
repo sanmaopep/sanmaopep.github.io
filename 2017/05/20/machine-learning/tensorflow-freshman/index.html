@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Tensorflow入门笔记 | 玩毛线的毛线</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Tensorflow原理背景： Python和C++来回切换会造成巨大开销。  To do efficient numerical computing in Python, we typically use libraries like NumPythat do expensive operations such as matrix  multiplication outside Python,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tensorflow入门笔记">
+<meta property="og:url" content="http://yoursite.com/2017/05/20/machine-learning/tensorflow-freshman/index.html">
+<meta property="og:site_name" content="玩毛线的毛线">
+<meta property="og:description" content="Tensorflow原理背景： Python和C++来回切换会造成巨大开销。  To do efficient numerical computing in Python, we typically use libraries like NumPythat do expensive operations such as matrix  multiplication outside Python,">
+<meta property="og:updated_time" content="2017-10-28T04:45:11.810Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tensorflow入门笔记">
+<meta name="twitter:description" content="Tensorflow原理背景： Python和C++来回切换会造成巨大开销。  To do efficient numerical computing in Python, we typically use libraries like NumPythat do expensive operations such as matrix  multiplication outside Python,">
+  
+    <link rel="alternate" href="/atom.xml" title="玩毛线的毛线" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">玩毛线的毛线</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-machine-learning/tensorflow-freshman" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/20/machine-learning/tensorflow-freshman/" class="article-date">
+  <time datetime="2017-05-19T16:00:00.000Z" itemprop="datePublished">2017-05-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Tensorflow入门笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Tensorflow原理"><a href="#Tensorflow原理" class="headerlink" title="Tensorflow原理"></a>Tensorflow原理</h2><p><strong>背景：</strong> Python和C++来回切换会造成巨大开销。</p>
+<blockquote>
+<p>To do efficient numerical computing in Python, we typically use libraries like <a href="http://www.numpy.org/" target="_blank" rel="external">NumPy</a>that do expensive operations such as matrix  multiplication outside Python, using highly efficient code implemented in another language. Unfortunately, there can still be a lot of overhead from switching back to Python every operation. This overhead is especially bad if you want to run computations on GPUs or in a distributed manner, where there can be a high cost to transferring data.</p>
+</blockquote>
+<p><strong>解决方案：</strong> 利用Python基于Graph定义所有运算，然后让这些一次性在Python外完成这些运算。</p>
+<blockquote>
+<p>TensorFlow also does its heavy lifting outside Python, but it ta<a href="https://www.tensorflow.org/get_started/mnist/proskes" target="_blank" rel="external">https://www.tensorflow.org/get_started/mnist/proskes</a> things a step further to avoid this overhead. Instead of running a single expensive operation independently from Python, TensorFlow lets us describe a graph of interacting operations that run entirely outside Python. This approach is similar to that used in Theano or Torch.</p>
+<p>The role of the Python code is therefore to build this external computation graph, and to dictate which parts of the computation graph should be run. See the <a href="https://www.tensorflow.org/get_started/get_started#the_computational_graph" target="_blank" rel="external">Computation Graph</a> section of <a href="https://www.tensorflow.org/get_started/get_started" target="_blank" rel="external">Getting Started With TensorFlow</a> for more detail.</p>
+</blockquote>
+<h2 id="Tensorflow常用API说明"><a href="#Tensorflow常用API说明" class="headerlink" title="Tensorflow常用API说明"></a>Tensorflow常用API说明</h2><h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><blockquote>
+<p>TensorFlow relies on a highly efficient C++ backend to do its computation. The connection to this backend is called a session.The common usage for TensorFlow programs is to first create a graph and then launch it in a session.</p>
+</blockquote>
+<p><strong>总结：</strong> 用于和C++高性能计算模块<strong>会话</strong>的类</p>
+<p>在入门教程中，我们使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line">sess = tf.InteractiveSession()</div></pre></td></tr></table></figure>
+<h3 id="Tensor"><a href="#Tensor" class="headerlink" title="Tensor"></a>Tensor</h3><p>中文名称张量，可以查看知乎上关于这个问题的解释：<a href="https://www.zhihu.com/question/20695804" target="_blank" rel="external">什么是张量</a>。实际上可以将其理解为一个矩阵，Tensorflow中的基本单位</p>
+<p>查看以下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line"><span class="comment"># What is Tensor?</span></div><div class="line">ta = [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>];</div><div class="line">ta[<span class="number">0</span>] = tf.placeholder(tf.float32,[<span class="keyword">None</span>,<span class="number">784</span>])</div><div class="line">ta[<span class="number">1</span>] = tf.zeros([<span class="number">5</span>,<span class="number">5</span>],tf.float32)</div><div class="line"><span class="keyword">print</span> (ta)</div></pre></td></tr></table></figure>
+<p>输出以下结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/usr/bin/python2.7 /home/maoyiwei/桌面/Tensorflow/playground/play.py</div><div class="line">[&lt;tf.Tensor 'Placeholder:0' shape=(?, 784) dtype=float32&gt;, &lt;tf.Tensor 'zeros:0' shape=(5, 5) dtype=float32&gt;, 0, 0]</div></pre></td></tr></table></figure>
+<h3 id="Placeholder"><a href="#Placeholder" class="headerlink" title="Placeholder"></a>Placeholder</h3><p>可以理解为用于存储输入数据（训练数据）的Tensor。格式如下：</p>
+<blockquote>
+<p>placeholder(    dtype,    shape=None,    name=None)</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">x = tf.placeholder(tf.float32, shape=(<span class="number">1024</span>, <span class="number">1024</span>))</div></pre></td></tr></table></figure>
+<h3 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h3><p>字面意思。在Tensorflow中意义如下：</p>
+<blockquote>
+<p>A <code>Variable</code> is a value that lives in TensorFlow’s computation graph. <strong>It can be used and even modified by the computation.</strong> In machine learning applications, one generally has the model parameters be<code>Variable</code>s.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">W = tf.Variable(tf.zeros([<span class="number">784</span>,<span class="number">10</span>]))</div><div class="line">b = tf.Variable(tf.zeros([<span class="number">10</span>]))</div></pre></td></tr></table></figure>
+<p>Variable要进行初始化，步骤如下：</p>
+<blockquote>
+<p>Before <code>Variable</code>s can be used within a session, they must be initialized using that session. This step takes the initial values (in this case tensors full of zeros) that have already been specified, and assigns them to each <code>Variable</code>. This can be done for all <code>Variables</code> at once:</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sess.run(tf.global_variables_initializer())</div></pre></td></tr></table></figure>
+<h3 id="tf-matmul-x-W"><a href="#tf-matmul-x-W" class="headerlink" title="tf.matmul(x,W)"></a>tf.matmul(x,W)</h3><p>矩阵相乘(x*W)：详细看文档：</p>
+<blockquote>
+<p>Matmul(a,b) Return:</p>
+<p>A Tensor of the same type as a and b where each inner-most matrix is the product of the corresponding matrices in a and b, e.g. if all transpose or adjoint attributes are False:</p>
+<p>output[…, i, j] = sum_k (a[…, i, k] * b[…, k, j]), for all indices i, j.</p>
+</blockquote>
+<h3 id="tf-reduce-XXX"><a href="#tf-reduce-XXX" class="headerlink" title="tf.reduce_XXX"></a>tf.reduce_XXX</h3><p>查看文档，解释如下：</p>
+<blockquote>
+<p>Computes the XXXX of elements across dimensions of a tensor.</p>
+</blockquote>
+<p>主要参数如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">reduce_mean(</div><div class="line">    input_tensor, <span class="comment"># 输入的tensor</span></div><div class="line">    axis=<span class="keyword">None</span>, <span class="comment"># 维度</span></div><div class="line">    <span class="comment"># keep_dims=False,</span></div><div class="line">    <span class="comment"># name=None,</span></div><div class="line">    <span class="comment"># reduction_indices=None</span></div><div class="line">)</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><strong>input_tensor</strong>: The tensor to reduce. Should have numeric type.</li>
+<li><strong>axis</strong>: The dimensions to reduce. If <code>None</code> (the default), reduces all dimensions.</li>
+</ul>
+</blockquote>
+<p>举例说明：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 'x' is [[1., 2.]</span></div><div class="line"><span class="comment">#         [3., 4.]]</span></div><div class="line"></div><div class="line">tf.reduce_mean(x) ==&gt; 2.5 #如果不指定第二个参数，那么就在所有的元素中取平均值</div><div class="line">tf.reduce_mean(x, 0) ==&gt; [2.,  3.] #指定第二个参数为0，则第一维的元素取平均值，即每一列求平均值</div><div class="line">tf.reduce_mean(x, 1) ==&gt; [1.5,  3.5] #指定第二个参数为1，则第二维的元素取平均值，即每一行求平均值</div></pre></td></tr></table></figure>
+<p>常用的API如下：</p>
+<ul>
+<li>reduce_mean 平均值</li>
+<li>reduce_max 最大值</li>
+<li>reduce_min 最小值</li>
+<li>reduce_sum 求和</li>
+</ul>
+<p><a href="https://stackoverflow.com/questions/43394402/why-does-tensorflow-uses-reduce-in-reduce-max-reduce-min-reduce-sum-etc" target="_blank" rel="external">为什么要命名Reduce呢？</a> Stackoverflow上对这个问题的解释为：</p>
+<blockquote>
+<p>Reduce is just a name for a family of operations which are used to create a single object from the sequence of objects, repeatedly applying the same binary operation.</p>
+</blockquote>
+<h3 id="tf-nn"><a href="#tf-nn" class="headerlink" title="tf.nn"></a>tf.nn</h3><p>一些激活函数、卷积函数等，源代码中注释如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""## Activation Functions</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">The activation ops provide different types of nonlinearities for use in neural</span></div><div class="line"><span class="string">networks.  These include smooth nonlinearities (`sigmoid`, `tanh`, `elu`,</span></div><div class="line"><span class="string">`softplus`, and `softsign`), continuous but not everywhere differentiable</span></div><div class="line"><span class="string">functions (`relu`, `relu6`, and `relu_x`), and random regularization</span></div><div class="line"><span class="string">(`dropout`).</span></div></pre></td></tr></table></figure>
+<h3 id="tf-train"><a href="#tf-train" class="headerlink" title="tf.train"></a>tf.train</h3><p>训练方法（训练损失函数）。直接上代码理解会更好一点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># define a math model</span></div><div class="line">print(<span class="string">'make model'</span>)</div><div class="line"><span class="comment"># 占位符（你的数据）</span></div><div class="line">x = tf.placeholder(tf.float32,[<span class="keyword">None</span>,<span class="number">784</span>])</div><div class="line">W = tf.Variable(tf.zeros([<span class="number">784</span>, <span class="number">10</span>]))</div><div class="line">b = tf.Variable(tf.zeros([<span class="number">10</span>]))</div><div class="line">y = tf.nn.softmax(tf.matmul(x,W) + b)</div><div class="line"></div><div class="line"><span class="comment"># train it</span></div><div class="line">print(<span class="string">'train it'</span>)</div><div class="line"><span class="comment"># 占位符（预测数据）</span></div><div class="line">y_ = tf.placeholder(tf.float32,[<span class="keyword">None</span>,<span class="number">10</span>])</div><div class="line"><span class="comment"># 计算交叉熵</span></div><div class="line">cross_entropy = tf.reduce_mean(-tf.reduce_sum( y_*tf.log(y),reduction_indices=[<span class="number">1</span>]))</div><div class="line"><span class="comment"># 使用梯度下降法</span></div><div class="line">train_step = tf.train.GradientDescentOptimizer(<span class="number">0.55</span>).minimize(cross_entropy)</div><div class="line">sess = tf.InteractiveSession()</div><div class="line">tf.global_variables_initializer().run()</div><div class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">1000</span>):</div><div class="line">	<span class="comment"># print('抓取100个随机数据训练')</span></div><div class="line">  	batch_xs, batch_ys = mnist.train.next_batch(<span class="number">100</span>)</div><div class="line">	<span class="comment"># print(x,y)</span></div><div class="line">  	sess.run(train_step, feed_dict=&#123;x: batch_xs, y_: batch_ys&#125;)</div></pre></td></tr></table></figure>
+<p>这个feed_dict和placeholder相互对应。</p>
+<p>记住这两句话：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">train_step = tf.train.GradientDescentOptimizer(<span class="number">0.55</span>).minimize(cross_entropy)</div><div class="line"></div><div class="line">sess.run(train_step, feed_dict=&#123;x: batch_xs, y_: batch_ys&#125;)</div></pre></td></tr></table></figure>
+<p>额外说明一下sess.run。可以传入tf.train或者tensor，如下面评价模型就是输入tensor的例子，此时sess.run返回tensor的计算结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Evaluating our Model</span></div><div class="line">print(<span class="string">'start to evaluate'</span>)</div><div class="line">correct_prediction = tf.equal(tf.argmax(y,<span class="number">1</span>), tf.argmax(y_,<span class="number">1</span>))</div><div class="line">accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</div><div class="line">print(sess.run(accuracy, feed_dict=&#123;x: mnist.test.images, y_: mnist.test.labels&#125;))</div></pre></td></tr></table></figure>
+<p>其中tf.cast用于数据转换。</p>
+<h2 id="Addition"><a href="#Addition" class="headerlink" title="Addition"></a>Addition</h2><p>另外找一个很好玩的网站<a href="http://playground.tensorflow.org/" target="_blank" rel="external">Tinker With a <strong>Neural Network</strong> in Your Browser.</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/05/20/machine-learning/tensorflow-freshman/" data-id="cj9aujwlf00059icxooeyf5zi" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/22/machine-learning/tensorflow-cnn/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Tensorflow训练多层卷积神经网络
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/26/web/my-understanding-of-closure/">我理解的闭包</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/22/web/react-two-way-binding/">React基于事件委托的双向绑定</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/05/acm/poj1094/">POJ1094 拓扑排序</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/05/acm/poj1459/">POJ1459 EdmonsKarp最大流算法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/05/acm/poj1789/">POJ1789 最小生成树</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Maoyiwei<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
