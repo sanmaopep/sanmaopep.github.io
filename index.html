@@ -79,13 +79,16 @@
 
 
 
+<meta name="description" content="做有情怀的程序员">
 <meta property="og:type" content="website">
 <meta property="og:title" content="玩毛线的毛线">
 <meta property="og:url" content="http://yoursite.com/index.html">
 <meta property="og:site_name" content="玩毛线的毛线">
+<meta property="og:description" content="做有情怀的程序员">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="玩毛线的毛线">
+<meta name="twitter:description" content="做有情怀的程序员">
 
 
 
@@ -98,7 +101,7 @@
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"fadeIn"}},
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -127,6 +130,16 @@
 
 
 
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5248c6d2daced8b8d25892af7f46b866";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -157,7 +170,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <h1 class="site-subtitle" itemprop="description">重度吸猫患者</h1>
       
   </div>
 
@@ -193,26 +206,6 @@
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
           </a>
         </li>
       
@@ -262,9 +255,9 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/machine-learning/lh-solution-chap-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="玩毛线的毛线">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/assets/woolen.jpg">
+      <meta itemprop="name" content="陆幽轩">
+      <meta itemprop="description" content="做有情怀的程序员">
+      <meta itemprop="image" content="/assets/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -276,9 +269,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/06/machine-learning/lh-solution-chap-2/" itemprop="url">统计学习方法 课后习题解答（第二章）</a></h1>
+                <a class="post-title-link" href="/2017/11/06/machine-learning/lh-solution-chap-2/" itemprop="url">统计学习方法 课后习题解答（第二章）</a></h2>
         
 
         <div class="post-meta">
@@ -352,67 +345,43 @@
       
         
           
-            <h2 id="section">2.1</h2>
-<p><strong>题目描述：</strong>Minsky和Papert指出：感知机是线性模型，所以不能表示复杂的函数。如异或（XOR），验证感知机为什么不能表示异或。</p>
-<p><strong>解：</strong>异或的输入输出如下：</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left"><span class="math inline">\(x^{(1)}\)</span></th>
-<th align="left"><span class="math inline">\(x^{(2)}\)</span></th>
-<th align="left"><span class="math inline">\(y\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">1</td>
-<td align="left">1</td>
-<td align="left">-1</td>
-</tr>
-<tr class="even">
-<td align="left">1</td>
-<td align="left">-1</td>
-<td align="left">1</td>
-</tr>
-<tr class="odd">
-<td align="left">-1</td>
-<td align="left">1</td>
-<td align="left">1</td>
-</tr>
-<tr class="even">
-<td align="left">-1</td>
-<td align="left">-1</td>
-<td align="left">-1</td>
-</tr>
-</tbody>
-</table>
-<p>接下来我们简单证明一下异或操作的线性不可分性：</p>
-<p><strong>证：</strong>利用反证法，假设存在一个超平面<span class="math inline">\(wx+b=0\)</span>，满足条件：</p>
-<p><span class="math display">\[ y(wx+b)&gt;0\]</span></p>
-<p><span class="math display">\[\forall x\in{\{(1,1)^{T},(-1,1)^{T},(1,-1)^{T},(-1,-1)^{T}\}}\]</span></p>
-<p>根据异或的输入输出，可以得到以下四个不等式：</p>
-<p><span class="math display">\[w^{(1)}+w^{(2)}+b &lt; 0 \dashrightarrow(1)\]</span> <span class="math display">\[w^{(1)}-w^{(2)}+b &gt; 0\dashrightarrow(2)\]</span> <span class="math display">\[-w^{(1)}-w^{(2)}+b &lt; 0 \dashrightarrow(3)\]</span> <span class="math display">\[-w^{(1)}+w^{(2)}+b &gt; 0\dashrightarrow(4)\]</span></p>
-<p>(1)式+(3)式可得：<span class="math inline">\(b&lt;0\)</span>，但是(2)式+(4)式可得：<span class="math inline">\(b&gt;0\)</span> 。矛盾，故不存在超平面满足线性可分条件。</p>
-<h2 id="section-1">2.2</h2>
-<p><strong>题目描述：</strong>模仿例题 2.1，构建从训练数据求解感知机模型的例子。</p>
-<p><strong>解：</strong>很水的一道题，照样子画葫芦就好。但是对帮助自己熟悉感知机的模型的细节很有帮助，就用jupyter自己简单实现一遍算法吧。</p>
-<h2 id="section-2">2.3</h2>
-<p><strong>题目描述：</strong>证明以下定理：样本集线性可分的充分必要条件是正实例点所构成的凸壳与负实例点所构成的凸壳互不相交。</p>
-<p><strong>凸壳的定义：</strong>设集合<span class="math inline">\(S \in R^{n}\)</span> 是由<span class="math inline">\(R^{n}\)</span> 的k个点所组成的集合，即<span class="math inline">\(S = \{x_{1},x_{2},...,x_{k}\}\)</span>。定义S的凸壳<span class="math inline">\(conv(S)\)</span>为</p>
-<p><span class="math display">\[conv(S)=\{ x= \sum^{k}_{i=1}{\lambda_{i}x_{i}}  | \sum_{i=1}^{k}{\lambda_{i}=1},\lambda_{i}\geq0,i=1,2,...,k     \}\]</span></p>
-<p><strong>解：</strong> 这个证明太难了(ㄒoㄒ)，最后还是参（shan）考（zhai）了大神的解法。<a href="http://blog.csdn.net/y954877035/article/details/52210734" target="_blank" rel="external">凸包与线性可分</a>。</p>
-<p>凸壳可以通过以下图形理解：</p>
-<p>维基百科上有一句话也非常形象地解释了凸壳：</p>
-<blockquote>
-<p>在二维欧几里得空间中，凸包(凸壳)可想象为一条刚好包着所有点的橡皮圈。</p>
-<p>From Wiki百科</p>
-</blockquote>
-<p><strong>充分性证明：</strong></p>
-<p><strong>必要性证明：</strong></p>
-<h2 id="参考资料">参考资料</h2>
-<p><a href="http://blog.csdn.net/y954877035/article/details/52210734" target="_blank" rel="external">凸包与线性可分</a></p>
+          2.1
+题目描述：Minsky和Papert指出：感知机是线性模型，所以不能表示复杂的函数。如异或（XOR），验证感知机为什么不能表示异或。
+解：异或的输入输出如下：
 
-          
+
+
+\(x^{(1)}\)
+\(x^{(2)}\)
+\(y\)
+
+
+
+
+1
+1
+-1
+
+
+1
+-1
+1
+
+
+-1
+1
+1
+
+
+-1
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/06/machine-learning/lh-solution-chap-2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -462,9 +431,9 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/26/web/my-understanding-of-closure/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="玩毛线的毛线">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/assets/woolen.jpg">
+      <meta itemprop="name" content="陆幽轩">
+      <meta itemprop="description" content="做有情怀的程序员">
+      <meta itemprop="image" content="/assets/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -476,9 +445,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/26/web/my-understanding-of-closure/" itemprop="url">我理解的闭包</a></h1>
+                <a class="post-title-link" href="/2017/10/26/web/my-understanding-of-closure/" itemprop="url">我理解的闭包</a></h2>
         
 
         <div class="post-meta">
@@ -552,58 +521,15 @@
       
         
           
-            <p>闭包是前端开发中的一个重要概念，也是前端面试的必问问题之一。对于JavaScript初学者而言，闭包学习JavaScript的一大障碍。网上有很多闭包的教程，形象地告诉了我闭包长什么样。但是大部分教程没有对闭包的定义给出精准的表达，也没有对闭包背后的一些原理和逻辑进行解释。本文通过整合网上各路资料，对闭包前前后后的知识点进行梳理，希望可以帮助大家准确并且深刻理解闭包的概念。（本文假设大家对闭包有一定的理解）</p>
-<h2 id="scope">Scope</h2>
-<p>要理解闭包，先要理解一个重要概念—作用域。</p>
-<blockquote>
-<p>In computer programming, the scope of a name <strong>binding</strong> – an association of a <strong>name</strong> to an <strong>entity</strong>, such as a variable – is the <strong>region</strong> of a computer program <strong>where the binding is valid</strong>: where the name can be used to refer to the entity.</p>
-<p>Such a region referred to as is a <strong>scope block</strong>.</p>
-<p>参考自<a href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scoping" target="_blank" rel="external">wiki百科 Scope (computer science)</a></p>
-</blockquote>
-<p>scope又可以分为词法作用域（Lexical scope）和动态作用域(Dynamic scope)。两者区别与对<strong>区域</strong>这个概念的解读。Wiki百科对两者的解释如下：</p>
-<blockquote>
-<p>In languages with lexical scope (also called static scope), name resolution depends on the location in the source code and the <strong>lexical context</strong>, which is defined by where the named variable or function is defined. In contrast, in languages with dynamic scope the name resolution depends upon the program state when the name is encountered which is determined by the <strong>execution context</strong> or calling context.</p>
-<p>参考自<a href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scoping" target="_blank" rel="external">wiki百科 Scope (computer science)</a></p>
-</blockquote>
-<p>在词法作用域中，一个name是否有效取决于它在源代码中的位置，也就是词法上下文。而动态作用域要相对复杂一点，在动态作用域中，一个name是否有效取决于这个程序的运行时状态，也就是运行时上下文。</p>
-<p>对词法作用域在JavaScript中的表现在本文不作阐述，具体参考这篇博文：<a href="http://www.cnblogs.com/wangfupeng1988/p/3991151.html" target="_blank" rel="external">深入理解javascript原型和闭包（12）——简介【作用域】</a></p>
-<h2 id="对closure的一些定义">对Closure的一些定义</h2>
-<blockquote>
-<p>各种专业文献上的“闭包”（closure）定义非常抽象，很难看懂。我的理解是，闭包就是能够读取其他函数内部变量的函数。</p>
-<p>参考自<a href="http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html" target="_blank" rel="external">阮一峰 学习Javascript闭包（Closure）</a></p>
-</blockquote>
-<blockquote>
-<p>A <em>closure</em> is the combination of a function and the lexical environment within which that function was declared.</p>
-<p>参考自<a href="https://link.zhihu.com/?target=https%3A//developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" target="_blank" rel="external">MDN Closure</a></p>
-</blockquote>
-<p>MDN的定义指出了闭包需要的东西：<strong>闭包 = 函数 + 函数定义的词法上下文环境</strong>。阮一峰老师的定义指出了闭包产生的现象：一个函数能够<strong>读取其他函数内部变量</strong>。</p>
-<blockquote>
-<p>In programming languages, closures (also lexical closures or function closures) are techniques for implementing lexically scoped name binding in languages with first-class functions.</p>
-<p>参考自<a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)" target="_blank" rel="external">wiki百科 Closure(computer programming)</a></p>
-</blockquote>
-<p>wiki百科上的定义指出了闭包需要的语言条件： <em>first-class functions</em>。关于这个知识点可以参考<a href="http://blog.leapoahead.com/2015/09/19/function-as-first-class-citizen/" target="_blank" rel="external">“函数是一等公民”背后的含义</a>。另外，定义中提到的<em>implementing lexically scoped name binding</em> ，即基于词法作用域的name绑定与scope中的binding概念相互照应。本质上就是说的就是词法作用域与变量有效性的关系。</p>
-<blockquote>
-<p>在JavaScript中，实现外部作用域访问内部作用域中变量的方法叫做闭包。</p>
-<p>参考自《深入浅出Node.js》</p>
-</blockquote>
-<p>以上对闭包的定义都略有差别，有的将闭包定义为函数，有的将闭包定义为方法，也有将闭包定义为组合。我觉得将闭包理解为一个方法，或者某个东西都对。两种定义的方法都对我们理解闭包有帮助。</p>
-<h2 id="javascript的闭包">JavaScript的闭包</h2>
-<p>我们都会遇到在一个外部函数套着一个内部函数的情况，比如说：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> tmp = <span class="number">3</span>;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params">y</span>) </span>&#123;</div><div class="line">        alert(x + y + (++tmp));</div><div class="line">    &#125;</div><div class="line">  	b(<span class="number">2</span>);</div><div class="line">  	b(<span class="number">3</span>);</div><div class="line">&#125;</div><div class="line">foo(<span class="number">0</span>);</div></pre></td></tr></table></figure>
-<p>在foo函数结束的时候，tmp就会被销毁。一般来说，当内部函数被return的时候，外部就可以引用内部的函数，闭包就会通过return而产生。如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> tmp = <span class="number">3</span>;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">y</span>) </span>&#123;</div><div class="line">        alert(x + y + (++tmp));</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> bar = foo(<span class="number">2</span>); <span class="comment">// bar 现在是一个闭包</span></div><div class="line">bar(<span class="number">10</span>);</div></pre></td></tr></table></figure>
-<p>按照我们原本的理解，在没有闭包的情况下，foo函数执行完，它内部的tmp变量就会被销毁，但是因为外部函数引用了内部的变量产生了闭包，内部函数的词法上下文没有被销毁，tmp变量也没有被销毁。</p>
-<p>当然，也有不用闭包的return的例子，比如利用setInterval或者绑定一个事件等等方法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> temp = <span class="number">0</span>;<span class="comment">// let也可以</span></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(temp++);</div><div class="line">  &#125;</div><div class="line">  <span class="comment">// setInterval可以产生闭包</span></div><div class="line">  setInterval(b,<span class="number">1000</span>);</div><div class="line">  <span class="comment">// 绑定可以产生闭包</span></div><div class="line">  <span class="built_in">window</span>.addEventListener(<span class="string">'click'</span>,b);</div><div class="line">  <span class="comment">// ajax传入callback可以产生闭包</span></div><div class="line">  ajax(b);</div><div class="line">  <span class="comment">// 或者直接把这个函数传给window或者其它函数外部的元素</span></div><div class="line">  <span class="built_in">window</span>.closure = b;</div><div class="line">&#125;</div><div class="line">a();</div></pre></td></tr></table></figure>
-<p>可以看到，只要内部函数有机会在函数外部被调用，或者说<strong>内部函数被外部的某个变量引用</strong>，就会产生闭包。就像《深入浅出Node.js》中提到的那样：</p>
-<blockquote>
-<p>闭包是JavaScript中的高级特性，利用它可以产生很多巧妙的效果。它的问题在于，一旦有变量<strong>引用</strong>了这个中间函数，这个中间函数不会释放，同时也使得原始作用域不会得到释放。作用域中产生的内存占用也不会被释放。除非不再有引用，才会逐步释放。</p>
-<p>参考自 《深入浅出Node.js》</p>
-</blockquote>
-<h2 id="参考资料">参考资料</h2>
-<p><a href="https://www.zhihu.com/question/20032419" target="_blank" rel="external">动态作用域和词法域的区别是什么？</a> <a href="http://blog.leapoahead.com/2015/09/19/function-as-first-class-citizen/" target="_blank" rel="external">“函数是一等公民”背后的含义</a> <a href="http://www.cnblogs.com/walter-white/p/4981151.html" target="_blank" rel="external">js闭包的概念作用域内存模型</a> <a href="http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html" target="_blank" rel="external">阮一峰 学习Javascript闭包（Closure）</a> <a href="http://www.cnblogs.com/Quains/archive/2011/04/12/2013121.html" target="_blank" rel="external">javascript基础拾遗——词法作用域</a> <a href="http://www.cnblogs.com/wangfupeng1988/p/3991151.html" target="_blank" rel="external">深入理解javascript原型和闭包（12）——简介【作用域】</a></p>
-
-          
+          闭包是前端开发中的一个重要概念，也是前端面试的必问问题之一。对于JavaScript初学者而言，闭包学习JavaScript的一大障碍。网上有很多闭包的教程，形象地告诉了我闭包长什么样。但是大部分教程没有对闭包的定义给出精准的表达，也没有对闭包背后的一些原理和逻辑进行解释。本文通过整合网上各路资料，
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/26/web/my-understanding-of-closure/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -653,9 +579,9 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/22/web/react-two-way-binding/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="玩毛线的毛线">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/assets/woolen.jpg">
+      <meta itemprop="name" content="陆幽轩">
+      <meta itemprop="description" content="做有情怀的程序员">
+      <meta itemprop="image" content="/assets/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -667,9 +593,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/22/web/react-two-way-binding/" itemprop="url">React基于事件委托的双向绑定</a></h1>
+                <a class="post-title-link" href="/2017/10/22/web/react-two-way-binding/" itemprop="url">React基于事件委托的双向绑定</a></h2>
         
 
         <div class="post-meta">
@@ -743,181 +669,16 @@
       
         
           
-            <p>在解决React双向绑定的时候,网上的代码要不就用乱七八糟的库，要么就handleChange一个组件一个组件慢慢写，非常麻烦。这里给出一个比较简单的办法：</p>
-<p><strong>事件冒泡模型</strong>是我们都耳熟能详的，在这里我们就用到了事件冒泡。<strong>在底层一个不知道名称的input发生了onchange事件，那个这个事件可以冒泡到顶层的某个div或者别的DOM元素当中。</strong>这个方法的解决思路就是，只需要捕获顶层元素的onChange事件，根据他的event.target就能知道是哪个input发生了变化。</p>
-<p>我们先写了一个工具函数：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// This function can bind a form with a state in component(key -&gt; name)</span></div><div class="line"></div><div class="line"><span class="comment">// usage like:</span></div><div class="line"><span class="comment">// import FormChangeBind from '../assisst/changeForm.js'</span></div><div class="line"><span class="comment">// &lt;Form className="inbox" ref='loginForm' onChange=&#123;FormChangeBind.bind(this)&#125;&gt;</span></div><div class="line"><span class="comment">// and use name in your form:</span></div><div class="line"><span class="comment">// &lt;Input type="text" placeholder="请输入用户名" name="username"&gt;&lt;/Input&gt;</span></div><div class="line"><span class="comment">// when you change the form ,you can clearly see some change in your state in component</span></div><div class="line"><span class="comment">// enjoy</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">changeForm</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">    event.persist();</div><div class="line">    <span class="keyword">this</span>.setState(<span class="function"><span class="params">state</span> =&gt;</span> &#123;</div><div class="line">        state[event.target.name] = event.target.value;</div><div class="line">        <span class="keyword">if</span> (event.target.type == <span class="string">"checkbox"</span>) &#123;</div><div class="line">            state[event.target.name] = event.target.checked;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在组件中的Render中的代码如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Form</span> <span class="attr">className</span>=<span class="string">"inbox"</span> <span class="attr">ref</span>=<span class="string">'loginForm'</span> <span class="attr">onChange</span>=<span class="string">&#123;FormChangeBind.bind(this)&#125;</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">className</span>=<span class="string">"controlLabel"</span>&gt;</span>用户名<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">Input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">placeholder</span>=<span class="string">"请输入用户名"</span> <span class="attr">name</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;/<span class="name">Input</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">className</span>=<span class="string">"controlLabel"</span>&gt;</span>密码<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">Input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">placeholder</span>=<span class="string">"请输入密码"</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span><span class="tag">&lt;/<span class="name">Input</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">"formline"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">Checkbox</span> <span class="attr">name</span>=<span class="string">"rememberMe"</span>&gt;</span><span class="tag">&lt;/<span class="name">Checkbox</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">htmlFor</span>=<span class="string">""</span>&gt;</span>记住我<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">className</span>=<span class="string">"fr"</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>忘记密码<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">"divider"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">className</span>=<span class="string">"btn primary"</span> <span class="attr">onClick</span>=<span class="string">&#123;this.clickLogin.bind(this)&#125;</span>&gt;</span>登录<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">className</span>=<span class="string">"btn second"</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>注册<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">Form</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>构造函数中制定state内容和input的name保持一致：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">constructor</span>() &#123;</div><div class="line">  <span class="keyword">super</span>();</div><div class="line">  <span class="keyword">this</span>.state = &#123;</div><div class="line">    username: <span class="string">''</span>,</div><div class="line">    password: <span class="string">''</span>,</div><div class="line">    rememberMe: <span class="literal">false</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/05/acm/poj1459/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="玩毛线的毛线">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/assets/woolen.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="玩毛线的毛线">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/05/acm/poj1459/" itemprop="url">POJ1459 EdmonsKarp最大流算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-05T00:00:00+08:00">
-                2017-09-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ACM/" itemprop="url" rel="index">
-                    <span itemprop="name">ACM</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目内容">题目内容</h1>
-<p>链接： <a href="https://vjudge.net/problem/POJ-1459" target="_blank" rel="external">POJ1459.题目</a></p>
-<h1 id="算法详解">算法详解</h1>
-<h1 id="题解">题解</h1>
-<p>本题就是EdmonsKarp算法的实现，唯一的难点在于多个发电站（有容量）和多个消费者（有用电需求）的处理。</p>
-<p>我们的解决方法是：</p>
-<ol style="list-style-type: decimal">
-<li>设置一个超级发电站（记为SUPER_S），我们把每个发电站和SUPER_S连接起来，连接起来的边的容量就是发电站的最大发电量，这就解决了多个发电站的问题。</li>
-<li>同样的，我们可以设置一个超级消费者（记为SUPER_C），我们把每个消费者和SUPER_C连接起来，消费者的用电需求就是消费者和SUPER_C边的容量。</li>
-</ol>
-<h1 id="编码注意点">编码注意点</h1>
-<p>本题使用vector&lt;Edge&gt; 实现的话会存在TLE的问题，用二维矩阵存取图结构能AC。所以建议在ACM比赛中除非空间复杂度太高，尽量使用二维矩阵存取图结构。</p>
-<h2 id="核心代码">核心代码</h2>
-<p>本题增广路算法核心代码如下，用了一些小技巧。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// EdmondsKarp算法 </span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxElectry</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</div><div class="line">		<span class="comment">// 从SUPER_S起点开始，标准操作 </span></div><div class="line">		<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; Q;</div><div class="line">		<span class="built_in">memset</span>(in,<span class="number">0</span>,<span class="keyword">sizeof</span>(<span class="keyword">int</span>)*maxn);</div><div class="line">		in[SUPER_S] = INF;</div><div class="line">		Q.push(SUPER_S);</div><div class="line">		<span class="comment">// BFS循环 </span></div><div class="line">		<span class="keyword">while</span>(!Q.empty())&#123;</div><div class="line">			<span class="comment">// 日常标准操作_(:з」∠)_ </span></div><div class="line">			<span class="keyword">int</span> now = Q.front();</div><div class="line">			Q.pop();</div><div class="line">			<span class="keyword">int</span> len = G[now].size();</div><div class="line">			<span class="comment">// 遍历该点所有出去的边 </span></div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; len;i++)&#123;</div><div class="line">				<span class="keyword">int</span> to = G[now][i];</div><div class="line">				<span class="comment">// 重要！ </span></div><div class="line">				<span class="comment">// 如果可以增加流量,并且没有访问过</span></div><div class="line">				<span class="comment">// 这里in数组一举两用，既可以表示该点的流入量，也可以表示是否访问过。 </span></div><div class="line">				<span class="keyword">if</span>(capMap[now][to] &gt; <span class="number">0</span> &amp;&amp; !in[to])&#123;</div><div class="line">					<span class="comment">// 重要！ </span></div><div class="line">					<span class="comment">// to的流入量为当前剩余容量和上一个流入量的最小值 </span></div><div class="line">					in[to] = min(in[now],capMap[now][to]);</div><div class="line">					<span class="comment">// 重要！</span></div><div class="line">					<span class="comment">// to的上一个点是now，用于记录路线 </span></div><div class="line">					p[to] = now;</div><div class="line">					Q.push(to);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			<span class="comment">// BFS到达终点，结束循环 </span></div><div class="line">			<span class="keyword">if</span>(in[SUPER_C])	<span class="keyword">break</span>;</div><div class="line">		&#125; </div><div class="line">		</div><div class="line">		<span class="comment">// 如果终点没有流量流入，说明没有增广路，结束 </span></div><div class="line">		<span class="keyword">if</span>(!in[SUPER_C]) <span class="keyword">break</span>;</div><div class="line">		<span class="comment">// 根据p数组记录的数据，返回起点 </span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> u = SUPER_C;u != SUPER_S;u = p[u])&#123;</div><div class="line">			<span class="comment">// 重要！</span></div><div class="line">			<span class="comment">// 根据最大流的定理，flow(u,v) = -flow(v,u)</span></div><div class="line">			<span class="comment">// 所以一个+ 一个- </span></div><div class="line">			capMap[p[u]][u] -= in[SUPER_C];</div><div class="line">			capMap[u][p[u]] += in[SUPER_C];</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// 总电量增加该增广路的流量 </span></div><div class="line">		sum += in[SUPER_C];</div><div class="line">		<span class="comment">// 寻找下一条增广路 </span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> sum;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>总结一些常见的编码方法：</p>
-<h3 id="p数组存储bfs路径的方法">p数组存储BFS路径的方法</h3>
-<p>两个重点，一个记录路径的方法，一个回溯路径的方法。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1.记录方法</span></div><div class="line">p[to] = now;</div><div class="line"></div><div class="line"><span class="comment">// 2.回溯方法</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> u = SUPER_C;u != SUPER_S;u = p[u])&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="源代码">源代码</h1>
-<h2 id="tle版本">TLE版本</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"></div><div class="line"><span class="comment">// How to do? make all source nodes the one source node</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="comment">//macros</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 120</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SUPER_STATION 105</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SUPER_CONSUMER 110</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SUPER_S SUPER_STATION</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SUPER_C SUPER_CONSUMER</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 99999999</span></div><div class="line"></div><div class="line"><span class="comment">// n -&gt; nodes</span></div><div class="line"><span class="comment">// np -&gt; power stations</span></div><div class="line"><span class="comment">// nc -&gt; consumers</span></div><div class="line"><span class="comment">// m -&gt; edge num</span></div><div class="line"><span class="keyword">int</span> n,np,nc,m;</div><div class="line"></div><div class="line"><span class="comment">// the definition of graph</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></div><div class="line">	<span class="keyword">int</span> from,to,cap,flow;</div><div class="line">	Edge(<span class="keyword">int</span> _from,<span class="keyword">int</span> _to,<span class="keyword">int</span> _cap):from(_from),to(_to),cap(_cap)&#123;</div><div class="line">		flow = <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"><span class="built_in">vector</span>&lt;Edge&gt; edges;		<span class="comment">// store the edge</span></div><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[maxn];	<span class="comment">// edges NO out in a node</span></div><div class="line"><span class="keyword">int</span> in[maxn];	<span class="comment">// supply of a node</span></div><div class="line"><span class="keyword">int</span> p[maxn];	<span class="comment">// record the last edge we move</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(<span class="keyword">int</span> from,<span class="keyword">int</span> to,<span class="keyword">int</span> value)</span></span>&#123;</div><div class="line">	edges.push_back(Edge(from,to,value));</div><div class="line">	edges.push_back(Edge(to,from,<span class="number">0</span>));</div><div class="line">	<span class="keyword">int</span> s = edges.size(); </div><div class="line">	G[from].push_back(s<span class="number">-2</span>);</div><div class="line">	G[to].push_back(s<span class="number">-1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// EdmondsKarp</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxElectry</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</div><div class="line">		<span class="comment">// start from SUPER_S</span></div><div class="line">		<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; Q;</div><div class="line">		<span class="built_in">memset</span>(in,<span class="number">0</span>,<span class="keyword">sizeof</span>(<span class="keyword">int</span>)*maxn);</div><div class="line">		in[SUPER_S] = INF;</div><div class="line">		Q.push(SUPER_S);</div><div class="line">		<span class="keyword">while</span>(!Q.empty())&#123;</div><div class="line">			<span class="keyword">int</span> now = Q.front();</div><div class="line">			Q.pop();</div><div class="line">			<span class="keyword">int</span> len = G[now].size();</div><div class="line">			<span class="comment">// get a way out</span></div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; len;i++)&#123;</div><div class="line">				Edge edge = edges[G[now][i]];</div><div class="line">				<span class="comment">// have not visited yet</span></div><div class="line">				<span class="keyword">if</span>(edge.cap &gt; edge.flow &amp;&amp; !in[edge.to])&#123;</div><div class="line">					in[edge.to] = min(in[now],edge.cap - edge.flow);</div><div class="line">					p[edge.to] = G[now][i];</div><div class="line">					Q.push(edge.to);</div><div class="line">				&#125;</div><div class="line">				</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span>(in[SUPER_C])	<span class="keyword">break</span>;</div><div class="line">		&#125; </div><div class="line">		</div><div class="line">		<span class="comment">// nothing more to send</span></div><div class="line">		<span class="keyword">if</span>(!in[SUPER_C]) <span class="keyword">break</span>;</div><div class="line">		<span class="comment">// the path</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> u = SUPER_C;u != SUPER_S;u = edges[p[u]].from)&#123;</div><div class="line">			edges[p[u]].flow += in[SUPER_C];</div><div class="line">			edges[p[u]^<span class="number">1</span>].flow -= in[SUPER_C];</div><div class="line">		&#125;</div><div class="line">		sum += in[SUPER_C];</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> sum;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">// input of scanf</span></div><div class="line">	<span class="keyword">int</span> first,next,value;</div><div class="line">	<span class="comment">// the use of scanf</span></div><div class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d%d%d"</span>,&amp;n,&amp;np,&amp;nc,&amp;m)!=EOF)&#123;</div><div class="line">		<span class="comment">// empty graph</span></div><div class="line">		edges.clear();</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</div><div class="line">			G[i].clear();</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// m edges</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; m;i++)&#123;</div><div class="line">			<span class="keyword">while</span>(getchar()!=<span class="string">'('</span>);</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%d,%d)%d"</span>, &amp;first, &amp;next, &amp;value);</div><div class="line">			addEdge(first,next,value);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// np nodes</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; np;i++)&#123;</div><div class="line">			<span class="keyword">while</span>(getchar()!=<span class="string">'('</span>);</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%d)%d"</span>, &amp;first, &amp;value);</div><div class="line">			addEdge(SUPER_S,first,value);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// nc nodes</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; nc;i++)&#123;</div><div class="line">			<span class="keyword">while</span>(getchar()!=<span class="string">'('</span>);</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%d)%d"</span>, &amp;first, &amp;value);</div><div class="line">			addEdge(first,SUPER_C,value);</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,maxElectry());</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="ac版本">AC版本</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"></div><div class="line"><span class="comment">// How to do? make all source nodes the one source node</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="comment">//macros</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 120</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SUPER_STATION 105</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SUPER_CONSUMER 110</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SUPER_S SUPER_STATION</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SUPER_C SUPER_CONSUMER</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 99999999</span></div><div class="line"></div><div class="line"><span class="comment">// n -&gt; nodes</span></div><div class="line"><span class="comment">// np -&gt; power stations</span></div><div class="line"><span class="comment">// nc -&gt; consumers</span></div><div class="line"><span class="comment">// m -&gt; edge num</span></div><div class="line"><span class="keyword">int</span> n,np,nc,m;</div><div class="line"></div><div class="line"><span class="comment">// the definition of graph</span></div><div class="line"><span class="keyword">int</span> capMap[maxn][maxn];</div><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[maxn];</div><div class="line"><span class="keyword">int</span> in[maxn];	<span class="comment">// supply of a node</span></div><div class="line"><span class="keyword">int</span> p[maxn];	<span class="comment">// record the last node we move</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(<span class="keyword">int</span> from,<span class="keyword">int</span> to,<span class="keyword">int</span> value)</span></span>&#123;</div><div class="line">	capMap[from][to] = value;</div><div class="line">	G[from].push_back(to);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// EdmondsKarp</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxElectry</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</div><div class="line">		<span class="comment">// start from SUPER_S</span></div><div class="line">		<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; Q;</div><div class="line">		<span class="built_in">memset</span>(in,<span class="number">0</span>,<span class="keyword">sizeof</span>(<span class="keyword">int</span>)*maxn);</div><div class="line">		in[SUPER_S] = INF;</div><div class="line">		Q.push(SUPER_S);</div><div class="line">		<span class="keyword">while</span>(!Q.empty())&#123;</div><div class="line">			<span class="keyword">int</span> now = Q.front();</div><div class="line">			Q.pop();</div><div class="line">			<span class="keyword">int</span> len = G[now].size();</div><div class="line">			<span class="comment">// get a way out</span></div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; len;i++)&#123;</div><div class="line">				<span class="keyword">int</span> to = G[now][i];</div><div class="line">				<span class="comment">// have not visited yet</span></div><div class="line">				<span class="keyword">if</span>(capMap[now][to] &gt; <span class="number">0</span> &amp;&amp; !in[to])&#123;</div><div class="line">					in[to] = min(in[now],capMap[now][to]);</div><div class="line">					p[to] = now;</div><div class="line">					Q.push(to);</div><div class="line">				&#125;</div><div class="line">				</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span>(in[SUPER_C])	<span class="keyword">break</span>;</div><div class="line">		&#125; </div><div class="line">		</div><div class="line">		<span class="comment">// nothing more to send</span></div><div class="line">		<span class="keyword">if</span>(!in[SUPER_C]) <span class="keyword">break</span>;</div><div class="line">		<span class="comment">// the path</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> u = SUPER_C;u != SUPER_S;u = p[u])&#123;</div><div class="line">			capMap[p[u]][u] -= in[SUPER_C];</div><div class="line">			capMap[u][p[u]] += in[SUPER_C];</div><div class="line">		&#125;</div><div class="line">		sum += in[SUPER_C];</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> sum;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">// input of scanf</span></div><div class="line">	<span class="keyword">int</span> first,next,value;</div><div class="line">	<span class="comment">// the use of scanf</span></div><div class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d%d%d"</span>,&amp;n,&amp;np,&amp;nc,&amp;m)!=EOF)&#123;</div><div class="line">		<span class="comment">// empty graph</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; maxn;i++)&#123;</div><div class="line">			G[i].clear();</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; maxn;j++)&#123;</div><div class="line">				capMap[i][j] = <span class="number">0</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// m edges</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; m;i++)&#123;</div><div class="line">			<span class="keyword">while</span>(getchar()!=<span class="string">'('</span>);</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%d,%d)%d"</span>, &amp;first, &amp;next, &amp;value);</div><div class="line">			addEdge(first,next,value);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// np nodes</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; np;i++)&#123;</div><div class="line">			<span class="keyword">while</span>(getchar()!=<span class="string">'('</span>);</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%d)%d"</span>, &amp;first, &amp;value);</div><div class="line">			addEdge(SUPER_S,first,value);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// nc nodes</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; nc;i++)&#123;</div><div class="line">			<span class="keyword">while</span>(getchar()!=<span class="string">'('</span>);</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%d)%d"</span>, &amp;first, &amp;value);</div><div class="line">			addEdge(first,SUPER_C,value);</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,maxElectry());</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
+          在解决React双向绑定的时候,网上的代码要不就用乱七八糟的库，要么就handleChange一个组件一个组件慢慢写，非常麻烦。这里给出一个比较简单的办法：
+事件冒泡模型是我们都耳熟能详的，在这里我们就用到了事件冒泡。在底层一个不知道名称的input发生了onchange事件，那个这个事件可以冒泡到
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/22/web/react-two-way-binding/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -967,9 +728,9 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/05/acm/poj1094/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="玩毛线的毛线">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/assets/woolen.jpg">
+      <meta itemprop="name" content="陆幽轩">
+      <meta itemprop="description" content="做有情怀的程序员">
+      <meta itemprop="image" content="/assets/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -981,9 +742,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/05/acm/poj1094/" itemprop="url">POJ1094 拓扑排序</a></h1>
+                <a class="post-title-link" href="/2017/09/05/acm/poj1094/" itemprop="url">POJ1094 拓扑排序</a></h2>
         
 
         <div class="post-meta">
@@ -1057,38 +818,20 @@
       
         
           
-            <h1 id="题目内容">题目内容</h1>
-<p>链接：<a href="https://vjudge.net/problem/POJ-1094" target="_blank" rel="external">POJ1094</a></p>
-<h1 id="算法详解">算法详解</h1>
-<h2 id="kahn算法">Kahn算法</h2>
-<p>摘抄维基百科上对于Kahn算法的伪代码描述：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">L← Empty list that will contain the sorted elements</div><div class="line">S ← Set of all nodes with no incoming edges</div><div class="line">while S is non-empty do</div><div class="line">    remove a node n from S</div><div class="line">    insert n into L</div><div class="line">    foreach node m with an edge e from nto m do</div><div class="line">        remove edge e from thegraph</div><div class="line">        ifm has no other incoming edges then</div><div class="line">            insert m into S</div><div class="line">if graph has edges then</div><div class="line">    return error (graph has at least onecycle)</div><div class="line">else </div><div class="line">    return L (a topologically sortedorder)</div></pre></td></tr></table></figure>
-<p>其实概要一下，几句话就可以了：</p>
-<ol style="list-style-type: decimal">
-<li>寻找入度为0的点。</li>
-<li>如果有多个，说明无法排序</li>
-<li>如果没有入度为0的点，且图中有节点，说明有环</li>
-<li>如果有一个入度为0的点，把这个点排到队伍后面，然后把图中这个点去掉</li>
-<li>图中什么都没有的时候结束运算，不然就循环到1。</li>
-</ol>
-<h1 id="题解">题解</h1>
-<p>该题作为拓扑排序实现的经典题，在lrj的《算法竞赛入门经典（第二版）》中P167有原题。书中使用了DFS作为拓扑排序的方法，但是个人觉得利用DFS进行拓扑排序无论从算法效率和编码难度上都存在问题。 于是采用了根据当前无入度点检索进行排序的方法，编码难度瞬间下降。算法详见算法详解。</p>
-<h1 id="编码注意点">编码注意点</h1>
-<h2 id="注意charint类型转换">注意char，int类型转换</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> getid(letter) (letter - <span class="meta-string">'A'</span>)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> getletter(id) (char)(id + <span class="meta-string">'A'</span>)</span></div></pre></td></tr></table></figure>
-<h2 id="无法排序的时候依旧要继续执行">无法排序的时候依旧要继续执行</h2>
-<p>在topsort函数中有这么一行：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 这里不return因为不知道后面存不存在环 </span></div><div class="line"><span class="keyword">if</span>(zeroNum &gt; <span class="number">1</span>) 	flag = <span class="number">0</span>; <span class="comment">// uncertain </span></div><div class="line"><span class="keyword">if</span>(zeroNum == <span class="number">0</span>)	<span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">// 有环</span></div></pre></td></tr></table></figure>
-<p>原本我的实现如下，在发现有多个入度为0（无法确定排序）的时候退出算法：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 这里不return因为不知道后面存不存在环 </span></div><div class="line"><span class="keyword">if</span>(zeroNum &gt; <span class="number">1</span>) 	<span class="keyword">return</span>  <span class="number">0</span>; <span class="comment">// uncertain </span></div><div class="line"><span class="keyword">if</span>(zeroNum == <span class="number">0</span>)	<span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">// 有环</span></div></pre></td></tr></table></figure>
-<p>这个编码获得了OJ上W的结果。原因在于，虽然这时候可以肯定这个序列是无法确定排序的，但是万一后面几个点存在环的时候呢？以下图为例进行说明：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">graph LR</div><div class="line">	A --&gt; B</div><div class="line">	C --&gt; B</div><div class="line">	B --&gt; D</div><div class="line">	D --&gt; E</div><div class="line">	E --&gt; B</div></pre></td></tr></table></figure>
-<p>图中A，C为入度为0的点，如果直接返回0的话，会忽略对后面BED环的检测工作，于是原本应该输出<strong>Inconsistency found after %d relations.</strong> 的结果，却只能输出 <strong>Sorted sequence cannot be determined.</strong></p>
-<p>所以当发现存在多个入度为0的点的时候，依旧要继续检测后面的节点，检测是否存在环。</p>
-<h1 id="源代码">源代码</h1>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 30</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,n) for(int i = 0;i &lt; n;i++)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> getid(letter) (letter - <span class="meta-string">'A'</span>)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> getletter(id) (char)(id + <span class="meta-string">'A'</span>)</span></div><div class="line"></div><div class="line"><span class="comment">// the definition of graph</span></div><div class="line"><span class="keyword">int</span> G[maxn][maxn];</div><div class="line"><span class="comment">// the indegree of node</span></div><div class="line"><span class="keyword">int</span> indeg[maxn];</div><div class="line"><span class="comment">// sorted array</span></div><div class="line"><span class="keyword">char</span> s[maxn];</div><div class="line"><span class="comment">// N -&gt; node num</span></div><div class="line"><span class="comment">// M -&gt; edge num</span></div><div class="line"><span class="keyword">int</span> N,M;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// ret: 0 -&gt; uncertain -1 -&gt; inconsistency 1 -&gt; ok</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">topsort</span><span class="params">()</span></span>&#123;</div><div class="line">	</div><div class="line">	<span class="keyword">int</span> in[maxn];</div><div class="line">	s[N] = <span class="string">'\0'</span>;</div><div class="line">	<span class="keyword">int</span> flag = <span class="number">1</span>;</div><div class="line">	</div><div class="line">	<span class="comment">// copy indeg </span></div><div class="line">	rep(i,N)&#123;</div><div class="line">		in[i] = indeg[i];</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	rep(i,N)&#123;</div><div class="line">		<span class="keyword">int</span> zeroNum = <span class="number">0</span>;</div><div class="line">		<span class="keyword">int</span> zeroPos = <span class="number">-1</span>;</div><div class="line">		<span class="comment">// find indegree zero</span></div><div class="line">		rep(j,N)&#123;</div><div class="line">			<span class="keyword">if</span>(in[j] == <span class="number">0</span>)&#123;</div><div class="line">				zeroPos = j;</div><div class="line">				zeroNum++;</div><div class="line">			&#125;</div><div class="line">		&#125; </div><div class="line">		<span class="comment">// 这里不return因为不知道后面存不存在环 </span></div><div class="line">		<span class="keyword">if</span>(zeroNum &gt; <span class="number">1</span>) 	flag = <span class="number">0</span>; <span class="comment">// uncertain </span></div><div class="line">		<span class="keyword">if</span>(zeroNum == <span class="number">0</span>)	<span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">// 有环 </span></div><div class="line">		</div><div class="line">		s[i] = getletter(zeroPos);</div><div class="line">		<span class="comment">// decrease indegree for the remove of zeroPos</span></div><div class="line">		in[zeroPos] = <span class="number">-1</span>;</div><div class="line">		rep(j,N)&#123;</div><div class="line">			<span class="keyword">if</span>(G[zeroPos][j])</div><div class="line">				in[j]--;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> flag;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">char</span> temp[<span class="number">5</span>];</div><div class="line">	</div><div class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;N,&amp;M)!=EOF)&#123;</div><div class="line">		<span class="keyword">if</span>(N == <span class="number">0</span> &amp;&amp; M ==<span class="number">0</span>)	<span class="keyword">break</span>;</div><div class="line">		<span class="built_in">memset</span>(G,<span class="number">0</span>,<span class="keyword">sizeof</span>(G));</div><div class="line">		<span class="built_in">memset</span>(indeg,<span class="number">0</span>,<span class="keyword">sizeof</span>(indeg));</div><div class="line">		</div><div class="line">		<span class="keyword">int</span> flag = <span class="number">0</span>;</div><div class="line">		rep(i,M)&#123;</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%s"</span>,temp);</div><div class="line">			<span class="keyword">if</span>(flag)	<span class="keyword">continue</span>;</div><div class="line">			</div><div class="line">			<span class="comment">// add to map</span></div><div class="line">			<span class="keyword">int</span> from = getid(temp[<span class="number">0</span>]);</div><div class="line">			<span class="keyword">int</span> to = getid(temp[<span class="number">2</span>]);</div><div class="line">			G[from][to] = <span class="number">1</span>;</div><div class="line">			indeg[to]++;</div><div class="line">			<span class="comment">// top sort</span></div><div class="line">			<span class="keyword">int</span> ans = topsort();</div><div class="line">			</div><div class="line">			<span class="keyword">if</span>(ans == <span class="number">-1</span>)&#123;</div><div class="line">				flag = <span class="number">1</span>;</div><div class="line">				<span class="built_in">printf</span>(<span class="string">"Inconsistency found after %d relations.\n"</span>,i+<span class="number">1</span>);</div><div class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(ans == <span class="number">1</span>)&#123;</div><div class="line">				flag = <span class="number">1</span>;</div><div class="line">				<span class="built_in">printf</span>(<span class="string">"Sorted sequence determined after %d relations: %s.\n"</span>,i+<span class="number">1</span>,s);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="keyword">if</span>(!flag)</div><div class="line">			<span class="built_in">printf</span>(<span class="string">"Sorted sequence cannot be determined.\n"</span>);</div><div class="line">			</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
+          题目内容
+链接：POJ1094
+算法详解
+Kahn算法
+摘抄维基百科上对于Kahn算法的伪代码描述：
+12345678910111213L← Empty list that will contain the sorted elementsS ← Set of all nodes with no in
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/05/acm/poj1094/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1135,12 +878,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/05/acm/poj3041/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/05/acm/poj1459/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="玩毛线的毛线">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/assets/woolen.jpg">
+      <meta itemprop="name" content="陆幽轩">
+      <meta itemprop="description" content="做有情怀的程序员">
+      <meta itemprop="image" content="/assets/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1152,9 +895,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/05/acm/poj3041/" itemprop="url">二分图与匈牙利算法</a></h1>
+                <a class="post-title-link" href="/2017/09/05/acm/poj1459/" itemprop="url">POJ1459 EdmonsKarp最大流算法</a></h2>
         
 
         <div class="post-meta">
@@ -1228,47 +971,22 @@
       
         
           
-            <h1 id="题目内容">题目内容</h1>
-<p>链接： <a href="https://vjudge.net/problem/POJ-3041" target="_blank" rel="external">POJ3041</a></p>
-<h1 id="算法详解">算法详解</h1>
-<h2 id="二分图相关知识">二分图相关知识</h2>
-<p>TODO 还没写完</p>
-<h3 id="berge定理">Berge定理</h3>
-<p>图G的一个匹配M是最大匹配的充要条件是图G不存在M的增广路。</p>
-<p><strong>证明：</strong> 假设存在v0v1v2…vn为增广路（n一定为奇数，起点终点分别在两个集合）。</p>
-<p>那么根据<strong>交错出现</strong>的定义：v0v1不属于M，v1v2属于M。该路径上存在n/2+1条路径不属于M，而n/2条路径属于M。</p>
-<p>那么只需要，将n/2原本属于M的边剔除，n/2+1条不属于M的边加入M，M的匹配数就可以加1。</p>
-<p>所以，如果存在增广路，就可以通过增广路与M的异或操作，使得M的匹配数加1，说明存在增广路一定不是最大匹配。</p>
-<h2 id="匈牙利算法">匈牙利算法</h2>
-<p>注意，二分图增广路的定义！每一个字都看清楚！M是图G的一个匹配，存在一个在M和E(G)/M <strong>交错出现</strong> 的路径，该路径<strong>起点和终点都是非饱和点</strong>（没有对象的点），则该路径为M的一条增广路。</p>
-<p>之前第一次自己手写实现匈牙利算法的时候，就没有注意到<strong>交错出现</strong> 这个条件，结果花费了很多时间在DFS寻找增广路的编码上面。</p>
-<p><strong>交错出现</strong> 有隐含含义：</p>
-<ul>
-<li>这个路径起点终点一定在两个不同的集合</li>
-</ul>
-<h1 id="题解">题解</h1>
-<p>说实话，能想到这道题用二分图解决的人，确实得有一定的积累才可以。要不是这道题被分到二分图下面，我也意识不到可以用二分图做。<em>(:з」∠)</em></p>
-<p>每一行的行号是一个集合，每一列的列号是一个集合，而地图中每一个行星都代表从行集合到列集合的一条边。我们的目的就是把这些边都给消除。</p>
-<p>那<strong>为什么二分图的最大匹配数就是最小消除行星的数量呢</strong> ？</p>
-<p>我们先举一个具体的例子，假设地图上行星的分布是这样的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">X.X </div><div class="line">.X. </div><div class="line">.X.</div></pre></td></tr></table></figure>
-<p>很容易看出来，最少从第0行，第1列射线就可以了。我们来看一下这个地图的二分图构造：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">graph LR</div><div class="line">	A0 --&gt; B0</div><div class="line">	A0 --&gt; B2</div><div class="line">	A1 --&gt; B1</div><div class="line">	A2 --&gt; B1</div></pre></td></tr></table></figure>
-<p>在该二分图中，A0连接着B0和B2，往A0（就是第0行）射一道激光，就可以消除与A0连接的所有边。往B1射一道激光，就可以消除B0相连的所有边。</p>
-<p>其实就是，找最少的点，使得这些点与所有边相邻。（最小点覆盖）</p>
-<p>而<strong>Hall定理</strong> 说：</p>
-<blockquote>
-<p>|最小点覆盖| = |最大匹配|</p>
-</blockquote>
-<p>于是用匈牙利算法求最大匹配，便可AC该题。</p>
-<h1 id="编码注意点">编码注意点</h1>
-<h2 id="核心代码">核心代码</h2>
-<p>核心代码为从u点出发<strong>寻找增广路</strong>并进行<strong>异或操作</strong>的代码，如下所示，关键点在代码重要已有注释。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 匈牙利算法</span></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</div><div class="line">	<span class="comment">// 重要！不加vis你会无限递归 </span></div><div class="line">	<span class="keyword">if</span>(vis[u])	<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	vis[u] = <span class="number">1</span>;</div><div class="line">	<span class="comment">// 日常操作，找到一条出去的路 </span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= N;i++)&#123;</div><div class="line">		<span class="keyword">if</span>(G[u][i])&#123;</div><div class="line">			<span class="comment">// 重要！存在一条增广路 </span></div><div class="line">			<span class="comment">// 很巧妙地将交错出现的条件满足 </span></div><div class="line">			<span class="keyword">if</span>(result[i] == <span class="number">0</span> || find(result[i]))&#123;</div><div class="line">				<span class="comment">// 重要！异或操作 </span></div><div class="line">				result[i] = u;</div><div class="line">				<span class="comment">// true代表是非饱和点 </span></div><div class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="源代码">源代码</h1>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 510</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,N) for(int i = 0;i &lt; N;i++)</span></div><div class="line"></div><div class="line"><span class="comment">// N -&gt; N*N Square </span></div><div class="line"><span class="comment">// M -&gt; M asteriods</span></div><div class="line"><span class="keyword">int</span> N,M;</div><div class="line"><span class="comment">// G[x][y]: x -&gt; row , y -&gt; col</span></div><div class="line"><span class="comment">// notice:  x &gt;= 1 , y &gt;= 1</span></div><div class="line"><span class="keyword">int</span> G[maxn][maxn];</div><div class="line"><span class="keyword">int</span> result[maxn];</div><div class="line"><span class="keyword">int</span> vis[maxn];</div><div class="line"></div><div class="line"><span class="comment">// 匈牙利算法</span></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</div><div class="line">	<span class="keyword">if</span>(vis[u])	<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	vis[u] = <span class="number">1</span>;</div><div class="line">	<span class="comment">// find a way out</span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= N;i++)&#123;</div><div class="line">		<span class="keyword">if</span>(G[u][i])&#123;</div><div class="line">			<span class="comment">// 存在一条增广路 </span></div><div class="line">			<span class="keyword">if</span>(result[i] == <span class="number">0</span> || find(result[i]))&#123;</div><div class="line">				result[i] = u;</div><div class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">getShoot</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="built_in">memset</span>(result,<span class="number">0</span>,<span class="keyword">sizeof</span>(result));</div><div class="line">	<span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">	</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= N;i++)&#123;</div><div class="line">		<span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</div><div class="line">		<span class="keyword">if</span>(find(i))&#123;</div><div class="line">			count++;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> count;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;N,&amp;M) != EOF)&#123;</div><div class="line">		<span class="keyword">int</span> x,y;</div><div class="line">		<span class="built_in">memset</span>(G,<span class="number">0</span>,<span class="keyword">sizeof</span>(G));</div><div class="line">		</div><div class="line">		rep(i,M)&#123;</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;x,&amp;y);</div><div class="line">			G[x][y] = <span class="number">1</span>;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,getShoot());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          题目内容
+链接： POJ1459.题目
+算法详解
+题解
+本题就是EdmonsKarp算法的实现，唯一的难点在于多个发电站（有容量）和多个消费者（有用电需求）的处理。
+我们的解决方法是：
 
-          
+设置一个超级发电站（记为SUPER_S），我们把每个发电站和SUPER_S连接起来，连接起来的边的容量就是发电站
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/05/acm/poj1459/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1318,9 +1036,9 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/05/acm/poj1789/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="玩毛线的毛线">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/assets/woolen.jpg">
+      <meta itemprop="name" content="陆幽轩">
+      <meta itemprop="description" content="做有情怀的程序员">
+      <meta itemprop="image" content="/assets/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1332,9 +1050,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/05/acm/poj1789/" itemprop="url">POJ1789 最小生成树</a></h1>
+                <a class="post-title-link" href="/2017/09/05/acm/poj1789/" itemprop="url">POJ1789 最小生成树</a></h2>
         
 
         <div class="post-meta">
@@ -1408,31 +1126,180 @@
       
         
           
-            <h1 id="题目内容">题目内容</h1>
-<p>链接： <a href="https://vjudge.net/problem/POJ-1789" target="_blank" rel="external">POJ1789题目</a></p>
-<h1 id="算法详解">算法详解</h1>
-<h2 id="kruskal算法">kruskal算法</h2>
-<h2 id="并查集">并查集</h2>
-<p>感觉是个很智商碾压的算法。</p>
-<h1 id="题解">题解</h1>
-<p>题目要求我们生成一个原图的子图。而这个子图要把所有边连接起来（形成一套卡车发展体系），并且根据公式，边权值和越小越好（卡车变化越小越好）。</p>
-<p>所以改题用最小生成树来解决。</p>
-<p>本题我采用kruskal算法，但是网上采用prime算法的居多。貌似prime算法对于这种边权比较多的图处理效果更好。prime算法就在下次最小生成树的题目里面来实践吧。</p>
-<h1 id="编码注意点">编码注意点</h1>
-<h2 id="sort比基数排序快">sort比基数排序快？</h2>
-<p>TLE编码采用了基数排序的思想（因为边的大小最多八种可能），按道理时间复杂度为线性。</p>
-<p>AC编码采用了algorithm头文件里面的sort，时间复杂度N*log(N)~N^2。</p>
-<p>但是结果表明，sort比基数排序快。于是自己额外写了基数排序和快速排序的代码进行比较，让我吃惊的是，快速排序的速度大约是基数排序的10倍。</p>
-<p>难道是queue操作很耗时间？虽然很好奇，但是这个问题还是先放这里吧。记着！<strong>实际编码中，sort有时会比基数排序快。</strong></p>
-<h2 id="并查集编码总结">并查集编码总结</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. 并查集数据结构</span></div><div class="line"><span class="keyword">int</span> p[maxn];</div><div class="line"></div><div class="line"><span class="comment">// 2. 查找函数编写</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">	<span class="comment">// 重要！</span></div><div class="line">	<span class="comment">// 如果一个节点的父节点是他自己，那么这个节点就是父节点。故返回x</span></div><div class="line">	<span class="comment">// 如果不是，就去找他的父节点的根节点</span></div><div class="line">	<span class="comment">// 然后一直递归....直到找到根节点位置 </span></div><div class="line">	<span class="keyword">return</span> p[x] == x ? x : p[x] = find(p[x]);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 3.合并a,b节点所在的两个集合</span></div><div class="line"><span class="comment">// 先找到连个根节点，然后把一个根节点的父节点设为另一个根节点就可以了。</span></div><div class="line"><span class="keyword">int</span> x = find(a);</div><div class="line"><span class="keyword">int</span> y = find(b);</div><div class="line">p[x] = y;</div></pre></td></tr></table></figure>
-<h1 id="源代码">源代码</h1>
-<h2 id="tle版本">TLE版本</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 2005</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> T_LEN 7</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// the definition of graph</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></div><div class="line">	<span class="keyword">int</span> from,to;</div><div class="line">	Edge(<span class="keyword">int</span> _from,<span class="keyword">int</span> _to):from(_from),to(_to)&#123;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"><span class="built_in">queue</span>&lt;Edge&gt; edges[<span class="number">8</span>];</div><div class="line"></div><div class="line"><span class="comment">// 并查集</span></div><div class="line"><span class="keyword">int</span> p[maxn];</div><div class="line"><span class="comment">// find parent node</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> p[x] == x ? x : p[x] = find(p[x]);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// length of truck is 7</span></div><div class="line"><span class="keyword">char</span> trucks[maxn][<span class="number">8</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">addTruck</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</div><div class="line">		<span class="keyword">int</span> d = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; T_LEN;j++)&#123;</div><div class="line">			d += (trucks[n][j] != trucks[i][j] ? <span class="number">1</span> : <span class="number">0</span>);</div><div class="line">		&#125;</div><div class="line">		edges[d].push(Edge(i,n));</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> N;</div><div class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;N)!=EOF)&#123;</div><div class="line">		<span class="keyword">if</span>(N == <span class="number">0</span>)	<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt;= T_LEN;i++)&#123;</div><div class="line">			<span class="keyword">while</span>(!edges[i].empty())&#123;</div><div class="line">				edges[i].pop();	</div><div class="line">			&#125; </div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; N;i++)&#123;</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%s"</span>,trucks[i]);</div><div class="line">			addTruck(i);</div><div class="line">			<span class="comment">// 每个节点一个集合 </span></div><div class="line">			p[i] = i;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">		<span class="keyword">int</span> flag = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> d = <span class="number">0</span>;d &lt;= T_LEN;d++)&#123;</div><div class="line">			<span class="comment">// read all edge</span></div><div class="line">			<span class="keyword">while</span>(!edges[d].empty())&#123;</div><div class="line">				Edge e = edges[d].front();</div><div class="line">				edges[d].pop();</div><div class="line">				<span class="comment">// get the set</span></div><div class="line">				<span class="keyword">int</span> x = find(e.from);</div><div class="line">				<span class="keyword">int</span> y = find(e.to);</div><div class="line">				<span class="comment">// 如果不连通 </span></div><div class="line">				<span class="keyword">if</span>(x != y)&#123;</div><div class="line">					sum += d;</div><div class="line">					flag++;</div><div class="line">					<span class="comment">// 连通两点 </span></div><div class="line">					p[e.to] = e.from;</div><div class="line">					<span class="keyword">if</span>(flag == N)	<span class="keyword">break</span>;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span>(flag == N)	<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"The highest possible quality is 1/%d.\n"</span>,sum);</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="ac版本">AC版本</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt; </span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 2005</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> T_LEN 7</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// the definition of graph</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></div><div class="line">	<span class="keyword">int</span> from,to,len;</div><div class="line">	Edge(<span class="keyword">int</span> _from,<span class="keyword">int</span> _to,<span class="keyword">int</span> _len):from(_from),to(_to),len(_len)&#123;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> Edge&amp; a,<span class="keyword">const</span> Edge&amp; b)</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> a.len &lt; b.len;</div><div class="line">&#125; </div><div class="line"></div><div class="line"><span class="built_in">vector</span>&lt;Edge&gt; edges;</div><div class="line"></div><div class="line"><span class="comment">// 并查集</span></div><div class="line"><span class="keyword">int</span> p[maxn];</div><div class="line"><span class="comment">// find parent node</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> p[x] == x ? x : p[x] = find(p[x]);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// length of truck is 7</span></div><div class="line"><span class="keyword">char</span> trucks[maxn][<span class="number">8</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">addTruck</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</div><div class="line">		<span class="keyword">int</span> d = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; T_LEN;j++)&#123;</div><div class="line">			d += (trucks[n][j] != trucks[i][j] ? <span class="number">1</span> : <span class="number">0</span>);</div><div class="line">		&#125;</div><div class="line">		edges.push_back(Edge(i,n,d));</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> N;</div><div class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;N)!=EOF)&#123;</div><div class="line">		<span class="keyword">if</span>(N == <span class="number">0</span>)	<span class="keyword">break</span>;</div><div class="line">		edges.clear();</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; N;i++)&#123;</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%s"</span>,trucks[i]);</div><div class="line">			addTruck(i);</div><div class="line">			<span class="comment">// 每个节点一个集合 </span></div><div class="line">			p[i] = i;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="comment">// 实验证明，用queue[8]比sort更耗时间，毕竟你数据结构课后作业也试过了 </span></div><div class="line">		sort(edges.begin(),edges.end(),cmp);</div><div class="line">		</div><div class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">		<span class="keyword">int</span> flag = <span class="number">0</span>;</div><div class="line">		<span class="keyword">int</span> len = edges.size();</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; len;i++)&#123;</div><div class="line">			Edge e = edges[i];</div><div class="line">			<span class="comment">// get the set</span></div><div class="line">			<span class="keyword">int</span> x = find(e.from);</div><div class="line">			<span class="keyword">int</span> y = find(e.to);</div><div class="line">			<span class="comment">// 如果不连通 </span></div><div class="line">			<span class="keyword">if</span>(x != y)&#123;</div><div class="line">				<span class="comment">// printf("add edge from %d to %d with %d\n",e.from,e.to,e.len);</span></div><div class="line">				sum += e.len;</div><div class="line">				flag++;</div><div class="line">				<span class="comment">// 连通两点 ，并查集写错  p[e.from] = e.to </span></div><div class="line">				p[x] = y;</div><div class="line">				<span class="keyword">if</span>(flag == N<span class="number">-1</span>)	<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"The highest possible quality is 1/%d.\n"</span>,sum);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          题目内容
+链接： POJ1789题目
+算法详解
+kruskal算法
+并查集
+感觉是个很智商碾压的算法。
+题解
+题目要求我们生成一个原图的子图。而这个子图要把所有边连接起来（形成一套卡车发展体系），并且根据公式，边权值和越小越好（卡车变化越小越好）。
+所以改题用最小生成树来解决。
+本题我采用krusk
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/05/acm/poj1789/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/05/acm/poj3041/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陆幽轩">
+      <meta itemprop="description" content="做有情怀的程序员">
+      <meta itemprop="image" content="/assets/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="玩毛线的毛线">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/05/acm/poj3041/" itemprop="url">二分图与匈牙利算法</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-05T00:00:00+08:00">
+                2017-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM/" itemprop="url" rel="index">
+                    <span itemprop="name">ACM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          题目内容
+链接： POJ3041
+算法详解
+二分图相关知识
+TODO 还没写完
+Berge定理
+图G的一个匹配M是最大匹配的充要条件是图G不存在M的增广路。
+证明： 假设存在v0v1v2…vn为增广路（n一定为奇数，起点终点分别在两个集合）。
+那么根据交错出现的定义：v0v1不属于M，v1v2属于M
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/05/acm/poj3041/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1482,9 +1349,9 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/03/computer-science/sql-review/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="玩毛线的毛线">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/assets/woolen.jpg">
+      <meta itemprop="name" content="陆幽轩">
+      <meta itemprop="description" content="做有情怀的程序员">
+      <meta itemprop="image" content="/assets/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1496,9 +1363,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/03/computer-science/sql-review/" itemprop="url">SQL复习</a></h1>
+                <a class="post-title-link" href="/2017/06/03/computer-science/sql-review/" itemprop="url">SQL复习</a></h2>
         
 
         <div class="post-meta">
@@ -1572,143 +1439,17 @@
       
         
           
-            <h2 id="basis">Basis</h2>
-<h3 id="basic-usage">Basic Usage</h3>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* Select */</span></div><div class="line"><span class="keyword">SELECT</span> column_name,column_name</div><div class="line"><span class="keyword">FROM</span> table_name;</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> table_name;</div><div class="line"></div><div class="line"><span class="comment">/* Insert */</span></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name</div><div class="line"><span class="keyword">VALUES</span> (value1,value2,value3,...);</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name (column1,column2,column3,...)</div><div class="line"><span class="keyword">VALUES</span> (value1,value2,value3,...);</div><div class="line"></div><div class="line"><span class="comment">/* Update */</span></div><div class="line"><span class="keyword">UPDATE</span> table_name</div><div class="line"><span class="keyword">SET</span> column1=value1,column2=value2,...</div><div class="line"><span class="keyword">WHERE</span> some_column=some_value;</div><div class="line"></div><div class="line"><span class="comment">/* Delete */</span></div><div class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> table_name</div><div class="line"><span class="keyword">WHERE</span> some_column=some_value;</div></pre></td></tr></table></figure>
-<h3 id="where">Where</h3>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name,column_name</div><div class="line"><span class="keyword">FROM</span> table_name</div><div class="line"><span class="keyword">WHERE</span> column_name <span class="keyword">operator</span> <span class="keyword">value</span>;</div></pre></td></tr></table></figure>
-<h3 id="distinct">Distinct</h3>
-<p>Choose the only one</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> column_name,column_name</div><div class="line"><span class="keyword">FROM</span> table_name;</div></pre></td></tr></table></figure>
-<h3 id="order-by">Order by</h3>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name,column_name</div><div class="line"><span class="keyword">FROM</span> table_name</div><div class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> column_name,column_name <span class="keyword">ASC</span>|<span class="keyword">DESC</span>;</div></pre></td></tr></table></figure>
-<p>Note that <strong>ASC</strong> is the default way.</p>
-<hr>
-<h2 id="advanced">Advanced</h2>
-<h3 id="演示数据库说明">演示数据库说明</h3>
-<h4 id="websites表">Websites表</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">+----+--------------+---------------------------+-------+---------+</div><div class="line">| id | name         | url                       | alexa | country |</div><div class="line">+----+--------------+---------------------------+-------+---------+</div><div class="line">| 1  | Google       | https://www.google.cm/    | 1     | USA     |</div><div class="line">| 2  | 淘宝          | https://www.taobao.com/   | 13    | CN      |</div><div class="line">| 3  | 菜鸟教程      | http://www.runoob.com/    | 4689  | CN      |</div><div class="line">| 4  | 微博          | http://weibo.com/         | 20    | CN      |</div><div class="line">| 5  | Facebook     | https://www.facebook.com/ | 3     | USA     |</div><div class="line">| 7  | stackoverflow | http://stackoverflow.com/ |   0 | IND     |</div><div class="line">+----+---------------+---------------------------+-------+---------+</div></pre></td></tr></table></figure>
-<h4 id="access_log-表">Access_log 表</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">+-----+---------+-------+------------+</div><div class="line">| aid | site_id | count | date       |</div><div class="line">+-----+---------+-------+------------+</div><div class="line">|   1 |       1 |    45 | 2016-05-10 |</div><div class="line">|   2 |       3 |   100 | 2016-05-13 |</div><div class="line">|   3 |       1 |   230 | 2016-05-14 |</div><div class="line">|   4 |       2 |    10 | 2016-05-14 |</div><div class="line">|   5 |       5 |   205 | 2016-05-14 |</div><div class="line">|   6 |       4 |    13 | 2016-05-15 |</div><div class="line">|   7 |       3 |   220 | 2016-05-15 |</div><div class="line">|   8 |       5 |   545 | 2016-05-16 |</div><div class="line">|   9 |       3 |   201 | 2016-05-17 |</div><div class="line">+-----+---------+-------+------------+</div></pre></td></tr></table></figure>
-<h4 id="apps表">apps表</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">+----+------------+-------------------------+---------+</div><div class="line">| id | app_name   | url                     | country |</div><div class="line">+----+------------+-------------------------+---------+</div><div class="line">|  1 | QQ APP     | http://im.qq.com/       | CN      |</div><div class="line">|  2 | 微博 APP | http://weibo.com/       | CN      |</div><div class="line">|  3 | 淘宝 APP | https://www.taobao.com/ | CN      |</div><div class="line">+----+------------+-------------------------+---------+</div></pre></td></tr></table></figure>
-<h3 id="通配符">通配符</h3>
-<p>在 SQL 中，通配符与 SQL LIKE 操作符一起使用，SQL 通配符用于搜索表中的数据。</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">通配符</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">_</td>
-<td align="left">代替一个字符</td>
-</tr>
-<tr class="even">
-<td align="left">%</td>
-<td align="left">代替0或多个字符</td>
-</tr>
-<tr class="odd">
-<td align="left">[字符串]</td>
-<td align="left">字符串中的任意一个字符</td>
-</tr>
-<tr class="even">
-<td align="left">[^字符串] 或 [!字符串]</td>
-<td align="left">不在字符串中的任意一个字符</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Websites</div><div class="line"><span class="keyword">WHERE</span> <span class="keyword">url</span> <span class="keyword">LIKE</span> <span class="string">'https%'</span>;</div></pre></td></tr></table></figure>
-<h3 id="正则表达式">正则表达式</h3>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 正则表达式匹配 */</span></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Websites</div><div class="line"><span class="keyword">WHERE</span> <span class="keyword">name</span> REGEXP <span class="string">'^[GFs]'</span>;</div><div class="line"></div><div class="line"><span class="comment">/* 正则表达式匹配 否定形式 */</span></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Websites</div><div class="line"><span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">NOT</span> REGEXP <span class="string">'^[GFs]'</span>;</div></pre></td></tr></table></figure>
-<h3 id="in">IN</h3>
-<p>IN 操作符允许您在 <strong>WHERE</strong> 子句中<strong>规定多个值</strong>。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Websites</div><div class="line"><span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">IN</span> (<span class="string">'Google'</span>,<span class="string">'菜鸟教程'</span>);</div></pre></td></tr></table></figure>
-<h3 id="between">BETWEEN</h3>
-<p>BETWEEN 操作符用于选取介于两个值之间的数据范围内的值。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name(s)</div><div class="line"><span class="keyword">FROM</span> table_name</div><div class="line"><span class="keyword">WHERE</span> column_name <span class="keyword">BETWEEN</span> value1 <span class="keyword">AND</span> value2;</div></pre></td></tr></table></figure>
-<h3 id="as">AS</h3>
-<p>通过使用 SQL，可以为表名称或列名称指定别名。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name <span class="keyword">AS</span> alias_name</div><div class="line"><span class="keyword">FROM</span> table_name;</div></pre></td></tr></table></figure>
-<h3 id="join">JOIN</h3>
-<h4 id="inner-join">INNER JOIN</h4>
-<div class="figure">
-<img src="http://www.runoob.com/wp-content/uploads/2013/09/img_innerjoin.gif" alt="SQL INNER JOIN">
-<p class="caption">SQL INNER JOIN</p>
-</div>
-<p>语法如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name(s)</div><div class="line"><span class="keyword">FROM</span> table1</div><div class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> table2</div><div class="line"><span class="keyword">ON</span> table1.column_name=table2.column_name;</div><div class="line"></div><div class="line"><span class="comment">/*或者*/</span></div><div class="line"><span class="keyword">SELECT</span> column_name(s)</div><div class="line"><span class="keyword">FROM</span> table1</div><div class="line"><span class="keyword">JOIN</span> table2</div><div class="line"><span class="keyword">ON</span> table1.column_name=table2.column_name;</div><div class="line"></div><div class="line"><span class="comment">/* 实例 */</span></div><div class="line"><span class="keyword">SELECT</span> Websites.name, access_log.count, access_log.date</div><div class="line"><span class="keyword">FROM</span> Websites</div><div class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> access_log</div><div class="line"><span class="keyword">ON</span> Websites.id=access_log.site_id</div><div class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> access_log.count;</div></pre></td></tr></table></figure>
-<p>举例如下：</p>
-<div class="figure">
-<img src="http://www.runoob.com/wp-content/uploads/2013/09/inner-join1.jpg" alt="img">
-<p class="caption">img</p>
-</div>
-<h4 id="left-join">LEFT JOIN</h4>
-<p>LEFT JOIN 关键字从<strong>左表（table1）返回所有的行</strong>，即使右表（table2）中没有匹配。如果右表中<strong>没有匹配</strong>，则结果<strong>为</strong> <strong>NULL</strong>。<strong>(RIGHT JOIN 则相反)</strong></p>
-<div class="figure">
-<img src="http://www.runoob.com/wp-content/uploads/2013/09/img_leftjoin.gif" alt="SQL LEFT JOIN">
-<p class="caption">SQL LEFT JOIN</p>
-</div>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name(s)</div><div class="line"><span class="keyword">FROM</span> table1</div><div class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> table2</div><div class="line"><span class="keyword">ON</span> table1.column_name=table2.column_name;</div></pre></td></tr></table></figure>
-<div class="figure">
-<img src="http://www.runoob.com/wp-content/uploads/2013/09/left-join1.jpg" alt="img">
-<p class="caption">img</p>
-</div>
-<h4 id="full-outer-join">FULL OUTER JOIN</h4>
-<p>FULL OUTER JOIN 关键字只要左表（table1）和右表（table2）其中一个表中存在匹配，则返回行。</p>
-<div class="figure">
-<img src="http://www.runoob.com/wp-content/uploads/2013/09/img_fulljoin.gif" alt="SQL FULL OUTER JOIN">
-<p class="caption">SQL FULL OUTER JOIN</p>
-</div>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name(s)</div><div class="line"><span class="keyword">FROM</span> table1</div><div class="line"><span class="keyword">FULL</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> table2</div><div class="line"><span class="keyword">ON</span> table1.column_name=table2.column_name;</div></pre></td></tr></table></figure>
-<h3 id="union">UNION</h3>
-<p>UNION 操作符用于合并两个或多个 SELECT 语句的结果集。</p>
-<p><strong>Attention：</strong> UNION 内部的每个 SELECT 语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每个 SELECT 语句中的列的顺序必须相同。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table1</div><div class="line"><span class="keyword">UNION</span></div><div class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table2;</div><div class="line"></div><div class="line"><span class="comment">/*默认地，UNION 操作符选取不同的值。如果允许重复的值，请使用 UNION ALL。*/</span></div><div class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table1</div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table2;</div></pre></td></tr></table></figure>
-<p><img src="http://www.runoob.com/wp-content/uploads/2013/09/union1.jpg" alt="img"><img src="http://www.runoob.com/wp-content/uploads/2013/09/union2.jpg" alt="img"></p>
-<p>另外，带where的union all会这样：</p>
-<div class="figure">
-<img src="http://www.runoob.com/wp-content/uploads/2013/09/AAA99C7B-36A5-43FB-B489-F8CE63B62C71.jpg" alt="img">
-<p class="caption">img</p>
-</div>
-<h3 id="insert-into-select">INSERT INTO SELECT</h3>
-<p>INSERT INTO SELECT 语句从一个表复制数据，然后把数据插入到一个已存在的表中。目标表中任何已存在的行都不会受影响。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table2</div><div class="line">(column_name(s))</div><div class="line"><span class="keyword">SELECT</span> column_name(s)</div><div class="line"><span class="keyword">FROM</span> table1;</div></pre></td></tr></table></figure>
-<h3 id="exists">EXISTS</h3>
-<p>结果集是否为空。比如说，选出有人访问的网站：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Websites</div><div class="line"><span class="keyword">WHERE</span> <span class="keyword">EXISTS</span> (<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> access_log</div><div class="line">             <span class="keyword">WHERE</span> access_log.site_id = Websites.id)</div></pre></td></tr></table></figure>
-<p>还有NOT EXISTS搭配使用。</p>
-<hr>
-<h2 id="sql-function">SQL Function</h2>
-<h3 id="group-by">GROUP BY</h3>
-<p>GROUP BY 语句用于<strong>结合聚合函数</strong>，根据一个或多个列对结果集进行分组。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name, aggregate_function(column_name)</div><div class="line"><span class="keyword">FROM</span> table_name</div><div class="line"><span class="keyword">WHERE</span> column_name <span class="keyword">operator</span> <span class="keyword">value</span></div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> column_name;</div></pre></td></tr></table></figure>
-<div class="figure">
-<img src="http://www.runoob.com/wp-content/uploads/2013/09/groupby1.jpg" alt="img">
-<p class="caption">img</p>
-</div>
-<h3 id="having">HAVING</h3>
-<p>在 SQL 中增加 HAVING 子句原因是，<strong>WHERE 关键字无法与聚合函数一起使用</strong>。</p>
-<p>HAVING 子句可以让我们<strong>筛选分组后的各组数据</strong>。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name, aggregate_function(column_name)</div><div class="line"><span class="keyword">FROM</span> table_name</div><div class="line"><span class="keyword">WHERE</span> column_name <span class="keyword">operator</span> <span class="keyword">value</span></div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> column_name</div><div class="line"><span class="keyword">HAVING</span> aggregate_function(column_name) <span class="keyword">operator</span> <span class="keyword">value</span>;</div></pre></td></tr></table></figure>
-<p>查找访问量大于200的网站</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> Websites.name, Websites.url, <span class="keyword">SUM</span>(access_log.count) <span class="keyword">AS</span> nums <span class="keyword">FROM</span> (access_log</div><div class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> Websites</div><div class="line"><span class="keyword">ON</span> access_log.site_id=Websites.id)</div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> Websites.name</div><div class="line"><span class="keyword">HAVING</span> <span class="keyword">SUM</span>(access_log.count) &gt; <span class="number">200</span>;</div></pre></td></tr></table></figure>
-<h3 id="聚合aggregate函数">聚合(Aggregate)函数</h3>
-<p>SQL Aggregate 函数计算从列中取得的值，返回一个单一的值。</p>
-<p>有用的 Aggregate 函数：</p>
-<ul>
-<li>AVG() - 返回平均值</li>
-<li>COUNT() - 返回行数</li>
-<li>FIRST() - 返回第一个记录的值</li>
-<li>LAST() - 返回最后一个记录的值</li>
-<li>MAX() - 返回最大值</li>
-<li>MIN() - 返回最小值</li>
-<li>SUM() - 返回总和</li>
-</ul>
-
-          
+          Basis
+Basic Usage
+123456789101112131415161718192021/* Select */SELECT column_name,column_nameFROM table_name;SELECT * FROM table_name;/* Insert */INSE
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/03/computer-science/sql-review/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1758,9 +1499,9 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/01/computer-science/c++ overload-and-virtual-function/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="玩毛线的毛线">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/assets/woolen.jpg">
+      <meta itemprop="name" content="陆幽轩">
+      <meta itemprop="description" content="做有情怀的程序员">
+      <meta itemprop="image" content="/assets/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1772,9 +1513,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/01/computer-science/c++ overload-and-virtual-function/" itemprop="url">C++重载与虚函数</a></h1>
+                <a class="post-title-link" href="/2017/06/01/computer-science/c++ overload-and-virtual-function/" itemprop="url">C++重载与虚函数</a></h2>
         
 
         <div class="post-meta">
@@ -1848,17 +1589,16 @@
       
         
           
-            <h2 id="overload">Overload</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">         <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span>)</span></span>;    </div><div class="line">&#125;;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> A &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">         <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span>, <span class="keyword">int</span>)</span></span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">       B b;</div><div class="line">       </div><div class="line">        b.test(<span class="number">5</span>);  <span class="comment">//错误，应该b.A::test(5);   </span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="virtual-function">Virtual Function</h2>
-<h3 id="introduction">Introduction</h3>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">        <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span>)</span></span>;  </div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> A &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span>)</span></span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> :</span> <span class="keyword">public</span> A &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span>)</span></span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">         A *a0;</div><div class="line">         A &amp;a1 = b;</div><div class="line">         A &amp;a2 = c;</div><div class="line">         B  b;</div><div class="line">         C  c;</div><div class="line"></div><div class="line">         a0 = &amp;b;</div><div class="line">         a0.test(<span class="number">2</span>);   <span class="comment">//调用类B的test函数</span></div><div class="line">         </div><div class="line">         a0 = &amp;c;</div><div class="line">         a0.test(<span class="number">3</span>);   <span class="comment">//调用类C的test函数</span></div><div class="line"></div><div class="line">         a1.test(<span class="number">4</span>);   <span class="comment">//调用类B的test函数</span></div><div class="line">         a2.test(<span class="number">5</span>);   <span class="comment">//调用类C的test函数</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="the-virtual">The Virtual “~”</h3>
-<p>A example that destructor of base class is not a “virtual” function:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></div><div class="line"><span class="class">&#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    A() &#123; ptra_ = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">10</span>];&#125;</div><div class="line">    ~A() &#123; <span class="keyword">delete</span>[] ptra_;&#125;        <span class="comment">// 非虚析构函数</span></div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">char</span> * ptra_;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span> <span class="keyword">public</span> A</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    B() &#123; ptrb_ = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">20</span>];&#125;</div><div class="line">    ~B() &#123; <span class="keyword">delete</span>[] ptrb_;&#125;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">char</span> * ptrb_;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    A * a = <span class="keyword">new</span> B;</div><div class="line">    <span class="keyword">delete</span> a;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>when we call <em>delete a</em>,we will call ~A(not ~B actually).</p>
-
-          
+          Overload
+123456789101112131415class A &#123;public:         void test(int);    &#125;;class B : public A &#123;public:         void test(int, int);&#1
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/01/computer-science/c++ overload-and-virtual-function/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1908,9 +1648,9 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/22/machine-learning/tensorflow-cnn/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="玩毛线的毛线">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/assets/woolen.jpg">
+      <meta itemprop="name" content="陆幽轩">
+      <meta itemprop="description" content="做有情怀的程序员">
+      <meta itemprop="image" content="/assets/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1922,9 +1662,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/05/22/machine-learning/tensorflow-cnn/" itemprop="url">Tensorflow训练多层卷积神经网络</a></h1>
+                <a class="post-title-link" href="/2017/05/22/machine-learning/tensorflow-cnn/" itemprop="url">Tensorflow训练多层卷积神经网络</a></h2>
         
 
         <div class="post-meta">
@@ -1998,116 +1738,19 @@
       
         
           
-            <p>来自官方例子：<a href="https://www.tensorflow.org/get_started/mnist/pros" target="_blank" rel="external">Deep MNIST for Experts</a></p>
-<p>在阅读之前确保自己已经理解了<a href="https://www.tensorflow.org/get_started/mnist/beginners" target="_blank" rel="external">MNIST For ML Beginners</a></p>
-<h2 id="理解卷积-convolution">理解卷积 Convolution</h2>
-<p><strong>原始定义：</strong>设f,g在R上可积,定义新函数h满足以下特性：</p>
-<p><span class="math display">\[h(x)=(f*g)(x) =\int_{-\infty}^{+\infty} f(t)g(x-t) {\rm d}t\]</span></p>
-<p>则称h是f和g的卷积。</p>
-<p>Wiki百科上有一个非常形象的图解来解释卷积：</p>
-<blockquote>
-<p>它（卷积）是其中一个函数翻转并平移后与另一个函数的乘积的积分,是一个对平移量的函数。</p>
-</blockquote>
-<p>这里有两个定义，翻转和平移，可以这么来理解这两个概念：</p>
-<ul>
-<li><strong>翻转</strong> g(t) 变成 g(-t)</li>
-<li><strong>平移</strong> g(-t) 向右平移x个单位，变成g(x-t)</li>
-</ul>
-<p>这里就不贴图了，直接上<a href="https://zh.wikipedia.org/wiki/%E5%8D%B7%E7%A7%AF" target="_blank" rel="external">Wiki百科地址</a>。看下面的图解，就能理解卷积函数所谓的翻转和平移了。另外有<a href="https://graphics.stanford.edu/courses/cs178/applets/convolution.html" target="_blank" rel="external">卷积Flash演示</a>。</p>
-<p>推荐一个知乎问题：<a href="https://www.zhihu.com/question/20500497" target="_blank" rel="external">在定义卷积时为什么要对其中一个函数进行翻转？</a>；这篇知乎阐述了卷积的起源。</p>
-<h3 id="卷积的离散定义">卷积的离散定义</h3>
-<p>根据卷积的连续定义，很容易就能理解卷积的离散定义：</p>
-<p><span class="math display">\[h(x)=(f*g)(x) =\sum_{k=-\infty}^{+\infty} f(k) g(x-k)  \]</span></p>
-<p><span class="math display">\[s.t.(x,k\in Z)\]</span></p>
-<p>参考总结的博文：<a href="http://mengqi92.github.io/2015/10/06/convolution/" target="_blank" rel="external">我对卷积的理解</a> 中输液的例子就能深刻理解卷积的离散定义。给出以下例子进行理解：</p>
-<h3 id="二维中的卷积">二维中的卷积</h3>
-<p>一维的卷积搞清楚了，二维的就好说了。</p>
-<p>参考总结的博文：<a href="http://mengqi92.github.io/2015/10/06/convolution/" target="_blank" rel="external">我对卷积的理解</a> 中对二维卷积的理解。</p>
-<h3 id="图像处理中的卷积">图像处理中的卷积</h3>
-<p>参考<a href="http://blog.sina.com.cn/s/blog_4bdb170b01019atv.html" target="_blank" rel="external">图像处理（卷积）作者太棒了</a></p>
-<h3 id="总结">总结</h3>
-<p>理解卷积，就要理解卷积的四个核心概念：</p>
-<ul>
-<li>（翻转）（图像处理中很多情况不用翻转？）</li>
-<li>移动</li>
-<li>乘积</li>
-<li>求和</li>
-</ul>
-<h2 id="理解卷积神经网络">理解卷积神经网络</h2>
-<p>参考博文：<a href="https://zhuanlan.zhihu.com/p/25868154" target="_blank" rel="external">看图判断口袋妖怪属性，学会用卷积神经网络分类（教程+代码）</a></p>
-<p>推荐视频教程：<a href="http://v.youku.com/v_show/id_XMjgzNzk5Njk3Ng==.html?spm=a2h0k.8191407.0.0&amp;from=s1.8-1-1.2" target="_blank" rel="external">卷积神经网络与图像识别</a></p>
-<h3 id="卷积">卷积</h3>
-<p>卷积的关键理解在前面一章已经阐述过。这里讲解卷积在卷积神经网络中的使用。</p>
-<p>tensorflow中卷积的写法如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv2d</span><span class="params">(x, W)</span>:</span></div><div class="line">  <span class="keyword">return</span> tf.nn.conv2d(x, W, strides=[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], padding=<span class="string">'SAME'</span>)</div><div class="line"></div><div class="line">x_image = tf.reshape(x, [<span class="number">-1</span>, <span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>])</div><div class="line">h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)</div></pre></td></tr></table></figure>
-<p>查看conv2d的官方解释：</p>
-<blockquote>
-<p>Computes a 2-D convolution given 4-D input and filter tensors.</p>
-<p>Given an input tensor of shape [batch, in_height, in_width, in_channels] and a filter / kernel tensor of shape [filter_height, filter_width, in_channels, out_channels], this op performs the following:</p>
-<ol style="list-style-type: decimal">
-<li>Flattens the filter to a 2-D matrix with shape <code>[filter_height * filter_width * in_channels, output_channels]</code>.</li>
-<li>Extracts image patches from the input tensor to form a <em>virtual</em> tensor of shape <code>[batch, out_height, out_width, filter_height * filter_width * in_channels]</code>.</li>
-<li>For each patch, right-multiplies the filter matrix and the image patch vector.</li>
-</ol>
-</blockquote>
-<blockquote>
-<h4 id="args">Args:</h4>
-<ul>
-<li><strong>input</strong>: A <code>Tensor</code>. Must be one of the following types: <code>half</code>, <code>float32</code>. A 4-D tensor. The dimension order is interpreted according to the value of <code>data_format</code>, see below for details.</li>
-<li><strong>filter</strong>: A <code>Tensor</code>. Must have the same type as <code>input</code>. A 4-D tensor of shape<code>[filter_height, filter_width, in_channels, out_channels]</code></li>
-<li><strong>strides</strong>: A list of <code>ints</code>. 1-D tensor of length 4. The stride of the sliding window for each dimension of <code>input</code>. The dimension order is determined by the value of <code>data_format</code>, see below for details.</li>
-<li><strong>padding</strong>: A <code>string</code> from: <code>&quot;SAME&quot;, &quot;VALID&quot;</code>. The type of padding algorithm to use.</li>
-</ul>
-</blockquote>
-<p><strong>strides</strong> 步长（每个维度上的移动步长）默认就是[1,1,1,1]了。</p>
-<p><strong>padding</strong> 填充算法，卷积核在边缘移动时，没有数据对应情况下的填充算法。</p>
-<h3 id="池化">池化</h3>
-<p>一张图就能直观解释池化：</p>
-<div class="figure">
-<img src="http://img.blog.csdn.net/20130918153655515?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lsZW5jZTEyMTQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img">
-<p class="caption">img</p>
-</div>
-<p>为什么要池化？64*64的图片你算得算半天，池化可以有效提取特征并减少计算，而且池化可以防止过拟合。</p>
-<h3 id="relu激活函数">Relu激活函数</h3>
-<p>Relu激活函数如图所示：</p>
-<div class="figure">
-<img src="http://images.cnitblog.com/blog2015/678029/201504/241900156879853.png" alt="img">
-<p class="caption">img</p>
-</div>
-<p>图中还有一个softplus公式，公式如下：</p>
-<p><span class="math display">\[Softplus(x) = log(1+e^x)\]</span></p>
-<p><a href="https://www.zhihu.com/question/29021768/answer/43517930" target="_blank" rel="external">为什么ReLu要好过于tanh和sigmoid function?</a></p>
-<h2 id="tensorflow实战">Tensorflow实战</h2>
-<h3 id="tf.reshape">tf.reshape</h3>
-<p><strong>tf.reshape(tensor, shape, name=None)</strong> 函数的作用是将tensor变换为参数shape的形式。 其中shape为一个列表形式，特殊的一点是列表中可以存在-1。<strong>-1代表的含义是不用我们自己指定这一维的大小</strong>，函数会自动计算，但列表中只能存在一个-1。（当然如果存在多个-1，就是一个存在多解的方程了）</p>
-<p>官方例子帮助理解：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># tensor 't' is [1, 2, 3, 4, 5, 6, 7, 8, 9]</span></div><div class="line"><span class="comment"># tensor 't' has shape [9]</span></div><div class="line">reshape(t, [3, 3]) ==&gt; [[1, 2, 3],</div><div class="line">                        [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>],</div><div class="line">                        [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]]</div><div class="line"></div><div class="line"><span class="comment"># tensor 't' is [[[1, 1], [2, 2]],</span></div><div class="line"><span class="comment">#                [[3, 3], [4, 4]]]</span></div><div class="line"><span class="comment"># tensor 't' has shape [2, 2, 2]</span></div><div class="line">reshape(t, [2, 4]) ==&gt; [[1, 1, 2, 2],</div><div class="line">                        [<span class="number">3</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">4</span>]]</div><div class="line"></div><div class="line"><span class="comment"># tensor 't' is [[[1, 1, 1],</span></div><div class="line"><span class="comment">#                 [2, 2, 2]],</span></div><div class="line"><span class="comment">#                [[3, 3, 3],</span></div><div class="line"><span class="comment">#                 [4, 4, 4]],</span></div><div class="line"><span class="comment">#                [[5, 5, 5],</span></div><div class="line"><span class="comment">#                 [6, 6, 6]]]</span></div><div class="line"><span class="comment"># tensor 't' has shape [3, 2, 3]</span></div><div class="line"><span class="comment"># pass '[-1]' to flatten 't'</span></div><div class="line">reshape(t, [-1]) ==&gt; [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6]</div><div class="line"></div><div class="line"><span class="comment"># -1 can also be used to infer the shape</span></div><div class="line"></div><div class="line"><span class="comment"># -1 is inferred to be 9:</span></div><div class="line">reshape(t, [2, -1]) ==&gt; [[1, 1, 1, 2, 2, 2, 3, 3, 3],</div><div class="line">                         [<span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>]]</div><div class="line"><span class="comment"># -1 is inferred to be 2:</span></div><div class="line">reshape(t, [-1, 9]) ==&gt; [[1, 1, 1, 2, 2, 2, 3, 3, 3],</div><div class="line">                         [<span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>]]</div><div class="line"><span class="comment"># -1 is inferred to be 3:</span></div><div class="line">reshape(t, [ 2, -1, 3]) ==&gt; [[[1, 1, 1],</div><div class="line">                              [<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>],</div><div class="line">                              [<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>]],</div><div class="line">                             [[<span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>],</div><div class="line">                              [<span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>],</div><div class="line">                              [<span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>]]]</div><div class="line"></div><div class="line"><span class="comment"># tensor 't' is [7]</span></div><div class="line"><span class="comment"># shape `[]` reshapes to a scalar</span></div><div class="line">reshape(t, []) ==&gt; 7</div></pre></td></tr></table></figure>
-<h3 id="正态分布取随机值">正态分布取随机值</h3>
-<h5 id="tf.truncated_normalshapemean0.0stddev1.0">tf.truncated_normal(shape,mean=0.0,stddev=1.0)</h5>
-<p>从<strong>截断</strong>的正态分布中输出随机值。 生成的值服从具有指定平均值和标准偏差的正态分布，如果生成的值大于平均值2个标准偏差的值则丢弃重新选择。</p>
-<p>在正态分布的曲线中，横轴区间（μ-σ，μ+σ）内的面积为68.268949%。 横轴区间（μ-2σ，μ+2σ）内的面积为95.449974%。 横轴区间（μ-3σ，μ+3σ）内的面积为99.730020%。 X落在（μ-3σ，μ+3σ）以外的概率小于千分之三，在实际问题中常认为相应的事件是不会发生的，基本上可以把区间（μ-3σ，μ+3σ）看作是随机变量X实际可能的取值区间，这称之为正态分布的“3σ”原则。 在tf.truncated_normal中如果x的取值在区间（μ-2σ，μ+2σ）之外则重新进行选择。这样保证了生成的值都在均值附近。</p>
-<p>参数:</p>
-<ul>
-<li>shape: 一维的张量，也是输出的张量。</li>
-<li>mean: 正态分布的均值。</li>
-<li>stddev: 正态分布的标准差。</li>
-<li>dtype: 输出的类型。</li>
-<li>seed: 一个整数，当设置之后，每次生成的随机数都一样。</li>
-<li>name: 操作的名字。</li>
-</ul>
-<h5 id="tf.random_normalshapemean0.0stddev1.0">tf.random_normal(shape,mean=0.0,stddev=1.0)</h5>
-<p>从正态分布中输出随机值。 参数:</p>
-<ul>
-<li>shape: 一维的张量，也是输出的张量。</li>
-<li>mean: 正态分布的均值。</li>
-<li>stddev: 正态分布的标准差。</li>
-<li>dtype: 输出的类型。</li>
-<li>seed: 一个整数，当设置之后，每次生成的随机数都一样。</li>
-<li>name: 操作的名字。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">a = tf.Variable(tf.random_normal([<span class="number">2</span>,<span class="number">2</span>],seed=<span class="number">1</span>))</div><div class="line">b = tf.Variable(tf.truncated_normal([<span class="number">2</span>,<span class="number">2</span>],seed=<span class="number">2</span>))</div><div class="line">init = tf.global_variables_initializer()</div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">    sess.run(init)</div><div class="line">    print(sess.run(a))</div><div class="line">    print(sess.run(b))</div><div class="line"></div><div class="line">输出：</div><div class="line">[[<span class="number">-0.81131822</span>  <span class="number">1.48459876</span>]</div><div class="line"> [ <span class="number">0.06532937</span> <span class="number">-2.44270396</span>]]</div><div class="line">[[<span class="number">-0.85811085</span> <span class="number">-0.19662298</span>]</div><div class="line"> [ <span class="number">0.13895047</span> <span class="number">-1.22127688</span>]]</div></pre></td></tr></table></figure>
-
-          
+          来自官方例子：Deep MNIST for Experts
+在阅读之前确保自己已经理解了MNIST For ML Beginners
+理解卷积 Convolution
+原始定义：设f,g在R上可积,定义新函数h满足以下特性：
+\[h(x)=(f*g)(x) =\int_{-\infty}^{+\in
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/22/machine-learning/tensorflow-cnn/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2181,11 +1824,11 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="/assets/woolen.jpg"
-                alt="玩毛线的毛线" />
+                src="/assets/avatar.jpg"
+                alt="陆幽轩" />
             
-              <p class="site-author-name" itemprop="name">玩毛线的毛线</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-author-name" itemprop="name">陆幽轩</p>
+              <p class="site-description motion-element" itemprop="description">做有情怀的程序员</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -2213,6 +1856,15 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
 
           </nav>
 
@@ -2227,10 +1879,34 @@
                       <i class="fa fa-fw fa-github"></i>GitHub</a>
                 </span>
               
+                <span class="links-of-author-item">
+                  <a href="/assets/weqcode.jpg" target="_blank" title="Wechat">
+                    
+                      <i class="fa fa-fw fa-wechat"></i>Wechat</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.douban.com/people/130847043/" target="_blank" title="Douban">
+                    
+                      <i class="fa fa-fw fa-globe"></i>Douban</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:jsmyw95@qq.com" target="_blank" title="Email">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>Email</a>
+                </span>
+              
             
           </div>
 
           
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
           
 
           
@@ -2259,7 +1935,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">玩毛线的毛线</span>
+  <span class="author" itemprop="copyrightHolder">陆幽轩</span>
 
   
 </div>
