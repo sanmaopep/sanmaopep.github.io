@@ -88,7 +88,7 @@
 <meta property="og:description" content="2.1 题目描述：Minsky和Papert指出：感知机是线性模型，所以不能表示复杂的函数。如异或（XOR），验证感知机为什么不能表示异或。 解：异或的输入输出如下：    \(x^{(1)}\) \(x^{(2)}\) \(y\)     1 1 -1   1 -1 1   -1 1 1   -1 -1 -1    接下来我们简单证明一下异或操作的线性不可分性： 证：利用反证法，假设存在一个超平">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2017/11/06/machine-learning/lh-solution-chap-2/lh2.png">
-<meta property="og:updated_time" content="2017-11-07T11:45:59.893Z">
+<meta property="og:updated_time" content="2017-11-08T04:53:59.194Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="统计学习方法 课后习题解答（第二章）">
 <meta name="twitter:description" content="2.1 题目描述：Minsky和Papert指出：感知机是线性模型，所以不能表示复杂的函数。如异或（XOR），验证感知机为什么不能表示异或。 解：异或的输入输出如下：    \(x^{(1)}\) \(x^{(2)}\) \(y\)     1 1 -1   1 -1 1   -1 1 1   -1 -1 -1    接下来我们简单证明一下异或操作的线性不可分性： 证：利用反证法，假设存在一个超平">
@@ -203,22 +203,22 @@
         </li>
       
         
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-简历">
+          <a href="/resume/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            简历
           </a>
         </li>
       
@@ -437,7 +437,7 @@
 <p><strong>题目描述：</strong>证明以下定理：样本集线性可分的充分必要条件是正实例点所构成的凸壳与负实例点所构成的凸壳互不相交。</p>
 <p><strong>凸壳的定义：</strong>设集合<span class="math inline">\(S \in R^{n}\)</span> 是由<span class="math inline">\(R^{n}\)</span> 的k个点所组成的集合，即<span class="math inline">\(S = \{x_{1},x_{2},...,x_{k}\}\)</span>。定义S的凸壳<span class="math inline">\(conv(S)\)</span>为</p>
 <p><span class="math display">\[conv(S)=\{ x= \sum^{k}_{i=1}{\lambda_{i}x_{i}}  | \sum_{i=1}^{k}{\lambda_{i}=1},\lambda_{i}\geq0,i=1,2,...,k     \}\]</span></p>
-<p><strong>解：</strong> 这个证明太难了(ㄒoㄒ)，最后还是参（shan）考（zhai）了大神的解法。<a href="http://blog.csdn.net/y954877035/article/details/52210734" target="_blank" rel="external">凸包与线性可分</a>。</p>
+<p><strong>解：</strong> 这个证明对我来说还是太难了(ㄒoㄒ)，最后还是参（shan）考（zhai）了大神的解法。<a href="http://blog.csdn.net/y954877035/article/details/52210734" target="_blank" rel="external">凸包与线性可分</a>。</p>
 <p>凸壳可以通过以下图形理解：</p>
 <div class="figure">
 <img src="/2017/11/06/machine-learning/lh-solution-chap-2/lh2.png">
@@ -590,7 +590,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -866,7 +866,7 @@
     var isfetched = false;
     var isXml = true;
     // Search DB path;
-    var search_path = "";
+    var search_path = "search.xml";
     if (search_path.length === 0) {
       search_path = "search.xml";
     } else if (/json$/i.test(search_path)) {
