@@ -88,7 +88,7 @@
 <meta property="og:description" content="2.1 题目描述：Minsky和Papert指出：感知机是线性模型，所以不能表示复杂的函数。如异或（XOR），验证感知机为什么不能表示异或。 解：异或的输入输出如下：    \(x^{(1)}\) \(x^{(2)}\) \(y\)     1 1 -1   1 -1 1   -1 1 1   -1 -1 -1    接下来我们简单证明一下异或操作的线性不可分性： 证：利用反证法，假设存在一个超平">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2017/11/06/machine-learning/lh-solution-chap-2/lh2.png">
-<meta property="og:updated_time" content="2017-11-09T08:31:30.707Z">
+<meta property="og:updated_time" content="2017-11-09T09:26:53.332Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="统计学习方法 课后习题解答（第二章）">
 <meta name="twitter:description" content="2.1 题目描述：Minsky和Papert指出：感知机是线性模型，所以不能表示复杂的函数。如异或（XOR），验证感知机为什么不能表示异或。 解：异或的输入输出如下：    \(x^{(1)}\) \(x^{(2)}\) \(y\)     1 1 -1   1 -1 1   -1 1 1   -1 -1 -1    接下来我们简单证明一下异或操作的线性不可分性： 证：利用反证法，假设存在一个超平">
@@ -448,10 +448,24 @@
 <p>在二维欧几里得空间中，凸包(凸壳)可想象为一条刚好包着所有点的橡皮圈。</p>
 <p>From Wiki百科</p>
 </blockquote>
-<p><strong>充分性证明：</strong></p>
-<p><strong>必要性证明：</strong></p>
+<p>下面我们开始证明，设数据集T中的正例点集为S+，负实例点集为S-。S+的凸壳为conv(S+)，S-的凸壳为conv(S-)。</p>
+<p><strong>必要性证明：</strong>（线性可分-&gt;凸壳不相交）</p>
+<p>如果数据集T是线性可分的，则存在超平面将S+和S-完全分离：</p>
+<p>我们令<span class="math inline">\((wx_i+b)=\epsilon_i \dashrightarrow (1)\)</span></p>
+<p>那么对于<span class="math inline">\(\forall x_i \in S+\)</span>，有<span class="math inline">\(\epsilon_i &gt; 0\)</span>，对于<span class="math inline">\(\forall x_i \in S-\)</span>，有<span class="math inline">\(\epsilon_i &lt; 0\)</span>，</p>
+<p>利用反证法，我们假设存在一个点s既属于S+，也属于S-。（证明关键点）</p>
+<p>S点可以表示为：<span class="math inline">\(s= \sum^{k}_{i=1}{\lambda_{i}x_{i}} \dashrightarrow (2)\)</span>，其中 $<em>{i=1}^{k}{</em>{i}=1},_{i}0,i=1,2,…,k $</p>
+<p>将(1)、(2)联立，可以得到</p>
+<p><span class="math display">\[ws = \sum_{i=1}^{k}{ (\lambda_i\epsilon_i-\lambda_ib )} = \sum_{i=1}^{k}{ \lambda_i\epsilon_i-b } \]</span></p>
+<p>即：$ws+b = _{i=1}^{k}{ _i_i } $</p>
+<p>因为<span class="math inline">\(s \in S+\)</span>，所以<span class="math inline">\(\epsilon_i&gt;0\)</span>，故<span class="math inline">\(ws+b&gt;0\)</span>。同时<span class="math inline">\(s \in S-\)</span>，所以<span class="math inline">\(\epsilon_i&lt;0\)</span>，故<span class="math inline">\(ws+b&lt;0\)</span>。</p>
+<p>矛盾，所以不存在一个点s既属于S+，也属于S-。即正例的凸壳和负例的凸壳不相交。</p>
+<p><strong>充分性证明：</strong>（凸壳不相交-&gt;线性可分）</p>
+<p><strong>证明总结：</strong> 好久没做这种证明题了_(:з」∠)_，必要性的证明不难，老老实实从定义出发。不相交很难表述，所以再用反证法就可以了。</p>
+<p>第二个证明就尴尬了，还是需要面对凸壳不相交的问题。这里借鉴了凸优化的相关理论。关于凸优化相关知识可以参考知乎上的回答：<a href="https://www.zhihu.com/question/24641575/answer/164397294" target="_blank" rel="external">为什么凸优化这么重要？ - Ormsom的回答 - 知乎</a>。</p>
 <h2 id="参考资料">参考资料</h2>
 <p><a href="http://blog.csdn.net/y954877035/article/details/52210734" target="_blank" rel="external">凸包与线性可分</a></p>
+<p><a href="http://blog.csdn.net/xiaoxiao_wen/article/details/54097835" target="_blank" rel="external">李航第二章课后习题</a></p>
 
       
     </div>
