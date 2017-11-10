@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="题目内容 链接： POJ3041 算法详解 二分图相关知识 TODO 还没写完 Berge定理 图G的一个匹配M是最大匹配的充要条件是图G不存在M的增广路。 证明： 假设存在v0v1v2…vn为增广路（n一定为奇数，起点终点分别在两个集合）。 那么根据交错出现的定义：v0v1不属于M，v1v2属于M。该路径上存在n/2+1条路径不属于M，而n/2条路径属于M。 那么只需要，将n/2原本属于M的边剔">
+<meta name="description" content="题目内容 链接： POJ3041 题解 说实话，能想到这道题用二分图解决的人，确实得有一定的积累才可以。要不是这道题被分到二分图下面，我也意识不到可以用二分图做。(:з」∠) 每一行的行号是一个集合，每一列的列号是一个集合，而地图中每一个行星都代表从行集合到列集合的一条边。我们的目的就是把这些边都给消除。 那为什么二分图的最大匹配数就是最小消除行星的数量呢 ？ 我们先举一个具体的例子，假设地图上行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二分图与匈牙利算法">
 <meta property="og:url" content="http://yoursite.com/2017/09/05/acm/poj3041/index.html">
 <meta property="og:site_name" content="玩毛线的毛线">
-<meta property="og:description" content="题目内容 链接： POJ3041 算法详解 二分图相关知识 TODO 还没写完 Berge定理 图G的一个匹配M是最大匹配的充要条件是图G不存在M的增广路。 证明： 假设存在v0v1v2…vn为增广路（n一定为奇数，起点终点分别在两个集合）。 那么根据交错出现的定义：v0v1不属于M，v1v2属于M。该路径上存在n/2+1条路径不属于M，而n/2条路径属于M。 那么只需要，将n/2原本属于M的边剔">
+<meta property="og:description" content="题目内容 链接： POJ3041 题解 说实话，能想到这道题用二分图解决的人，确实得有一定的积累才可以。要不是这道题被分到二分图下面，我也意识不到可以用二分图做。(:з」∠) 每一行的行号是一个集合，每一列的列号是一个集合，而地图中每一个行星都代表从行集合到列集合的一条边。我们的目的就是把这些边都给消除。 那为什么二分图的最大匹配数就是最小消除行星的数量呢 ？ 我们先举一个具体的例子，假设地图上行">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-07T07:57:35.739Z">
+<meta property="og:updated_time" content="2017-11-10T06:39:24.886Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二分图与匈牙利算法">
-<meta name="twitter:description" content="题目内容 链接： POJ3041 算法详解 二分图相关知识 TODO 还没写完 Berge定理 图G的一个匹配M是最大匹配的充要条件是图G不存在M的增广路。 证明： 假设存在v0v1v2…vn为增广路（n一定为奇数，起点终点分别在两个集合）。 那么根据交错出现的定义：v0v1不属于M，v1v2属于M。该路径上存在n/2+1条路径不属于M，而n/2条路径属于M。 那么只需要，将n/2原本属于M的边剔">
+<meta name="twitter:description" content="题目内容 链接： POJ3041 题解 说实话，能想到这道题用二分图解决的人，确实得有一定的积累才可以。要不是这道题被分到二分图下面，我也意识不到可以用二分图做。(:з」∠) 每一行的行号是一个集合，每一列的列号是一个集合，而地图中每一个行星都代表从行集合到列集合的一条边。我们的目的就是把这些边都给消除。 那为什么二分图的最大匹配数就是最小消除行星的数量呢 ？ 我们先举一个具体的例子，假设地图上行">
 
 
 
@@ -388,22 +388,6 @@
       
         <h1 id="题目内容">题目内容</h1>
 <p>链接： <a href="https://vjudge.net/problem/POJ-3041" target="_blank" rel="external">POJ3041</a></p>
-<h1 id="算法详解">算法详解</h1>
-<h2 id="二分图相关知识">二分图相关知识</h2>
-<p>TODO 还没写完</p>
-<h3 id="berge定理">Berge定理</h3>
-<p>图G的一个匹配M是最大匹配的充要条件是图G不存在M的增广路。</p>
-<p><strong>证明：</strong> 假设存在v0v1v2…vn为增广路（n一定为奇数，起点终点分别在两个集合）。</p>
-<p>那么根据<strong>交错出现</strong>的定义：v0v1不属于M，v1v2属于M。该路径上存在n/2+1条路径不属于M，而n/2条路径属于M。</p>
-<p>那么只需要，将n/2原本属于M的边剔除，n/2+1条不属于M的边加入M，M的匹配数就可以加1。</p>
-<p>所以，如果存在增广路，就可以通过增广路与M的异或操作，使得M的匹配数加1，说明存在增广路一定不是最大匹配。</p>
-<h2 id="匈牙利算法">匈牙利算法</h2>
-<p>注意，二分图增广路的定义！每一个字都看清楚！M是图G的一个匹配，存在一个在M和E(G)/M <strong>交错出现</strong> 的路径，该路径<strong>起点和终点都是非饱和点</strong>（没有对象的点），则该路径为M的一条增广路。</p>
-<p>之前第一次自己手写实现匈牙利算法的时候，就没有注意到<strong>交错出现</strong> 这个条件，结果花费了很多时间在DFS寻找增广路的编码上面。</p>
-<p><strong>交错出现</strong> 有隐含含义：</p>
-<ul>
-<li>这个路径起点终点一定在两个不同的集合</li>
-</ul>
 <h1 id="题解">题解</h1>
 <p>说实话，能想到这道题用二分图解决的人，确实得有一定的积累才可以。要不是这道题被分到二分图下面，我也意识不到可以用二分图做。<em>(:з」∠)</em></p>
 <p>每一行的行号是一个集合，每一列的列号是一个集合，而地图中每一个行星都代表从行集合到列集合的一条边。我们的目的就是把这些边都给消除。</p>
@@ -411,7 +395,7 @@
 <p>我们先举一个具体的例子，假设地图上行星的分布是这样的：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">X.X </div><div class="line">.X. </div><div class="line">.X.</div></pre></td></tr></table></figure>
 <p>很容易看出来，最少从第0行，第1列射线就可以了。我们来看一下这个地图的二分图构造：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">graph LR</div><div class="line">	A0 --&gt; B0</div><div class="line">	A0 --&gt; B2</div><div class="line">	A1 --&gt; B1</div><div class="line">	A2 --&gt; B1</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">A0 --&gt; B0</div><div class="line">A0 --&gt; B2</div><div class="line">A1 --&gt; B1</div><div class="line">A2 --&gt; B1</div></pre></td></tr></table></figure>
 <p>在该二分图中，A0连接着B0和B2，往A0（就是第0行）射一道激光，就可以消除与A0连接的所有边。往B1射一道激光，就可以消除B0相连的所有边。</p>
 <p>其实就是，找最少的点，使得这些点与所有边相邻。（最小点覆盖）</p>
 <p>而<strong>Hall定理</strong> 说：</p>
@@ -420,6 +404,14 @@
 </blockquote>
 <p>于是用匈牙利算法求最大匹配，便可AC该题。</p>
 <h1 id="编码注意点">编码注意点</h1>
+<h2 id="关于匈牙利算法berge定理的证明">关于匈牙利算法Berge定理的证明</h2>
+<p>图G的一个匹配M是最大匹配的充要条件是图G不存在M的增广路。</p>
+<p><strong>证明：</strong> 假设存在v0v1v2…vn为增广路（n一定为奇数，起点终点分别在两个集合）。</p>
+<p>那么根据<strong>交错出现</strong>的定义：v0v1不属于M，v1v2属于M。该路径上存在n/2+1条路径不属于M，而n/2条路径属于M。</p>
+<p>那么只需要，将n/2原本属于M的边剔除，n/2+1条不属于M的边加入M，M的匹配数就可以加1。</p>
+<p>所以，如果存在增广路，就可以通过增广路与M的异或操作，使得M的匹配数加1，说明存在增广路一定不是最大匹配。</p>
+<h2 id="匈牙利算法注意点">匈牙利算法注意点</h2>
+<p>注意，二分图增广路的定义！每一个字都看清楚！M是图G的一个匹配，存在一个在M和E(G)/M <strong>交错出现</strong> 的路径，该路径<strong>起点和终点都是非饱和点</strong>（没有对象的点），则该路径为M的一条增广路。</p>
 <h2 id="核心代码">核心代码</h2>
 <p>核心代码为从u点出发<strong>寻找增广路</strong>并进行<strong>异或操作</strong>的代码，如下所示，关键点在代码重要已有注释。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 匈牙利算法</span></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</div><div class="line">	<span class="comment">// 重要！不加vis你会无限递归 </span></div><div class="line">	<span class="keyword">if</span>(vis[u])	<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	vis[u] = <span class="number">1</span>;</div><div class="line">	<span class="comment">// 日常操作，找到一条出去的路 </span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= N;i++)&#123;</div><div class="line">		<span class="keyword">if</span>(G[u][i])&#123;</div><div class="line">			<span class="comment">// 重要！存在一条增广路 </span></div><div class="line">			<span class="comment">// 很巧妙地将交错出现的条件满足 </span></div><div class="line">			<span class="keyword">if</span>(result[i] == <span class="number">0</span> || find(result[i]))&#123;</div><div class="line">				<span class="comment">// 重要！异或操作 </span></div><div class="line">				result[i] = u;</div><div class="line">				<span class="comment">// true代表是非饱和点 </span></div><div class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -449,8 +441,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/03/computer-science/sql-review/" rel="next" title="SQL复习">
-                <i class="fa fa-chevron-left"></i> SQL复习
+              <a href="/2017/09/05/acm/poj1789/" rel="next" title="POJ1789 最小生成树">
+                <i class="fa fa-chevron-left"></i> POJ1789 最小生成树
               </a>
             
           </div>
@@ -550,7 +542,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -639,7 +631,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目内容"><span class="nav-number">1.</span> <span class="nav-text">题目内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法详解"><span class="nav-number">2.</span> <span class="nav-text">算法详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#二分图相关知识"><span class="nav-number">2.1.</span> <span class="nav-text">二分图相关知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#berge定理"><span class="nav-number">2.1.1.</span> <span class="nav-text">Berge定理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#匈牙利算法"><span class="nav-number">2.2.</span> <span class="nav-text">匈牙利算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">3.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编码注意点"><span class="nav-number">4.</span> <span class="nav-text">编码注意点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#核心代码"><span class="nav-number">4.1.</span> <span class="nav-text">核心代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源代码"><span class="nav-number">5.</span> <span class="nav-text">源代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目内容"><span class="nav-number">1.</span> <span class="nav-text">题目内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编码注意点"><span class="nav-number">3.</span> <span class="nav-text">编码注意点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于匈牙利算法berge定理的证明"><span class="nav-number">3.1.</span> <span class="nav-text">关于匈牙利算法Berge定理的证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#匈牙利算法注意点"><span class="nav-number">3.2.</span> <span class="nav-text">匈牙利算法注意点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心代码"><span class="nav-number">3.3.</span> <span class="nav-text">核心代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源代码"><span class="nav-number">4.</span> <span class="nav-text">源代码</span></a></li></ol></div>
             
 
           </div>

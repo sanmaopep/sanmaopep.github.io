@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="题目内容 链接： POJ1789题目 算法详解 kruskal算法 并查集 感觉是个很智商碾压的算法。 题解 题目要求我们生成一个原图的子图。而这个子图要把所有边连接起来（形成一套卡车发展体系），并且根据公式，边权值和越小越好（卡车变化越小越好）。 所以改题用最小生成树来解决。 本题我采用kruskal算法，但是网上采用prime算法的居多。貌似prime算法对于这种边权比较多的图处理效果更好。p">
+<meta name="description" content="题目内容 链接： POJ1789题目 题解 题目要求我们生成一个原图的子图。而这个子图要把所有边连接起来（形成一套卡车发展体系），并且根据公式，边权值和越小越好（卡车变化越小越好）。 所以改题用最小生成树来解决。 本题我采用kruskal算法，但是网上采用prime算法的居多。貌似prime算法对于这种边权比较多的图处理效果更好。prime算法就在下次最小生成树的题目里面来实践吧。 编码注意点 s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="POJ1789 最小生成树">
 <meta property="og:url" content="http://yoursite.com/2017/09/05/acm/poj1789/index.html">
 <meta property="og:site_name" content="玩毛线的毛线">
-<meta property="og:description" content="题目内容 链接： POJ1789题目 算法详解 kruskal算法 并查集 感觉是个很智商碾压的算法。 题解 题目要求我们生成一个原图的子图。而这个子图要把所有边连接起来（形成一套卡车发展体系），并且根据公式，边权值和越小越好（卡车变化越小越好）。 所以改题用最小生成树来解决。 本题我采用kruskal算法，但是网上采用prime算法的居多。貌似prime算法对于这种边权比较多的图处理效果更好。p">
+<meta property="og:description" content="题目内容 链接： POJ1789题目 题解 题目要求我们生成一个原图的子图。而这个子图要把所有边连接起来（形成一套卡车发展体系），并且根据公式，边权值和越小越好（卡车变化越小越好）。 所以改题用最小生成树来解决。 本题我采用kruskal算法，但是网上采用prime算法的居多。貌似prime算法对于这种边权比较多的图处理效果更好。prime算法就在下次最小生成树的题目里面来实践吧。 编码注意点 s">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-07T07:57:32.804Z">
+<meta property="og:updated_time" content="2017-11-10T06:32:47.409Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="POJ1789 最小生成树">
-<meta name="twitter:description" content="题目内容 链接： POJ1789题目 算法详解 kruskal算法 并查集 感觉是个很智商碾压的算法。 题解 题目要求我们生成一个原图的子图。而这个子图要把所有边连接起来（形成一套卡车发展体系），并且根据公式，边权值和越小越好（卡车变化越小越好）。 所以改题用最小生成树来解决。 本题我采用kruskal算法，但是网上采用prime算法的居多。貌似prime算法对于这种边权比较多的图处理效果更好。p">
+<meta name="twitter:description" content="题目内容 链接： POJ1789题目 题解 题目要求我们生成一个原图的子图。而这个子图要把所有边连接起来（形成一套卡车发展体系），并且根据公式，边权值和越小越好（卡车变化越小越好）。 所以改题用最小生成树来解决。 本题我采用kruskal算法，但是网上采用prime算法的居多。貌似prime算法对于这种边权比较多的图处理效果更好。prime算法就在下次最小生成树的题目里面来实践吧。 编码注意点 s">
 
 
 
@@ -388,10 +388,6 @@
       
         <h1 id="题目内容">题目内容</h1>
 <p>链接： <a href="https://vjudge.net/problem/POJ-1789" target="_blank" rel="external">POJ1789题目</a></p>
-<h1 id="算法详解">算法详解</h1>
-<h2 id="kruskal算法">kruskal算法</h2>
-<h2 id="并查集">并查集</h2>
-<p>感觉是个很智商碾压的算法。</p>
 <h1 id="题解">题解</h1>
 <p>题目要求我们生成一个原图的子图。而这个子图要把所有边连接起来（形成一套卡车发展体系），并且根据公式，边权值和越小越好（卡车变化越小越好）。</p>
 <p>所以改题用最小生成树来解决。</p>
@@ -402,7 +398,7 @@
 <p>AC编码采用了algorithm头文件里面的sort，时间复杂度N*log(N)~N^2。</p>
 <p>但是结果表明，sort比基数排序快。于是自己额外写了基数排序和快速排序的代码进行比较，让我吃惊的是，快速排序的速度大约是基数排序的10倍。</p>
 <p>难道是queue操作很耗时间？虽然很好奇，但是这个问题还是先放这里吧。记着！<strong>实际编码中，sort有时会比基数排序快。</strong></p>
-<h2 id="并查集编码总结">并查集编码总结</h2>
+<h2 id="并查集编码总结重要">并查集编码总结(重要)</h2>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. 并查集数据结构</span></div><div class="line"><span class="keyword">int</span> p[maxn];</div><div class="line"></div><div class="line"><span class="comment">// 2. 查找函数编写</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">	<span class="comment">// 重要！</span></div><div class="line">	<span class="comment">// 如果一个节点的父节点是他自己，那么这个节点就是父节点。故返回x</span></div><div class="line">	<span class="comment">// 如果不是，就去找他的父节点的根节点</span></div><div class="line">	<span class="comment">// 然后一直递归....直到找到根节点位置 </span></div><div class="line">	<span class="keyword">return</span> p[x] == x ? x : p[x] = find(p[x]);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 3.合并a,b节点所在的两个集合</span></div><div class="line"><span class="comment">// 先找到连个根节点，然后把一个根节点的父节点设为另一个根节点就可以了。</span></div><div class="line"><span class="keyword">int</span> x = find(a);</div><div class="line"><span class="keyword">int</span> y = find(b);</div><div class="line">p[x] = y;</div></pre></td></tr></table></figure>
 <h1 id="源代码">源代码</h1>
 <h2 id="tle版本">TLE版本</h2>
@@ -433,8 +429,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/05/acm/poj1459/" rel="next" title="POJ1459 EdmonsKarp最大流算法">
-                <i class="fa fa-chevron-left"></i> POJ1459 EdmonsKarp最大流算法
+              <a href="/2017/05/22/machine-learning/tensorflow-cnn/" rel="next" title="Tensorflow训练多层卷积神经网络">
+                <i class="fa fa-chevron-left"></i> Tensorflow训练多层卷积神经网络
               </a>
             
           </div>
@@ -443,8 +439,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/09/05/acm/poj1094/" rel="prev" title="POJ1094 拓扑排序">
-                POJ1094 拓扑排序 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/09/05/acm/poj3041/" rel="prev" title="二分图与匈牙利算法">
+                二分图与匈牙利算法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -534,7 +530,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -623,7 +619,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目内容"><span class="nav-number">1.</span> <span class="nav-text">题目内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法详解"><span class="nav-number">2.</span> <span class="nav-text">算法详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#kruskal算法"><span class="nav-number">2.1.</span> <span class="nav-text">kruskal算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并查集"><span class="nav-number">2.2.</span> <span class="nav-text">并查集</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">3.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编码注意点"><span class="nav-number">4.</span> <span class="nav-text">编码注意点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sort比基数排序快"><span class="nav-number">4.1.</span> <span class="nav-text">sort比基数排序快？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并查集编码总结"><span class="nav-number">4.2.</span> <span class="nav-text">并查集编码总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源代码"><span class="nav-number">5.</span> <span class="nav-text">源代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tle版本"><span class="nav-number">5.1.</span> <span class="nav-text">TLE版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ac版本"><span class="nav-number">5.2.</span> <span class="nav-text">AC版本</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目内容"><span class="nav-number">1.</span> <span class="nav-text">题目内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编码注意点"><span class="nav-number">3.</span> <span class="nav-text">编码注意点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sort比基数排序快"><span class="nav-number">3.1.</span> <span class="nav-text">sort比基数排序快？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并查集编码总结重要"><span class="nav-number">3.2.</span> <span class="nav-text">并查集编码总结(重要)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源代码"><span class="nav-number">4.</span> <span class="nav-text">源代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tle版本"><span class="nav-number">4.1.</span> <span class="nav-text">TLE版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ac版本"><span class="nav-number">4.2.</span> <span class="nav-text">AC版本</span></a></li></ol></li></ol></div>
             
 
           </div>
